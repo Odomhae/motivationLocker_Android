@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">motivationLocker</string>
+
+    <string name="colorBlack">검정</string>
+    <string name="colorPink">핑크</string>
+    <string name="colorRed">빨강</string>
+    <string name="colorWhite">흰색</string>
+
+    <string name="languageEnglish">영어</string>
+    <string name="languageKorean">한국어</string>
+
+    <string name="app_activation">앱 활성화</string>
+    <string name="background_color">배경색</string>
+    <string name="text_color">글자색</string>
+    <string name="language_setting">언어 설정</string>
+    <string name="text_size">글자 크기</string>
+
+
+</resources>
