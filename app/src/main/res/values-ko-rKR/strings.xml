@@ -15,6 +15,14 @@
     <string name="text_color">글자색</string>
     <string name="language_setting">언어 설정</string>
     <string name="text_size">글자 크기</string>
+    <string name="colorBeige">베이지</string>
+    <string name="colorBlue">파랑</string>
+    <string name="colorGreen">녹색</string>
+    <string name="colorOrange">오렌지색</string>
+    <string name="colorYellow">노랑색</string>
+    <string name="textSizeLarge">크게</string>
+    <string name="textSizeMedium">중간</string>
+    <string name="textSizeSmall">작게</string>
 
 
 </resources>

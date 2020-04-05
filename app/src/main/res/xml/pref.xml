@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="useLockScreen"
-        android:title="@string/app_activation" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="useLockScreen"
+            android:title="@string/app_activation" />
 
-    <MultiSelectListPreference
-        android:defaultValue="@array/languageCategory"
-        android:entries="@array/languageCategory"
-        android:entryValues="@array/languageCategory"
-        android:key="languageCategory"
-        android:title="@string/language_setting" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/languageCategory"
+            android:entryValues="@array/languageCategory"
+            android:key="languageCategory"
+            android:title="@string/language_setting" />
 
-    <PreferenceCategory android:title=" " >
-    </PreferenceCategory>
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/colorCategory"
+            android:entryValues="@array/colorCategory"
+            android:key="backgroundColorCategory"
+            android:title="@string/background_color" />
 
-    <ListPreference
-        android:defaultValue="1"
-        android:entries="@array/colorCategory"
-        android:entryValues="@array/colorCategory"
-        android:key="backgroundColorCategory"
-        android:title="@string/background_color" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/colorCategory"
+            android:entryValues="@array/colorCategory"
+            android:key="textColorCategory"
+            android:title="@string/text_color" />
 
-    <ListPreference
-        android:defaultValue="1"
-        android:entries="@array/colorCategory"
-        android:entryValues="@array/colorCategory"
-        android:key="textColorCategory"
-        android:title="@string/text_color" />
-
-    <EditTextPreference
-        android:defaultValue="Default value"
-        android:key="textSizeCategory"
-        android:inputType="number"
-        android:selectAllOnFocus="true"
-        android:singleLine="true"
-        android:title="@string/text_size" />
-
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/textSizeCategory"
+            android:entryValues="@array/textSizeCategory"
+            android:key="textSizeCategory"
+            android:title="@string/text_size" />
 
 
 </PreferenceScreen>

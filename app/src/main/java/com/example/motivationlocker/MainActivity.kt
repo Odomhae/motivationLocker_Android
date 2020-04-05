@@ -1,12 +1,12 @@
 package com.example.motivationlocker
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.*
 import android.util.Log
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +23,12 @@ class MainActivity : AppCompatActivity() {
 
     class MyPreferenceFragment : PreferenceFragment(){
 
+        fun setInts(context: Context, key : String, value : Int) {
+            val prefs = context.getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
+            val editor = prefs!!.edit()
+            editor.putInt(key, value).apply()
+        }
+
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
 
@@ -30,13 +36,13 @@ class MainActivity : AppCompatActivity() {
             addPreferencesFromResource(R.xml.pref)
 
             // 언어 종류 요약정보에 현재 선택된 항목 보여줌
-            val languageCategoryPref = findPreference("languageCategory") as MultiSelectListPreference
+            val languageCategoryPref = findPreference("languageCategory") as ListPreference
             // 요약정보도 같이 변경
             languageCategoryPref.setOnPreferenceChangeListener { preference, newValue ->
-                val newValueSet = newValue as? HashSet<*>
-                    ?: return@setOnPreferenceChangeListener true
-
-                languageCategoryPref.summary = newValueSet.joinToString(", ")
+                val index = languageCategoryPref.findIndexOfValue(newValue.toString())
+                // 언어 정보 저장
+                setInts(context, "language", index)
+                languageCategoryPref.summary = languageCategoryPref.entries[index]
                 Log.d("선택한 언어", languageCategoryPref.summary.toString())
                 true
             }
@@ -45,7 +51,7 @@ class MainActivity : AppCompatActivity() {
             val backgroundColorCategoryPref = findPreference("backgroundColorCategory") as ListPreference
             backgroundColorCategoryPref.setOnPreferenceChangeListener { preference, newValue ->
                 val index = backgroundColorCategoryPref.findIndexOfValue(newValue.toString())
-
+                setInts(context, "backgroundColor", index)
                 backgroundColorCategoryPref.summary = backgroundColorCategoryPref.entries[index]
                 Log.d("선택한 배경색", backgroundColorCategoryPref.summary.toString())
                 true
@@ -55,16 +61,18 @@ class MainActivity : AppCompatActivity() {
             val textColorCategoryPref = findPreference("textColorCategory") as ListPreference
             textColorCategoryPref.setOnPreferenceChangeListener { preference, newValue ->
                 val index = textColorCategoryPref.findIndexOfValue(newValue.toString())
-
+                setInts(context, "textColor", index)
                 textColorCategoryPref.summary = textColorCategoryPref.entries[index]
                 Log.d("선택한 글자색", textColorCategoryPref.summary.toString())
                 true
             }
 
             //글자크기
-            val textSizeCategoryPref = findPreference("textSizeCategory") as EditTextPreference
+            val textSizeCategoryPref = findPreference("textSizeCategory") as ListPreference
             textSizeCategoryPref.setOnPreferenceChangeListener{preference, newValue ->
-                textSizeCategoryPref.summary = newValue.toString()
+                val index = textSizeCategoryPref.findIndexOfValue(newValue.toString())
+                setInts(context, "textSize", index)
+                textSizeCategoryPref.summary = textSizeCategoryPref.entries[index]
                 Log.d("선택한 글자크기", textSizeCategoryPref.summary.toString())
                 true
             }

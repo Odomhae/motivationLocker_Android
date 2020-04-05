@@ -10,10 +10,20 @@
     <string name="languageKorean">Korean</string>
     <string name="languageEnglish">English</string>
 
-    <string name="colorBlack">Black</string>
     <string name="colorWhite">White</string>
+    <string name="colorBlack">Black</string>
     <string name="colorRed">Red</string>
+    <string name="colorBeige">Beige</string>
+    <string name="colorBlue">Blue</string>
+    <string name="colorGreen">Green</string>
+    <string name="colorOrange">Orange</string>
+    <string name="colorYellow">Yellow</string>
     <string name="colorPink">Pink</string>
+
+    <string name="textSizeSmall">Small</string>
+    <string name="textSizeMedium">Medium</string>
+    <string name="textSizeLarge">Large</string>
+
 
     <string-array name="languageCategory">
         <item>@string/languageEnglish</item>
@@ -21,10 +31,21 @@
     </string-array>
 
     <string-array name="colorCategory">
-        <item>@string/colorBlack</item>
         <item>@string/colorWhite</item>
+        <item>@string/colorBlack</item>
         <item>@string/colorRed</item>
+        <item>@string/colorBeige</item>
+        <item>@string/colorBlue</item>
+        <item>@string/colorGreen</item>
+        <item>@string/colorOrange</item>
+        <item>@string/colorYellow</item>
         <item>@string/colorPink</item>
+    </string-array>
+
+    <string-array name="textSizeCategory">
+        <item>@string/textSizeSmall</item>
+        <item>@string/textSizeMedium</item>
+        <item>@string/textSizeLarge</item>
     </string-array>
 
 
