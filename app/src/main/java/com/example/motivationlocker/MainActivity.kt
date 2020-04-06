@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.*
 import android.util.Log
+import android.view.View
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +17,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        window.statusBarColor = resources.getColor(R.color.colorGray)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         // preferenceContent 아이디 부분에 fragment 넣기
         fragmentManager.beginTransaction().replace(R.id.preferenceContent, fragment).commit()
@@ -37,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
             // 언어 종류 요약정보에 현재 선택된 항목 보여줌
             val languageCategoryPref = findPreference("languageCategory") as ListPreference
+            languageCategoryPref.summary = preferenceScreen.sharedPreferences.getString("language", "")
             // 요약정보도 같이 변경
             languageCategoryPref.setOnPreferenceChangeListener { preference, newValue ->
                 val index = languageCategoryPref.findIndexOfValue(newValue.toString())

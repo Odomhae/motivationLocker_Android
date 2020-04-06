@@ -6,6 +6,9 @@
             android:key="useLockScreen"
             android:title="@string/app_activation" />
 
+        <PreferenceCategory>
+        </PreferenceCategory>
+
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/languageCategory"

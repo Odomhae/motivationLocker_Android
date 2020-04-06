@@ -7,6 +7,8 @@ import android.os.Build.VERSION_CODES
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
+import android.view.MotionEvent
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_motivation_locker.*
@@ -81,15 +83,47 @@ class motivationLockerActivity : AppCompatActivity() {
 
         // 배경색
         when(backgroundColor){
-            0 ->  myLayout.setBackgroundColor(resources.getColor(R.color.colorWhite))
-            1 ->  myLayout.setBackgroundColor(resources.getColor(R.color.colorBlack))
-            2 ->  myLayout.setBackgroundColor(resources.getColor(R.color.colorRed))
-            3 ->  myLayout.setBackgroundColor(resources.getColor(R.color.colorBeige))
-            4 ->  myLayout.setBackgroundColor(resources.getColor(R.color.colorBlue))
-            5 ->  myLayout.setBackgroundColor(resources.getColor(R.color.colorGreen))
-            6 ->  myLayout.setBackgroundColor(resources.getColor(R.color.colorOrange))
-            7 ->  myLayout.setBackgroundColor(resources.getColor(R.color.colorYellow))
-            8 ->  myLayout.setBackgroundColor(resources.getColor(R.color.colorPink))
+            0 -> {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorWhite))
+                // 삳태바도 같은 색으로 api 21 이상
+                window.statusBarColor = resources.getColor(R.color.colorWhite)
+                //상태바 글씨 보이게
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            }
+            1 -> {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorBlack))
+                window.statusBarColor = resources.getColor(R.color.colorBlack)
+            }
+            2 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorRed))
+                window.statusBarColor = resources.getColor(R.color.colorRed)
+            }
+            3 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorBeige))
+                window.statusBarColor = resources.getColor(R.color.colorBeige)
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            }
+            4 -> {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorBlue))
+                window.statusBarColor = resources.getColor(R.color.colorBlue)
+            }
+            5 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorGreen))
+                window.statusBarColor = resources.getColor(R.color.colorGreen)
+            }
+            6 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorOrange))
+                window.statusBarColor = resources.getColor(R.color.colorOrange)
+            }
+            7 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorYellow))
+                window.statusBarColor = resources.getColor(R.color.colorYellow)
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+            }
+            8 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorPink))
+                window.statusBarColor = resources.getColor(R.color.colorPink)
+            }
         }
         // 글자색
         when(textColor){
@@ -110,6 +144,46 @@ class motivationLockerActivity : AppCompatActivity() {
             2 ->  sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
         }
 
+
+        //시작, 끝점 계산해서 잠금해제
+        var startX = 0
+        var startY = 0
+
+        var endX = 0
+        var endY = 0
+
+        myLayout.setOnTouchListener { v, event ->
+            when(event.action){
+                MotionEvent.ACTION_DOWN -> {
+                    // 초기값
+                    startX =  event.x.toInt()
+                    startY =  event.y.toInt()
+
+                    Log.d("start x", startX.toString() )
+                    Log.d("start y", startY.toString() )
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+                    // 이동 값
+                    endX = event.x.toInt()
+                    endY = event.y.toInt()
+
+                    Log.d("end x", endX.toString() )
+                    Log.d("end y", endY.toString() )
+                }
+
+                   // 이동 끝내고 조건 맞으면 헤제
+                    else -> {
+                        Log.d("gazaa", (((endX-startX)*(endX-startX)) + ((endY-startY)*(endY-startY))).toString())
+                        if( ((endX- startX)*(endX - startX)) + ((endY - startY)*(endY- startY)) >= 80000 )
+                            finish()
+                    }
+            }
+
+            true
+        }
+
     }
+
 
 }
