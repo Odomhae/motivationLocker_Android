@@ -11,6 +11,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginTop
 import kotlinx.android.synthetic.main.activity_motivation_locker.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -66,8 +67,8 @@ class motivationLockerActivity : AppCompatActivity() {
                 saying = sayingArray.getJSONObject(Random.nextInt(sayingArray.length()))
                 //글 보여줌
                 sayingTextView.text = saying?.getString("quote")
-                // 작가? 보여줌
-                //    writerTextView.text = saying?.getString("writer")
+                // 작가 보여줌
+                writerTextView.text = saying?.getString("writer")
             }
             //
             1-> {
@@ -76,7 +77,7 @@ class motivationLockerActivity : AppCompatActivity() {
                 saying = sayingArray.getJSONObject(Random.nextInt(sayingArray.length()))
                 sayingTextView.text = saying?.getString("quote")
                 // 작가?
-                //    writerTextView.text = saying?.getString("writer")
+                writerTextView.text = saying?.getString("writer")
 
             }
         }
@@ -124,24 +125,80 @@ class motivationLockerActivity : AppCompatActivity() {
                 myLayout.setBackgroundColor(resources.getColor(R.color.colorPink))
                 window.statusBarColor = resources.getColor(R.color.colorPink)
             }
+            9 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorGray))
+                window.statusBarColor = resources.getColor(R.color.colorGray)
+            }
+            10 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorViolet))
+                window.statusBarColor = resources.getColor(R.color.colorViolet)
+            }
         }
         // 글자색
         when(textColor){
-            0 ->  sayingTextView.setTextColor(resources.getColor(R.color.colorWhite))
-            1 ->  sayingTextView.setTextColor(resources.getColor(R.color.colorBlack))
-            2 ->  sayingTextView.setTextColor(resources.getColor(R.color.colorRed))
-            3 ->  sayingTextView.setTextColor(resources.getColor(R.color.colorBeige))
-            4 ->  sayingTextView.setTextColor(resources.getColor(R.color.colorBlue))
-            5 ->  sayingTextView.setTextColor(resources.getColor(R.color.colorGreen))
-            6 ->  sayingTextView.setTextColor(resources.getColor(R.color.colorOrange))
-            7 ->  sayingTextView.setTextColor(resources.getColor(R.color.colorYellow))
-            8 ->  sayingTextView.setTextColor(resources.getColor(R.color.colorPink))
+            0 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorWhite))
+                writerTextView.setTextColor(resources.getColor(R.color.colorWhite))
+            }
+            1 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorBlack))
+                writerTextView.setTextColor(resources.getColor(R.color.colorBlack))
+            }
+            2 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorRed))
+                writerTextView.setTextColor(resources.getColor(R.color.colorRed))
+            }
+            3 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorBeige))
+                writerTextView.setTextColor(resources.getColor(R.color.colorBeige))
+            }
+            4 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorBlue))
+                writerTextView.setTextColor(resources.getColor(R.color.colorBlue))
+            }
+            5 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorGreen))
+                writerTextView.setTextColor(resources.getColor(R.color.colorGreen))
+            }
+            6 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorOrange))
+                writerTextView.setTextColor(resources.getColor(R.color.colorOrange))
+            }
+            7 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorYellow))
+                writerTextView.setTextColor(resources.getColor(R.color.colorYellow))
+            }
+            8 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorPink))
+                writerTextView.setTextColor(resources.getColor(R.color.colorPink))
+            }
+            9 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorGray))
+                writerTextView.setTextColor(resources.getColor(R.color.colorGray))
+            }
+            10 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorViolet))
+                writerTextView.setTextColor(resources.getColor(R.color.colorViolet))
+            }
         }
         // 글자크기
         when(textSize){
-            0 ->  sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
-            1 ->  sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36f)
-            2 ->  sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
+            0 ->  {
+                sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
+                blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
+                writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15f)
+            }
+            1 ->  {
+                sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36f)
+                blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36f)
+                writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25f)
+            }
+            2 ->  {
+                sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
+                blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
+                writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 35f)
+
+            }
         }
 
 

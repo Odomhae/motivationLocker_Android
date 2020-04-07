@@ -1,22 +1,420 @@
 [
   {
     "id" : 1,
-    "quote": "sssssssss\n 수도는?",
-    "writer" : "소크라테스"
+    "quote": "Change your thoughts\n and\n you change your world.",
+    "writer" : "- Norman Vincent Peale"
   },
   {
     "id" : 2,
-    "quote": "zzesefa1112\n 수도는?",
-    "writer" : "서울"
+    "quote": "Three things in life :\nyour health\nyour mission\nand the people you love.\nThat’s it.",
+    "writer" : "- Naval Ravikant"
+  },
+  {
+    "id" : 2,
+    "quote": "Those who realize their folly\n are not true fools.",
+    "writer" : "- Zhuangzi"
   },
   {
     "id" : 3,
-    "quote": ";p;p;;llsljelf22222\n 수도는?",
-    "writer" : "서울"
+    "quote": "Keep your eyes on the stars\nand your feet on the ground.",
+    "writer" : "- Theodore Roosevelt"
   },
   {
     "id" : 4,
-    "quote": "대한민33333국의\n 수도는?",
-    "writer" : "서울"
+    "quote": "It’s better \nto be a lion for a day\nthan a sheep all your life.",
+    "writer" : "-Elizabeth Kenny"
+  },
+  {
+    "id" : 5,
+    "quote": "Life is a question \nand how we live it\n is our answer.",
+    "writer" : "- Gary Keller"
+  },
+  {
+    "id" : 6,
+    "quote": "Keep looking up…\nthat’s the secret of life.",
+    "writer" : "- Snoopy"
+  },
+  {
+    "id" : 7,
+    "quote": "It always seems impossible \nuntil it’s done.",
+    "writer" : "- Nelson Mandela"
+  },
+  {
+    "id" : 8,
+    "quote": "Life is too important\nto be taken seriously.",
+    "writer" : "- Oscar Wilde"
+  },
+  {
+    "id" : 9,
+    "quote": "Life is \nlike a box of chocolates.\nYou never know \nwhat you’re going to get.",
+    "writer" : "- Forrest Gump\n"
+  },
+  {
+    "id" : 10,
+    "quote": "Life isn’t a matter of milestones,\b but of moments.",
+    "writer" : "- Rose Kennedy"
+  },
+  {
+    "id" : 11,
+    "quote": "Not how long,\nbut how well \nyou have lived is the main thing.",
+    "writer" : "- Seneca\n"
+  },
+  {
+    "id" : 12,
+    "quote": "I love those who\n can smile in trouble.",
+    "writer" : "- Leonardo da Vinci"
+  },
+  {
+    "id" : 13,
+    "quote": "Be happy\n for this moment.\nThis moment is your life.",
+    "writer" : "- Omar Khayyam"
+  },
+  {
+    "id" : 14,
+    "quote": "Life is what happens\nwhen you’re busy \nmaking other plans.",
+    "writer" : "- John Lennon"
+  },
+  {
+    "id" : 15,
+    "quote": "Very little is needed\n to make a happy life.",
+    "writer" : "- Marcus Aurelius"
+  },
+  {
+    "id" : 16,
+    "quote": "You’ve gotta dance\nlike there’s nobody watching.",
+    "writer" : "- William W. Purkey"
+  },
+  {
+    "id" : 17,
+    "quote": "Believe \nthat life is worth living\n and your belief will help\n create the fact.",
+    "writer" : "- William James"
+  },
+  {
+    "id" : 18,
+    "quote": "Don't take life \ntoo seriously.\nYou will never get out of it alive.",
+    "writer" : "- Elbert Hubbard"
+  },
+  {
+    "id" : 19,
+    "quote": "Don’t search\nfor the meaning of life.\nSimply be present \nfor the people you love.",
+    "writer" : "- Maxime Lagacé"
+  },
+  {
+    "id" : 20,
+    "quote": "The trick in life is\n learning how to deal with it.",
+    "writer" : "- Helen Mirren"
+  },
+  {
+    "id" : 21,
+    "quote": "Get busy living \nor\n get busy dying.",
+    "writer" : "- Stephen King"
+  },
+  {
+    "id" : 22,
+    "quote": "Don’t cry \nbecause it’s over.\nSmile\n because it happened.",
+    "writer" : "- Ludwig Jacobowski"
+  },
+  {
+    "id" : 23,
+    "quote": "Life is either \na daring adventure or nothing at all.",
+    "writer" : "- Helen Keller"
+  },
+  {
+    "id" : 24,
+    "quote": "Keep calm and carry on.",
+    "writer" : "- Winston Churchill"
+  },
+  {
+    "id" : 25,
+    "quote": "Love all,\ntrust a few,\ndo wrong to none.",
+    "writer" : "- William Shakespeare"
+  },
+  {
+    "id" : 26,
+    "quote": "Life is ours to be spent,\n not to be saved.",
+    "writer" : "- D. H. Lawrence\n"
+  },
+  {
+    "id" : 27,
+    "quote": "The greatest pleasure\n of life is love.",
+    "writer" : "- Euripides"
+  },
+  {
+    "id" : 28,
+    "quote": "Life can be simple and beautiful.\nFocus on the good things.",
+    "writer" : "- Maxime Lagacé\n"
+  },
+  {
+    "id" : 29,
+    "quote": "Life is a long lesson \nin humility.",
+    "writer" : "- James M. Barrie"
+  },
+  {
+    "id" : 30,
+    "quote": "It’s better to dance\n than to march\n through life.",
+    "writer" : "- Yoko Ono"
+  },
+  {
+    "id" : 31,
+    "quote": "We are who \nwe choose to be.",
+    "writer" : "- Green Goblin\n"
+  },
+  {
+    "id" : 32,
+    "quote": "The only impossible journey\n is the one you never begin. \n",
+    "writer" : "- Tony Robbins\n"
+  },
+  {
+    "id" : 33,
+    "quote": "Your best life will not be found in comfort.",
+    "writer" : "- Maxime Lagacé"
+  },
+  {
+    "id" : 34,
+    "quote": "Doing is a quantum leap\n from imagining.",
+    "writer" : "- Barbara Sher"
+  },
+  {
+    "id" : 35,
+    "quote": "Be so good they can’t ignore you.",
+    "writer" : "- Steve Martin"
+  },
+  {
+    "id" : 36,
+    "quote": "If you don’t like something\n change it.",
+    "writer" : "- Mary Engelbreit\n"
+  },
+  {
+    "id" : 37,
+    "quote": "All our dreams can come true \nif we have the courage\n to pursue them.",
+    "writer" : "- Walt Disney\n"
+  },
+  {
+    "id" : 38,
+    "quote": "The dreamers are the saviors\n of the world.",
+    "writer" : "- James Allen\n"
+  },
+  {
+    "id" : 39,
+    "quote": "Life is to entered\n upon with courage.",
+    "writer" : "- Alexis de Tocqueville\n"
+  },
+  {
+    "id" : 40,
+    "quote": "Life is a single player game.",
+    "writer" : "- Naval Ravikant"
+  },
+  {
+    "id" : 41,
+    "quote": "Life is the art\nof drawing sufficient conclusions\nfrom insufficient premises.",
+    "writer" : "- Samuel Butler\n"
+  },
+  {
+    "id" : 42,
+    "quote": "Life is a process.\nWe are a process.\nThe universe is a process.",
+    "writer" : "- Anne Wilson Schaef\n"
+  },
+  {
+    "id" : 43,
+    "quote": "Life is beautiful\nbecause it doesn’t last. \n",
+    "writer" : "- Brit Marling\n"
+  },
+  {
+    "id" : 44,
+    "quote": "Reverence for life\nis the highest court of appeal.",
+    "writer" : "- Albert Schweitzer\n"
+  },
+  {
+    "id" : 45,
+    "quote": "The tragedy of life\nis what dies inside a man\nwhile he lives.",
+    "writer" : "- Albert Schweitzer\n"
+  },
+  {
+    "id" : 46,
+    "quote": "Life is wide, limitless.\nThere is no border, no frontier.",
+    "writer" : "- Bruce Lee\n"
+  },
+  {
+    "id" : 47,
+    "quote": "Life is about learning.\nWhen you stop learning,\nyou die.",
+    "writer" : "- Tom Clancy\n"
+  },
+  {
+    "id" : 48,
+    "quote": "Life is not an exact science, \nit is an art.",
+    "writer" : "- Samuel Butler"
+  },
+  {
+    "id" : 49,
+    "quote": "Love is a better teacher\nthan duty.",
+    "writer" : "- Albert Einstein"
+  },
+
+  {
+    "id" : 50,
+    "quote": "Life is a series\n of baby steps.",
+    "writer" : "- Hoda Kotb\n"
+  },
+  {
+    "id" : 51,
+    "quote": "Love yourself first \nand everything else \nfalls into line.",
+    "writer" : "- Lucille Ball\n"
+  },
+  {
+    "id" : 52,
+    "quote": "Don't give it five minutes\nif you're not going to\n give it five years.",
+    "writer" : "- Meghan Markle"
+  },
+  {
+    "id" : 53,
+    "quote": "I've failed over and over\nand that is why I succeed.",
+    "writer" : "- Michael Jordan"
+  },
+  {
+    "id" : 54,
+    "quote": "Nothing can dim the light \nthat shines from within.",
+    "writer" : "- Maya Angelou"
+  },
+  {
+    "id" : 55,
+    "quote": "Sometimes you will never know\n the value of a moment\n until it becomes a memory.",
+    "writer" : "- Dr. Seuss\n"
+  },
+  {
+    "id" : 56,
+    "quote": "Only I can change my life.\nNo one can do it for me.",
+    "writer" : "- Carol Burnett"
+  },
+  {
+    "id" : 57,
+    "quote": "If everything was perfect,\nyou would never learn\n and you would never grow.",
+    "writer" : "- Beyoncé"
+  },
+  {
+    "id" : 58,
+    "quote": "Life is like riding a bicycle.\nTo keep your balance,\nyou must keep moving.",
+    "writer" : "- Albert Einstein"
+  },
+  {
+    "id" : 59,
+    "quote": "Life isn't about finding yourself.\nLife is about creating yourself.",
+    "writer" : "- George Bernard Shaw"
+  },
+  {
+    "id" : 60,
+    "quote": "It is not the length of life,\nbut depth of life.",
+    "writer" : "- Ralph Waldo Emerson"
+  },
+  {
+    "id" : 61,
+    "quote": "Where there is no struggle,\nthere is no strength.",
+    "writer" : "- Oprah Winfrey"
+  },
+  {
+    "id" : 62,
+    "quote": "Above all,\nbe the heroine of your life,\nnot the victim.",
+    "writer" : "- Nora Ephron\n"
+  },
+  {
+    "id" : 63,
+    "quote": "It's not whether you get knocked down.\nIt's whether you get up.",
+    "writer" : "- Vince Lombardi\n"
+  },
+  {
+    "id" : 64,
+    "quote": "Remember,\nno one can make you feel inferior\n without your consent.",
+    "writer" : "- Eleanor Roosevelt"
+  },
+  {
+    "id" : 65,
+    "quote": "Yesterday is not ours to recover,\nbut tomorrow is ours to win or lose.",
+    "writer" : "- Lyndon B. Johnson"
+  },
+  {
+    "id" : 66,
+    "quote": "Knowing what must be done\n does away with fear.",
+    "writer" : "- Rosa Parks"
+  },
+  {
+    "id" : 67,
+    "quote": "Your time is limited,\nso don't waste it \nliving someone else's life.",
+    "writer" : "- Steve Jobs"
+  },
+  {
+    "id" : 68,
+    "quote": "Innovation distinguishes \nbetween a leader and a follower.",
+    "writer" : "- Steve Jobs"
+  },
+  {
+    "id" : 69,
+    "quote": "I want to put a ding\nin the universe.",
+    "writer" : "- Steve Jobs"
+  },
+  {
+    "id" : 70,
+    "quote": "Sometimes life is going to hit you \nin the head with a brick.\nDon't lose faith.",
+    "writer" : "- Steve Jobs"
+  },
+  {
+    "id" : 71,
+    "quote": "Things don't have to change the world\n to be important.",
+    "writer" : "- Steve Jobs\n"
+  },
+  {
+    "id" : 72,
+    "quote": "I'm as proud of\n what we don't do\nas I am of what we do.",
+    "writer" : "- Steve Jobs\n"
+  },
+  {
+    "id" : 73,
+    "quote": "Life is not fair;\nget used to it.",
+    "writer" : "- Bill Gates"
+  },
+  {
+    "id" : 74,
+    "quote": "Your most unhappy customers\nare your greatest source of learning.",
+    "writer" : "- Bill Gates\n"
+  },
+  {
+    "id" : 75,
+    "quote": "If you can't make it good,\nat least make it look good.",
+    "writer" : "- Bill Gates"
+  },
+  {
+    "id" : 76,
+    "quote": "If you think your teacher is tough,\nwait until you get a boss.\nHe doesn't have tenure.",
+    "writer" : "- Bill Gates\n"
+  },
+  {
+    "id" : 77,
+    "quote": "It's fine to celebrate success\nbut it is more important\nto heed the lessons of failure.",
+    "writer" : "- Bill Gates\n"
+  },
+  {
+    "id" : 78,
+    "quote": "Success is a lousy teacher.\nIt seduces smart people\ninto thinking they can't lose.\n",
+    "writer" : "- Bill Gates\n"
+  },
+  {
+    "id" : 79,
+    "quote": "I could either watch it happen\n or be a part of it.",
+    "writer" : "- Elon Musk"
+  },
+  {
+    "id" : 80,
+    "quote": "The first step is to establish that something is possible;\nthen probability will occur.",
+    "writer" : "- Elon Musk\n"
+  },
+  {
+    "id" : 81,
+    "quote": "Failure is an option here.\nIf things are not failing,\nyou are not innovating enough.",
+    "writer" : "- Elon Musk\n"
+  },
+  {
+    "id" : 82,
+    "quote": "Persistence is very important.\nYou should not give up\nunless you are forced to give up.",
+    "writer" : "- Elon Musk\n"
   }
+
+
 ]

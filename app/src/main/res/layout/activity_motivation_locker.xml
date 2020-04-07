@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/myLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/myLayout"
     android:background="@color/colorPrimary"
     tools:context=".motivationLockerActivity">
 
@@ -13,11 +13,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="40dp"
-        android:textColor="@color/colorWhite"
         android:text="TextView"
+        android:textColor="@color/colorWhite"
+        android:textSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/blankTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text= " "
+        app:layout_constraintStart_toStartOf="@+id/sayingTextView"
+        app:layout_constraintTop_toBottomOf="@+id/sayingTextView" />
+
+    <TextView
+        android:id="@+id/writerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/colorWhite"
+        android:textSize="35dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintEnd_toEndOf="@+id/sayingTextView"
+        app:layout_constraintTop_toBottomOf="@+id/blankTextView" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

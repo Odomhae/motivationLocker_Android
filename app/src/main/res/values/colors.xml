@@ -14,4 +14,6 @@
     <color name="colorYellow">#e8f321</color>
     <color name="colorPink">#f987c5</color>
     <color name="colorGray">#DCDCDC</color>
+    <color name="colorViolet">#cc99ff</color>
+
 </resources>
