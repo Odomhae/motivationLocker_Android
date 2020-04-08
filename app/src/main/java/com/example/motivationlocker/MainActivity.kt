@@ -6,23 +6,82 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.*
+import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.AdListener
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
 
     val fragment = MyPreferenceFragment()
+    // 광고
+    lateinit var mAdView : AdView
+    private lateinit var mInterstitialAd: InterstitialAd
+    private val adSize: AdSize
+        get() {
+            val display = windowManager.defaultDisplay
+            val outMetrics = DisplayMetrics()
+            display.getMetrics(outMetrics)
+
+            val density = outMetrics.density
+            val adWidthPixels = outMetrics.widthPixels.toFloat()
+            val adWidth = (adWidthPixels / density).toInt()
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // 초기실행시 전면 광고
+        mInterstitialAd = InterstitialAd(this)
+        //전면 광고 테스트 전용 광고 단위 ID
+        mInterstitialAd.adUnitId = resources.getString(R.string.TEST_fullscreen_ad_unit_id)
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+
+        mInterstitialAd.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                if (mInterstitialAd.isLoaded) {
+                    mInterstitialAd.show()
+                }else {
+                    Log.d("Msg ", "The interstitial wasn't loaded yet.")
+                }
+            }
+
+            override fun onAdOpened() {}
+            override fun onAdFailedToLoad(errorCode: Int) {}
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
 
         window.statusBarColor = resources.getColor(R.color.colorGray)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         // preferenceContent 아이디 부분에 fragment 넣기
         fragmentManager.beginTransaction().replace(R.id.preferenceContent, fragment).commit()
+
+        // 배너 광고
+        MobileAds.initialize(this) {}
+        mAdView = AdView(this)
+        adView.addView(mAdView)
+        loadBanner()
+    }
+
+    private fun loadBanner() {
+        mAdView.adUnitId = resources.getString(R.string.TEST_banner_ad_unit_id)
+        mAdView.adSize = adSize
+
+        val adRequest = AdRequest
+            .Builder()
+            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()
+
+        // Start loading the ad in the background.
+        mAdView.loadAd(adRequest)
     }
 
     class MyPreferenceFragment : PreferenceFragment(){
@@ -79,6 +138,18 @@ class MainActivity : AppCompatActivity() {
                 setInts(context, "textSize", index)
                 textSizeCategoryPref.summary = textSizeCategoryPref.entries[index]
                 Log.d("선택한 글자크기", textSizeCategoryPref.summary.toString())
+                true
+            }
+
+            // 출처 표시
+            val showSourcePref = findPreference("showSourcePref") as SwitchPreference
+            showSourcePref.setOnPreferenceClickListener {
+                when{
+                    //출처 표기시 0
+                    showSourcePref.isChecked -> setInts(context, "showSource", 0)
+                    //출처 미표기시 1
+                    else -> setInts(context, "showSource", 1)
+                }
                 true
             }
 

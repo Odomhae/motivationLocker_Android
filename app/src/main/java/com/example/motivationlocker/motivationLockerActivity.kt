@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
@@ -49,11 +50,12 @@ class motivationLockerActivity : AppCompatActivity() {
             return prefs.getInt(key, 0)
         }
 
-        // 언어, 배경색, 글자색, 글자 크기
+        // 언어, 배경색, 글자색, 글자 크기, 출처표기 여부
         val language = getInt("language")
         val backgroundColor = getInt("backgroundColor")
         val textColor = getInt("textColor")
         val textSize = getInt("textSize")
+        val showSource = getInt("showSource")
 
         // 언어
         when(language){
@@ -201,6 +203,9 @@ class motivationLockerActivity : AppCompatActivity() {
             }
         }
 
+        // 출처 표기 안하면 투명하게
+        if(showSource == 1)
+            writerTextView.setTextColor(resources.getColor(R.color.colorTransparent))
 
         //시작, 끝점 계산해서 잠금해제
         var startX = 0
@@ -241,6 +246,5 @@ class motivationLockerActivity : AppCompatActivity() {
         }
 
     }
-
 
 }

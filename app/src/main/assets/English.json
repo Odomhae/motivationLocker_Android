@@ -414,6 +414,91 @@
     "id" : 82,
     "quote": "Persistence is very important.\nYou should not give up\nunless you are forced to give up.",
     "writer" : "- Elon Musk\n"
+  },
+  {
+    "id" : 83,
+    "quote": "When something is important enough,\nyou do it\neven if the odds are not in your favor.",
+    "writer" : "- Elon Musk"
+  },
+  {
+    "id" : 84,
+    "quote": "Price is what you pay.\nValue is what you get.",
+    "writer" : "- Warren Buffett\n"
+  },
+  {
+    "id" : 85,
+    "quote": "Risk comes from \nnot knowing what you're doing.",
+    "writer" : "- Warren Buffett\n"
+  },
+  {
+    "id" : 86,
+    "quote": "I always knew \nI was going to be rich.\nI don't think I ever doubted it for a minute.",
+    "writer" : "- Warren Buffett\n"
+  },
+  {
+    "id" :87,
+    "quote": "After all,\nyou only find out who is swimming naked\nwhen the tide goes out.\n",
+    "writer" : "-  Warren Buffett"
+  },
+  {
+    "id" : 88,
+    "quote": "Whatever you are,\nbe a good one.",
+    "writer" : "- Abraham Lincoln"
+  },
+  {
+    "id" : 89,
+    "quote": "My Best Friend is a person\nwho will give me a book\nI have not read.",
+    "writer" : "- Abraham Lincoln"
+  },
+  {
+    "id" : 90,
+    "quote": "I am a slow walker,\nbut I never walk back.",
+    "writer" : "- Abraham Lincoln"
+  },
+  {
+    "id" : 91,
+    "quote": "The best way to predict your future\n is to create it.",
+    "writer" : "- Abraham Lincoln"
+  },
+  {
+    "id" : 92,
+    "quote": "I laugh because I must not cry,\n that is all.",
+    "writer" : "- Abraham Lincoln"
+  },
+  {
+    "id" : 93,
+    "quote": "I will prepare \nand some day\n my chance will come.",
+    "writer" : "- Abraham Lincoln"
+  },
+  {
+    "id" : 94,
+    "quote": "Every man's happiness\n is his own responsibility.",
+    "writer" : "- Abraham Lincoln"
+  },
+  {
+    "id" : 95,
+    "quote": "Achievement has no color.",
+    "writer" : "- Abraham Lincoln"
+  },
+  {
+    "id" : 96,
+    "quote": "I do the very best I know how,\nthe very best I can,\nand I mean to keep on doing so until the end.",
+    "writer" : "- Abraham Lincoln"
+  },
+  {
+    "id" : 97,
+    "quote": "Get books,\nsit yourself down anywhere,\nand go to reading them yourself.",
+    "writer" : "- Abraham Lincoln"
+  },
+  {
+    "id" : 98,
+    "quote": "Success is not final; failure is not fatal: It is the courage to continue that counts.",
+    "writer" : "- Winston S. Churchill"
+  },
+  {
+    "id" : 99,
+    "quote": "Never give in,\nnever give in,\nnever,\nnever,\nnever,\nnever.",
+    "writer" : "- Winston S. Churchill"
   }
 
 

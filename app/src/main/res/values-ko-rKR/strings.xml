@@ -2,6 +2,14 @@
 <resources>
     <string name="app_name">동기부여 잠금화면</string>
 
+    <!-- 테스트용 배너 광고 -->
+    <string name="TEST_banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <!-- 테스트용 전면 광고 -->
+    <string name="TEST_fullscreen_video_ad_unit_id">ca-app-pub-3940256099942544/8691691433</string>
+    <string name="TEST_fullscreen_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <!--  테스트용 애드몹 앱 아이디 -->
+    <string name="TEST_admob_app_id"> ca-app-pub-3940256099942544~3347511713</string>
+
     <string name="colorBlack">검정</string>
     <string name="colorPink">핑크</string>
     <string name="colorRed">빨강</string>
@@ -27,6 +35,7 @@
     <string name="colorViolet">바이올렛</string>
 
     <string name="lockScreen_setting">잠금화면 설정</string>
+    <string name="show_source">출처 표시</string>
 
 
 </resources>

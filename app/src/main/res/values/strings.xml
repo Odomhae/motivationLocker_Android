@@ -3,11 +3,18 @@
 
     <string name="lockScreen_setting">Lock Screen Setting</string>
 
+
+    <string name="TEST_banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="TEST_fullscreen_video_ad_unit_id">ca-app-pub-3940256099942544/8691691433</string>
+    <string name="TEST_fullscreen_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="TEST_admob_app_id"> ca-app-pub-3940256099942544~3347511713</string>
+
     <string name="app_activation">App Activation</string>
     <string name="language_setting">Language</string>
     <string name="background_color">Background Color</string>
     <string name="text_color">Text Color</string>
     <string name="text_size">Text Size</string>
+    <string name="show_source">Indication of source</string>
 
     <string name="languageKorean">Korean</string>
     <string name="languageEnglish">English</string>
