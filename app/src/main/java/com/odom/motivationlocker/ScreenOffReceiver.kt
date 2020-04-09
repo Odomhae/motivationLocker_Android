@@ -1,4 +1,4 @@
-package com.example.motivationlocker
+package com.odom.motivationlocker
 
 import android.content.BroadcastReceiver
 import android.content.Context

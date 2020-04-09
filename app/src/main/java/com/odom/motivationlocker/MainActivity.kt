@@ -1,4 +1,4 @@
-package com.example.motivationlocker
+package com.odom.motivationlocker
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.preference.*
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.View
+import com.odom.motivationlocker.R
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.AdListener
 import kotlinx.android.synthetic.main.activity_main.*

@@ -1,4 +1,4 @@
-package com.example.motivationlocker
+package com.odom.motivationlocker
 
 import android.annotation.SuppressLint
 import android.app.Notification
@@ -11,13 +11,14 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
+import com.odom.motivationlocker.R
 
 class LockScreenService : Service() {
 
     // 화면꺼질때 브로드케스트 msg 수신하는 리시버
     var receiver : ScreenOffReceiver? = null
 
-    private val ANDROID_CHANNEL_ID = "com.example.motivationlocker"
+    private val ANDROID_CHANNEL_ID = "com.odom.motivationlocker"
     private val NOTIFICATION_ID = 9999
 
     override fun onCreate() {

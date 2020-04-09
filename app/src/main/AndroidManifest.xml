@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.motivationlocker">
+    package="com.odom.motivationlocker">
 
     <!-- 포그라운드 서비스 -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -19,14 +19,14 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/TEST_admob_app_id"/>
 
-        <activity android:name=".motivationLockerActivity"></activity>
+        <activity android:name="com.odom.motivationlocker.motivationLockerActivity"></activity>
 
         <service
-            android:name=".LockScreenService"
+            android:name="com.odom.motivationlocker.LockScreenService"
             android:enabled="true"
             android:exported="true"/>
 
-        <activity android:name=".MainActivity">
+        <activity android:name="com.odom.motivationlocker.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

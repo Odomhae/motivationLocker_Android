@@ -1,4 +1,4 @@
-package com.example.motivationlocker
+package com.odom.motivationlocker
 
 import android.app.KeyguardManager
 import android.content.Context
@@ -13,6 +13,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.marginTop
+import com.odom.motivationlocker.R
 import kotlinx.android.synthetic.main.activity_motivation_locker.*
 import org.json.JSONArray
 import org.json.JSONObject

@@ -1,4 +1,4 @@
-package com.example.motivationlocker
+package com.odom.motivationlocker
 
 import org.junit.Test
 
