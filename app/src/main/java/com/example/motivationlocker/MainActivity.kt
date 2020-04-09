@@ -36,24 +36,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 초기실행시 전면 광고
-        mInterstitialAd = InterstitialAd(this)
-        //전면 광고 테스트 전용 광고 단위 ID
-        mInterstitialAd.adUnitId = resources.getString(R.string.TEST_fullscreen_ad_unit_id)
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
-
-        mInterstitialAd.adListener = object : AdListener() {
-            override fun onAdLoaded() {
-                if (mInterstitialAd.isLoaded) {
-                    mInterstitialAd.show()
-                }else {
-                    Log.d("Msg ", "The interstitial wasn't loaded yet.")
-                }
-            }
-
-            override fun onAdOpened() {}
-            override fun onAdFailedToLoad(errorCode: Int) {}
-        }
+//        // 초기실행시 전면 광고
+//        mInterstitialAd = InterstitialAd(this)
+//        //전면 광고 테스트 전용 광고 단위 ID
+//        mInterstitialAd.adUnitId = resources.getString(R.string.TEST_fullscreen_ad_unit_id)
+//        mInterstitialAd.loadAd(AdRequest.Builder().build())
+//
+//        mInterstitialAd.adListener = object : AdListener() {
+//            override fun onAdLoaded() {
+//                if (mInterstitialAd.isLoaded) {
+//                    mInterstitialAd.show()
+//                }else {
+//                    Log.d("Msg ", "The interstitial wasn't loaded yet.")
+//                }
+//            }
+//
+//            override fun onAdOpened() {}
+//            override fun onAdFailedToLoad(errorCode: Int) {}
+//        }
     }
 
     override fun onStart() {

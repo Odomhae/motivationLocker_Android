@@ -94,47 +94,85 @@ class motivationLockerActivity : AppCompatActivity() {
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
             1 -> {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorGray))
+                window.statusBarColor = resources.getColor(R.color.colorGray)
+            }
+            2 ->  {
                 myLayout.setBackgroundColor(resources.getColor(R.color.colorBlack))
                 window.statusBarColor = resources.getColor(R.color.colorBlack)
             }
-            2 ->  {
+            3 ->  {
                 myLayout.setBackgroundColor(resources.getColor(R.color.colorRed))
                 window.statusBarColor = resources.getColor(R.color.colorRed)
             }
-            3 ->  {
+            4 -> {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorCrimson))
+                window.statusBarColor = resources.getColor(R.color.colorCrimson)
+            }
+            5 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorSalmon))
+                window.statusBarColor = resources.getColor(R.color.colorSalmon)
+            }
+            6 ->  {
                 myLayout.setBackgroundColor(resources.getColor(R.color.colorBeige))
                 window.statusBarColor = resources.getColor(R.color.colorBeige)
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
-            4 -> {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorBlue))
-                window.statusBarColor = resources.getColor(R.color.colorBlue)
-            }
-            5 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorGreen))
-                window.statusBarColor = resources.getColor(R.color.colorGreen)
-            }
-            6 ->  {
+            7 ->  {
                 myLayout.setBackgroundColor(resources.getColor(R.color.colorOrange))
                 window.statusBarColor = resources.getColor(R.color.colorOrange)
             }
-            7 ->  {
+            8 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorBrown))
+                window.statusBarColor = resources.getColor(R.color.colorBrown)
+            }
+            9 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorWalnut))
+                window.statusBarColor = resources.getColor(R.color.colorWalnut)
+            }
+            10 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorBlue))
+                window.statusBarColor = resources.getColor(R.color.colorBlue)
+            }
+            11 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorMalibu))
+                window.statusBarColor = resources.getColor(R.color.colorMalibu)
+            }
+            12 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorGreen))
+                window.statusBarColor = resources.getColor(R.color.colorGreen)
+            }
+            13 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorYellowGreen))
+                window.statusBarColor = resources.getColor(R.color.colorYellowGreen)
+            }
+            14 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorMint))
+                window.statusBarColor = resources.getColor(R.color.colorMint)
+            }
+            15 ->  {
                 myLayout.setBackgroundColor(resources.getColor(R.color.colorYellow))
                 window.statusBarColor = resources.getColor(R.color.colorYellow)
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
             }
-            8 ->  {
+            16 ->  {
                 myLayout.setBackgroundColor(resources.getColor(R.color.colorPink))
                 window.statusBarColor = resources.getColor(R.color.colorPink)
             }
-            9 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorGray))
-                window.statusBarColor = resources.getColor(R.color.colorGray)
-            }
-            10 ->  {
+            17 ->  {
                 myLayout.setBackgroundColor(resources.getColor(R.color.colorViolet))
                 window.statusBarColor = resources.getColor(R.color.colorViolet)
             }
+            18 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorMagenta))
+                window.statusBarColor = resources.getColor(R.color.colorMagenta)
+            }
+            19 ->  {
+                myLayout.setBackgroundColor(resources.getColor(R.color.colorPurple))
+                window.statusBarColor = resources.getColor(R.color.colorPurple)
+            }
+
         }
         // 글자색
         when(textColor){
@@ -143,44 +181,80 @@ class motivationLockerActivity : AppCompatActivity() {
                 writerTextView.setTextColor(resources.getColor(R.color.colorWhite))
             }
             1 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorBlack))
-                writerTextView.setTextColor(resources.getColor(R.color.colorBlack))
-            }
-            2 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorRed))
-                writerTextView.setTextColor(resources.getColor(R.color.colorRed))
-            }
-            3 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorBeige))
-                writerTextView.setTextColor(resources.getColor(R.color.colorBeige))
-            }
-            4 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorBlue))
-                writerTextView.setTextColor(resources.getColor(R.color.colorBlue))
-            }
-            5 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorGreen))
-                writerTextView.setTextColor(resources.getColor(R.color.colorGreen))
-            }
-            6 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorOrange))
-                writerTextView.setTextColor(resources.getColor(R.color.colorOrange))
-            }
-            7 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorYellow))
-                writerTextView.setTextColor(resources.getColor(R.color.colorYellow))
-            }
-            8 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorPink))
-                writerTextView.setTextColor(resources.getColor(R.color.colorPink))
-            }
-            9 ->  {
                 sayingTextView.setTextColor(resources.getColor(R.color.colorGray))
                 writerTextView.setTextColor(resources.getColor(R.color.colorGray))
             }
+            2 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorBlack))
+                writerTextView.setTextColor(resources.getColor(R.color.colorBlack))
+            }
+            3 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorRed))
+                writerTextView.setTextColor(resources.getColor(R.color.colorRed))
+            }
+            4 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorCrimson))
+                writerTextView.setTextColor(resources.getColor(R.color.colorCrimson))
+            }
+            5 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorSalmon))
+                writerTextView.setTextColor(resources.getColor(R.color.colorSalmon))
+            }
+            6 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorBeige))
+                writerTextView.setTextColor(resources.getColor(R.color.colorBeige))
+            }
+            7 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorOrange))
+                writerTextView.setTextColor(resources.getColor(R.color.colorOrange))
+            }
+            8 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorBrown))
+                writerTextView.setTextColor(resources.getColor(R.color.colorBrown))
+            }
+            9 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorWalnut))
+                writerTextView.setTextColor(resources.getColor(R.color.colorWalnut))
+            }
             10 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorBlue))
+                writerTextView.setTextColor(resources.getColor(R.color.colorBlue))
+            }
+            11 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorMalibu))
+                writerTextView.setTextColor(resources.getColor(R.color.colorMalibu))
+            }
+            12 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorGreen))
+                writerTextView.setTextColor(resources.getColor(R.color.colorGreen))
+            }
+            13 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorYellowGreen))
+                writerTextView.setTextColor(resources.getColor(R.color.colorYellowGreen))
+            }
+            14 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorMint))
+                writerTextView.setTextColor(resources.getColor(R.color.colorMint))
+            }
+            15 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorYellow))
+                writerTextView.setTextColor(resources.getColor(R.color.colorYellow))
+            }
+            16 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorPink))
+                writerTextView.setTextColor(resources.getColor(R.color.colorPink))
+            }
+            17 ->  {
                 sayingTextView.setTextColor(resources.getColor(R.color.colorViolet))
                 writerTextView.setTextColor(resources.getColor(R.color.colorViolet))
+            }
+            18 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorMagenta))
+                writerTextView.setTextColor(resources.getColor(R.color.colorMagenta))
+            }
+            19 ->  {
+                sayingTextView.setTextColor(resources.getColor(R.color.colorPurple))
+                writerTextView.setTextColor(resources.getColor(R.color.colorPurple))
             }
         }
         // 글자크기
@@ -199,6 +273,18 @@ class motivationLockerActivity : AppCompatActivity() {
                 sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
                 blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
                 writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 35f)
+
+            }
+            3 ->  {
+                sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 75f)
+                blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 75f)
+                writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
+
+            }
+            4 ->  {
+                sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 100f)
+                blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 100f)
+                writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 70f)
 
             }
         }

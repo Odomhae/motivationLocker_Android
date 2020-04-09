@@ -1,12 +1,12 @@
 [
   {
     "id" : 1,
-    "quote": "Change your thoughts\n and\n you change your world.",
+    "quote": "Change your thoughts\nand\nyou change your world.",
     "writer" : "- Norman Vincent Peale"
   },
   {
     "id" : 2,
-    "quote": "Three things in life :\nyour health\nyour mission\nand the people you love.\nThat’s it.",
+    "quote": "Three things in life\nyour health\nyour mission\nand the people you love.\nThat’s it.",
     "writer" : "- Naval Ravikant"
   },
   {
@@ -36,7 +36,7 @@
   },
   {
     "id" : 7,
-    "quote": "It always seems impossible \nuntil it’s done.",
+    "quote": "It always seems impossible\nuntil it’s done.",
     "writer" : "- Nelson Mandela"
   },
   {
@@ -51,12 +51,12 @@
   },
   {
     "id" : 10,
-    "quote": "Life isn’t a matter of milestones,\b but of moments.",
+    "quote": "Life isn’t a matter of milestones\b but of moments.",
     "writer" : "- Rose Kennedy"
   },
   {
     "id" : 11,
-    "quote": "Not how long,\nbut how well \nyou have lived is the main thing.",
+    "quote": "Not how long, but how well\nyou have lived is the main thing.",
     "writer" : "- Seneca\n"
   },
   {
@@ -66,12 +66,12 @@
   },
   {
     "id" : 13,
-    "quote": "Be happy\n for this moment.\nThis moment is your life.",
+    "quote": "Be happy\nfor this moment.\nThis moment is your life.",
     "writer" : "- Omar Khayyam"
   },
   {
     "id" : 14,
-    "quote": "Life is what happens\nwhen you’re busy \nmaking other plans.",
+    "quote": "Life is what happens\nwhen you’re busy\nmaking other plans.",
     "writer" : "- John Lennon"
   },
   {
@@ -91,17 +91,17 @@
   },
   {
     "id" : 18,
-    "quote": "Don't take life \ntoo seriously.\nYou will never get out of it alive.",
+    "quote": "Don't take life\ntoo seriously.\nYou will never get out of it alive.",
     "writer" : "- Elbert Hubbard"
   },
   {
     "id" : 19,
-    "quote": "Don’t search\nfor the meaning of life.\nSimply be present \nfor the people you love.",
+    "quote": "Don’t search\nfor the meaning of life.\nSimply be present\nfor the people you love.",
     "writer" : "- Maxime Lagacé"
   },
   {
     "id" : 20,
-    "quote": "The trick in life is\n learning how to deal with it.",
+    "quote": "The trick in life is\nlearning how to deal with it.",
     "writer" : "- Helen Mirren"
   },
   {
@@ -126,12 +126,12 @@
   },
   {
     "id" : 25,
-    "quote": "Love all,\ntrust a few,\ndo wrong to none.",
+    "quote": "Love all\ntrust a few\ndo wrong to none.",
     "writer" : "- William Shakespeare"
   },
   {
     "id" : 26,
-    "quote": "Life is ours to be spent,\n not to be saved.",
+    "quote": "Life is ours to be spent\n not to be saved.",
     "writer" : "- D. H. Lawrence\n"
   },
   {
@@ -241,7 +241,7 @@
   },
   {
     "id" : 48,
-    "quote": "Life is not an exact science, \nit is an art.",
+    "quote": "Life is not an exact science\nit is an art.",
     "writer" : "- Samuel Butler"
   },
   {
@@ -257,7 +257,7 @@
   },
   {
     "id" : 51,
-    "quote": "Love yourself first \nand everything else \nfalls into line.",
+    "quote": "Love yourself first\nand everything else \nfalls into line.",
     "writer" : "- Lucille Ball\n"
   },
   {
@@ -287,12 +287,12 @@
   },
   {
     "id" : 57,
-    "quote": "If everything was perfect,\nyou would never learn\n and you would never grow.",
+    "quote": "If everything was perfect\nyou would never learn\nand you would never grow.",
     "writer" : "- Beyoncé"
   },
   {
     "id" : 58,
-    "quote": "Life is like riding a bicycle.\nTo keep your balance,\nyou must keep moving.",
+    "quote": "Life is like riding a bicycle.\nTo keep your balance\nyou must keep moving.",
     "writer" : "- Albert Einstein"
   },
   {
@@ -302,17 +302,17 @@
   },
   {
     "id" : 60,
-    "quote": "It is not the length of life,\nbut depth of life.",
+    "quote": "It is not the length of life\nbut depth of life.",
     "writer" : "- Ralph Waldo Emerson"
   },
   {
     "id" : 61,
-    "quote": "Where there is no struggle,\nthere is no strength.",
+    "quote": "Where there is no struggle\nthere is no strength.",
     "writer" : "- Oprah Winfrey"
   },
   {
     "id" : 62,
-    "quote": "Above all,\nbe the heroine of your life,\nnot the victim.",
+    "quote": "Above all\nbe the heroine of your life\nnot the victim.",
     "writer" : "- Nora Ephron\n"
   },
   {
@@ -322,12 +322,12 @@
   },
   {
     "id" : 64,
-    "quote": "Remember,\nno one can make you feel inferior\n without your consent.",
+    "quote": "Remember\nno one can make you feel inferior\n without your consent.",
     "writer" : "- Eleanor Roosevelt"
   },
   {
     "id" : 65,
-    "quote": "Yesterday is not ours to recover,\nbut tomorrow is ours to win or lose.",
+    "quote": "Yesterday is not ours to recover\nbut tomorrow is ours to win or lose.",
     "writer" : "- Lyndon B. Johnson"
   },
   {
@@ -337,7 +337,7 @@
   },
   {
     "id" : 67,
-    "quote": "Your time is limited,\nso don't waste it \nliving someone else's life.",
+    "quote": "Your time is limited\nso don't waste it\nliving someone else's life.",
     "writer" : "- Steve Jobs"
   },
   {
@@ -377,12 +377,12 @@
   },
   {
     "id" : 75,
-    "quote": "If you can't make it good,\nat least make it look good.",
+    "quote": "If you can't make it good\nat least make it look good.",
     "writer" : "- Bill Gates"
   },
   {
     "id" : 76,
-    "quote": "If you think your teacher is tough,\nwait until you get a boss.\nHe doesn't have tenure.",
+    "quote": "If you think your teacher is tough\nwait until you get a boss.\nHe doesn't have tenure.",
     "writer" : "- Bill Gates\n"
   },
   {
@@ -407,7 +407,7 @@
   },
   {
     "id" : 81,
-    "quote": "Failure is an option here.\nIf things are not failing,\nyou are not innovating enough.",
+    "quote": "Failure is an option here.\nIf things are not failing\nyou are not innovating enough.",
     "writer" : "- Elon Musk\n"
   },
   {
@@ -417,7 +417,7 @@
   },
   {
     "id" : 83,
-    "quote": "When something is important enough,\nyou do it\neven if the odds are not in your favor.",
+    "quote": "When something is important enough\nyou do it\neven if the odds are not in your favor.",
     "writer" : "- Elon Musk"
   },
   {
@@ -427,22 +427,22 @@
   },
   {
     "id" : 85,
-    "quote": "Risk comes from \nnot knowing what you're doing.",
+    "quote": "Risk comes from\nnot knowing what you're doing.",
     "writer" : "- Warren Buffett\n"
   },
   {
     "id" : 86,
-    "quote": "I always knew \nI was going to be rich.\nI don't think I ever doubted it for a minute.",
+    "quote": "I always knew\nI was going to be rich.\nI don't think I ever doubted it for a minute.",
     "writer" : "- Warren Buffett\n"
   },
   {
     "id" :87,
-    "quote": "After all,\nyou only find out who is swimming naked\nwhen the tide goes out.\n",
+    "quote": "After all\nyou only find out who is swimming naked\nwhen the tide goes out.\n",
     "writer" : "-  Warren Buffett"
   },
   {
     "id" : 88,
-    "quote": "Whatever you are,\nbe a good one.",
+    "quote": "Whatever you are\nbe a good one.",
     "writer" : "- Abraham Lincoln"
   },
   {
@@ -452,7 +452,7 @@
   },
   {
     "id" : 90,
-    "quote": "I am a slow walker,\nbut I never walk back.",
+    "quote": "I am a slow walker\nbut I never walk back.",
     "writer" : "- Abraham Lincoln"
   },
   {
@@ -462,12 +462,12 @@
   },
   {
     "id" : 92,
-    "quote": "I laugh because I must not cry,\n that is all.",
+    "quote": "I laugh because I must not cry\n that is all.",
     "writer" : "- Abraham Lincoln"
   },
   {
     "id" : 93,
-    "quote": "I will prepare \nand some day\n my chance will come.",
+    "quote": "I will prepare\nand some day\n my chance will come.",
     "writer" : "- Abraham Lincoln"
   },
   {
@@ -482,24 +482,342 @@
   },
   {
     "id" : 96,
-    "quote": "I do the very best I know how,\nthe very best I can,\nand I mean to keep on doing so until the end.",
+    "quote": "I do the very best I know how\nthe very best I can\nand I mean to keep on doing so until the end.",
     "writer" : "- Abraham Lincoln"
   },
   {
     "id" : 97,
-    "quote": "Get books,\nsit yourself down anywhere,\nand go to reading them yourself.",
+    "quote": "Get books\nsit yourself down anywhere\nand go to reading them yourself.",
     "writer" : "- Abraham Lincoln"
   },
   {
     "id" : 98,
-    "quote": "Success is not final; failure is not fatal: It is the courage to continue that counts.",
+    "quote": "Success is not final\nFailure is not fatal\nIt is the courage to continue that counts.",
     "writer" : "- Winston S. Churchill"
   },
   {
     "id" : 99,
-    "quote": "Never give in,\nnever give in,\nnever,\nnever,\nnever,\nnever.",
+    "quote": "Never give in\nnever give in\nnever\nnever\nnever\nnever.",
     "writer" : "- Winston S. Churchill"
+  },
+  {
+    "id" : 100,
+    "quote": "Some people want it to happen\nsome wish it would happen\nothers make it happen.",
+    "writer" : "- Michael Jordan"
+  },
+  {
+    "id" : 101,
+    "quote": "Talent wins games\nbut teamwork and intelligence wins championships.",
+    "writer" : "- Michael Jordan"
+  },
+  {
+    "id" : 102,
+    "quote": "I can accept failure\nbut I can't accept not trying.",
+    "writer" : "- Michael Jordan"
+  },
+  {
+    "id" : 103,
+    "quote": "Always turn a negative situation\ninto a positive situation.",
+    "writer" : "- Michael Jordan"
+  },
+  {
+    "id" : 104,
+    "quote": "You must expect great things of yourself\n before you can do them.",
+    "writer" : "- Michael Jordan"
+  },
+  {
+    "id" : 105,
+    "quote": "If you quit ONCE\nit becomes a habit.\nNever quit.",
+    "writer" : "- Michael Jordan"
+  },
+  {
+    "id" : 106,
+    "quote": "Everybody has talent\nbut ability takes hard work.",
+    "writer" : "- Michael Jordan"
+  },
+  {
+    "id" : 107,
+    "quote": "Never say never\nbecause limits, like fears\nare often just an illusion.",
+    "writer" : "- Michael Jordan"
+  },
+  {
+    "id" : 108,
+    "quote": "To learn to succeed\nyou must first learn to fail.",
+    "writer" : "- Michael Jordan\n"
+  },
+  {
+    "id" : 109,
+    "quote": "Make It Happen.",
+    "writer" : "- Michael Jordan\n"
+  },
+  {
+    "id" : 110,
+    "quote": "If you do the work you get rewarded.\nThere are no shortcuts in life.",
+    "writer" : "- Michael Jordan\n"
+  },
+  {
+    "id" : 111,
+    "quote": "The key to success is failure.",
+    "writer" : "- Michael Jordan\n"
+  },
+  {
+    "id" : 112,
+    "quote": "Always deliver more than expected.",
+    "writer" : "-  Larry Page"
+  },
+  {
+    "id" : 113,
+    "quote": "Every time we launch a feature\npeople yell at us.",
+    "writer" : "- Angelo Sotira\n"
+  },
+  {
+    "id" : 114,
+    "quote": "Make every detail perfect\nand limit the number of details to perfect.",
+    "writer" : "- Jack Dorsey\n"
+  },
+  {
+    "id" :115,
+    "quote": "Always look for the fool in the deal.\nIf you don’t find one,\nit’s you.",
+    "writer" : "- Mark Cuban"
+  },
+  {
+    "id" : 116,
+    "quote": "Chase the vision, not the money, the money will end up following you.",
+    "writer" : "- Tony Hsieh"
+  },
+  {
+    "id" : 117,
+    "quote": "Nothing works better \nthan just improving your product.",
+    "writer" : "- Joel Spolsky"
+  },
+  {
+    "id" : 118,
+    "quote": "Get big quietly\nso you don’t tip off\npotential competitors.",
+    "writer" : "- Chris Dixon"
+  },
+  {
+    "id" : 119,
+    "quote": "It's kind of fun\n to do the impossible.",
+    "writer" : "- Walt Disney\n"
+  },
+  {
+    "id" : 120,
+    "quote": "The way to get started\nis to quit talking\nand begin doing.",
+    "writer" : "- Walt Disney\n"
+  },
+  {
+    "id" : 121,
+    "quote": "All our dreams can come true\nif we have the courage to pursue them.",
+    "writer" : "- Walt Disney\n"
+  },
+  {
+    "id" : 122,
+    "quote": "Even miracles take a little time.",
+    "writer" : "- Cinderella"
+  },
+  {
+    "id" : 123,
+    "quote": "The flower that blooms in adversity\nis the most rare and beautiful of all.",
+    "writer" : "- Mulan"
+  },
+  {
+    "id" : 124,
+    "quote": "Don't just fly, soar",
+    "writer" : "- Dumbo\n"
+  },
+  {
+    "id" : 125,
+    "quote": "Believe you can\nthen you will.",
+    "writer" : "- Mulan\n"
+  },
+  {
+    "id" : 126,
+    "quote": "Today is a good day to try.",
+    "writer" : "- The Hunchback of Notre Dame"
+  },
+  {
+    "id" : 127,
+    "quote": "Listen with your heart\nyou will understand.",
+    "writer" : "- Pocahontas"
+  },
+  {
+    "id" : 128,
+    "quote": "Giving up is for rookies.",
+    "writer" : "- Hercules\n"
+  },
+  {
+    "id" : 129,
+    "quote": "Always \nlet your conscience \nbe your guide.",
+    "writer" : "- Pinocchio"
+  },
+  {
+    "id" : 130,
+    "quote": "Change is good.",
+    "writer" : "- The Lion King"
+  },
+  {
+    "id" : 131,
+    "quote": "The only thing predictable\n about life is\nits unpredictability.",
+    "writer" : "- Ratatouille\n"
+  },
+  {
+    "id" : 132,
+    "quote": "Remember\nyou're the one\nwho can fill the world with sunshine.",
+    "writer" : "- Snow White\n"
+  },
+  {
+    "id" : 133,
+    "quote": "Data beats emotions.",
+    "writer" : "- Sean Rad"
+  },
+  {
+    "id" : 134,
+    "quote": "I never dreamed about success,\nI worked for it.",
+    "writer" : "- Estee Lauder"
+  },
+  {
+    "id" : 135,
+    "quote": "See things in the present\neven if they are in the future.",
+    "writer" : "- Larry Ellison\n"
+  },
+  {
+    "id" : 136,
+    "quote": "Life’s a journey.\nIt’s a journey about discovering limits.",
+    "writer" : "- Larry Ellison\n"
+  },
+  {
+    "id" : 137,
+    "quote": "You have to act\nand\nact now.",
+    "writer" : "- Larry Ellison\n"
+  },
+  {
+    "id" : 138,
+    "quote": "Diligence is the mother\nof good luck.",
+    "writer" : "- Benjamin Franklin"
+  },
+  {
+    "id" : 139,
+    "quote": "He that falls in love with himself\nwill have no rivals.",
+    "writer" : "- Benjamin Franklin"
+  },
+  {
+    "id" : 140,
+    "quote": "Well done is better\nthan well said.",
+    "writer" : "- Benjamin Franklin"
+  },
+  {
+    "id" : 141,
+    "quote": "No gains without pains.",
+    "writer" : "- Benjamin Franklin"
+  },
+  {
+    "id" : 142,
+    "quote": "Lost Time is\nnever found again.",
+    "writer" : "- Benjamin Franklin"
+  },
+  {
+    "id" : 143,
+    "quote": "Haste makes Waste.",
+    "writer" : "- Benjamin Franklin"
+  },
+  {
+    "id" : 144,
+    "quote": "Search others for their virtues\nthy self for thy vices.",
+    "writer" : "- Benjamin Franklin"
+  },
+  {
+    "id" : 145,
+    "quote": "Act\nas if what you do makes a difference.\nIt does.",
+    "writer" : "- William James\n"
+  },
+  {
+    "id" : 146,
+    "quote": "Believe you can and you're halfway there.",
+    "writer" : "- Theodore Roosevelt"
+  },
+  {
+    "id" : 147,
+    "quote": "Limit your 'always'\n and your 'nevers.'",
+    "writer" : "- Amy Poehler"
+  },
+  {
+    "id" : 148,
+    "quote": "Try to be a rainbow \nin someone else's cloud.",
+    "writer" : "- Maya Angelou\n"
+  },
+  {
+    "id" : 149,
+    "quote": "You do not find the happy life.\nYou make it.",
+    "writer" : "- Camilla Eyring Kimball"
+  },
+  {
+    "id" : 150,
+    "quote": "It isn't where you came from.\nIt's where you're going that counts.",
+    "writer" : "- Ella Fitzgerald"
+  },
+  {
+    "id" : 151,
+    "quote": "You get what you give.",
+    "writer" : "- Jennifer Lopez"
+  },
+  {
+    "id" : 152,
+    "quote": "Happiness is not by chance\nbut by choice.",
+    "writer" : "- Jim Rohn\n"
+  },
+  {
+    "id" : 153,
+    "quote": "If I can't do great things\nI can do small things in a great way.",
+    "writer" : "- Martin Luther King Jr."
+  },
+  {
+    "id" : 154,
+    "quote": "Don't wait.\nThe time will never be just right.",
+    "writer" : "- Napoleon Hill"
+  },
+  {
+    "id" : 155,
+    "quote": "Keep your face always toward the sunshine\nand shadows will fall behind you.",
+    "writer" : "- Walt Whitman"
+  },
+  {
+    "id" : 156,
+    "quote": "As long as we persevere and endure\nwe can get anything we want.",
+    "writer" : "- Mike Tyson"
+  },
+  {
+    "id" : 157,
+    "quote": "I love to hit people\nI love to.",
+    "writer" : "- Mike Tyson"
+  },
+  {
+    "id" : 158,
+    "quote": "If you can concentrate always on the present\nyou'll be a happy man.",
+    "writer" : "- Paulo Cuelho"
+  },
+  {
+    "id" : 159,
+    "quote": "A wise man\nwill make more opportunities\n than he finds.",
+    "writer" : "- Sir Francis Bacon"
+  },
+  {
+    "id" : 160,
+    "quote": "Kites rise highest against the wind.",
+    "writer" : "- Winston S. Churchill"
+  },
+  {
+    "id" : 161,
+    "quote": "Luck is the residue of design.",
+    "writer" : "- Branch Rickey"
+  },
+  {
+    "id" : 162,
+    "quote": "It's choice\n- not chance - \nthat determines your destiny.",
+    "writer" : "- Jean Nidetch"
   }
+
+
+
 
 
 ]

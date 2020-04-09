@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">동기부여 잠금화면</string>
+    <string name="app_name">명언 잠금화면</string>
 
     <!-- 테스트용 배너 광고 -->
     <string name="TEST_banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
@@ -10,32 +10,50 @@
     <!--  테스트용 애드몹 앱 아이디 -->
     <string name="TEST_admob_app_id"> ca-app-pub-3940256099942544~3347511713</string>
 
-    <string name="colorBlack">검정</string>
-    <string name="colorPink">핑크</string>
-    <string name="colorRed">빨강</string>
-    <string name="colorWhite">흰색</string>
+    <!-- 진짜 -->
+    <string name="REAL_admob_app_id"> ca-app-pub-6729344454320392~6582777262</string>
+    <string name="REAL_banner_ad_unit_id">ca-app-pub-6729344454320392/4684206381</string>
+
 
     <string name="languageEnglish">영어</string>
     <string name="languageKorean">한국어</string>
 
+    <string name="lockScreen_setting">잠금화면 설정</string>
     <string name="app_activation">앱 활성화</string>
     <string name="background_color">배경색</string>
     <string name="text_color">글자색</string>
     <string name="language_setting">언어</string>
     <string name="text_size">글자 크기</string>
+    <string name="show_source">출처 표시</string>
+
+
+    <string name="colorBlack">검정</string>
+    <string name="colorPink">핑크</string>
+    <string name="colorRed">빨강</string>
+    <string name="colorCrimson">크림슨</string>
+    <string name="colorWhite">흰색</string>
     <string name="colorBeige">베이지</string>
+    <string name="colorBrown">갈색</string>
+    <string name="colorWalnut">진갈색</string>
     <string name="colorBlue">파랑</string>
+    <string name="colorMalibu">말리부</string>
     <string name="colorGreen">녹색</string>
+    <string name="colorYellowGreen">연두색</string>
+    <string name="colorMint">민트</string>
     <string name="colorOrange">오렌지</string>
+    <string name="colorSalmon">살몬</string>
     <string name="colorYellow">노랑</string>
-    <string name="textSizeLarge">크게</string>
-    <string name="textSizeMedium">중간</string>
-    <string name="textSizeSmall">작게</string>
     <string name="colorGray">회색</string>
     <string name="colorViolet">바이올렛</string>
+    <string name="colorMagenta">마젠타</string>
+    <string name="colorPurple">보라</string>
 
-    <string name="lockScreen_setting">잠금화면 설정</string>
-    <string name="show_source">출처 표시</string>
+    <string name="textSizeSmall">S</string>
+    <string name="textSizeMedium">M</string>
+    <string name="textSizeLarge">L</string>
+    <string name="textSizeXLarge">XL</string>
+    <string name="textSizeXXLarge">XXL</string>
+
 
 
 </resources>

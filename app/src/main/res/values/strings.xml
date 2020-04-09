@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">motivationLocker</string>
+    <string name="app_name">motivation Lockscreen</string>
 
     <string name="lockScreen_setting">Lock Screen Setting</string>
 
@@ -9,31 +9,45 @@
     <string name="TEST_fullscreen_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
     <string name="TEST_admob_app_id"> ca-app-pub-3940256099942544~3347511713</string>
 
+    <string name="REAL_admob_app_id"> ca-app-pub-6729344454320392~6582777262</string>
+    <string name="REAL_banner_ad_unit_id">ca-app-pub-6729344454320392/4684206381</string>
+
     <string name="app_activation">App Activation</string>
     <string name="language_setting">Language</string>
     <string name="background_color">Background Color</string>
     <string name="text_color">Text Color</string>
     <string name="text_size">Text Size</string>
-    <string name="show_source">Indication of source</string>
+    <string name="show_source">Source Indication</string>
 
     <string name="languageKorean">Korean</string>
     <string name="languageEnglish">English</string>
 
     <string name="colorWhite">White</string>
+    <string name="colorGray">Gray</string>
     <string name="colorBlack">Black</string>
     <string name="colorRed">Red</string>
+    <string name="colorCrimson">Crimson</string>
+    <string name="colorSalmon">Salmon</string>
     <string name="colorBeige">Beige</string>
-    <string name="colorBlue">Blue</string>
-    <string name="colorGreen">Green</string>
     <string name="colorOrange">Orange</string>
+    <string name="colorBrown">Brown</string>
+    <string name="colorWalnut">Walnut</string>
+    <string name="colorBlue">Blue</string>
+    <string name="colorMalibu">Malibu</string>
+    <string name="colorGreen">Green</string>
+    <string name="colorYellowGreen">Yellow Green</string>
+    <string name="colorMint">Mint</string>
     <string name="colorYellow">Yellow</string>
     <string name="colorPink">Pink</string>
-    <string name="colorGray">Gray</string>
     <string name="colorViolet">Violet</string>
+    <string name="colorMagenta">Magenta</string>
+    <string name="colorPurple">Purple</string>
 
-    <string name="textSizeSmall">Small</string>
-    <string name="textSizeMedium">Medium</string>
-    <string name="textSizeLarge">Large</string>
+    <string name="textSizeSmall">S</string>
+    <string name="textSizeMedium">M</string>
+    <string name="textSizeLarge">L</string>
+    <string name="textSizeXLarge">XL</string>
+    <string name="textSizeXXLarge">XXL</string>
 
 
     <string-array name="languageCategory">
@@ -43,22 +57,33 @@
 
     <string-array name="colorCategory">
         <item>@string/colorWhite</item>
+        <item>@string/colorGray</item>
         <item>@string/colorBlack</item>
         <item>@string/colorRed</item>
+        <item>@string/colorCrimson</item>
+        <item>@string/colorSalmon</item>
         <item>@string/colorBeige</item>
-        <item>@string/colorBlue</item>
-        <item>@string/colorGreen</item>
         <item>@string/colorOrange</item>
+        <item>@string/colorBrown</item>
+        <item>@string/colorWalnut</item>
+        <item>@string/colorBlue</item>
+        <item>@string/colorMalibu</item>
+        <item>@string/colorGreen</item>
+        <item>@string/colorYellowGreen</item>
+        <item>@string/colorMint</item>
         <item>@string/colorYellow</item>
         <item>@string/colorPink</item>
-        <item>@string/colorGray</item>
         <item>@string/colorViolet</item>
+        <item>@string/colorMagenta</item>
+        <item>@string/colorPurple</item>
     </string-array>
 
     <string-array name="textSizeCategory">
         <item>@string/textSizeSmall</item>
         <item>@string/textSizeMedium</item>
         <item>@string/textSizeLarge</item>
+        <item>@string/textSizeXLarge</item>
+        <item>@string/textSizeXXLarge</item>
     </string-array>
 
 

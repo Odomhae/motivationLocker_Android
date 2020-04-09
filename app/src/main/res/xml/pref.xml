@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="useLockScreen"
-        android:title="@string/app_activation" />
-
-
     <PreferenceCategory
         android:title="@string/lockScreen_setting" android:layout="@layout/preference_category">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="useLockScreen"
+            android:title="@string/app_activation" />
+
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/languageCategory"
@@ -36,11 +36,12 @@
             android:entryValues="@array/textSizeCategory"
             android:key="textSizeCategory"
             android:title="@string/text_size" />
-    </PreferenceCategory>
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="showSourcePref"
-        android:title="@string/show_source" />
 
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="showSourcePref"
+            android:title="@string/show_source" />
+
+    </PreferenceCategory>
 
 </PreferenceScreen>

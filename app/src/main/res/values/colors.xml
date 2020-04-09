@@ -5,16 +5,26 @@
     <color name="colorAccent">#3333ff</color>
 
     <color name="colorWhite">#ffffff</color>
+    <color name="colorGray">#DCDCDC</color>
     <color name="colorBlack">#000000</color>
     <color name="colorRed">#FF0023</color>
+    <color name="colorCrimson">#b80f0a</color>
+    <color name="colorSalmon">#FA8072</color>
     <color name="colorBeige">#F2DFD2</color>
-    <color name="colorBlue">#2C40DC</color>
-    <color name="colorGreen">#1CAE4C</color>
     <color name="colorOrange">#f37021</color>
+    <color name="colorBrown">#7c4700</color>
+    <color name="colorWalnut">#432711</color>
+    <color name="colorBlue">#2C40DC</color>
+    <color name="colorMalibu">#ff89d3fb</color>
+    <color name="colorGreen">#1CAE4C</color>
+    <color name="colorYellowGreen">#52D017</color>
+    <color name="colorMint">#69e0a5</color>
     <color name="colorYellow">#e8f321</color>
     <color name="colorPink">#f987c5</color>
-    <color name="colorGray">#DCDCDC</color>
     <color name="colorViolet">#cc99ff</color>
+    <color name="colorMagenta">#FF00FF</color>
+    <color name="colorPurple">#8b00ff</color>
+
 
     <color name="colorTransparent">@android:color/transparent</color>
 
