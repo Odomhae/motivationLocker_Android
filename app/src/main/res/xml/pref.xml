@@ -25,8 +25,8 @@
 
         <ListPreference
             android:defaultValue="1"
-            android:entries="@array/colorCategory"
-            android:entryValues="@array/colorCategory"
+            android:entries="@array/textColorCategory"
+            android:entryValues="@array/textColorCategory"
             android:key="textColorCategory"
             android:title="@string/text_color" />
 

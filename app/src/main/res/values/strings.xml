@@ -19,6 +19,8 @@
     <string name="text_size">Text Size</string>
     <string name="show_source">Source Indication</string>
 
+    <string name="app_running_message">App is running</string>
+
     <string name="languageKorean">Korean</string>
     <string name="languageEnglish">English</string>
 
@@ -59,6 +61,29 @@
         <item>@string/colorWhite</item>
         <item>@string/colorGray</item>
         <item>@string/colorBlack</item>
+        <item>@string/colorRed</item>
+        <item>@string/colorCrimson</item>
+        <item>@string/colorSalmon</item>
+        <item>@string/colorBeige</item>
+        <item>@string/colorOrange</item>
+        <item>@string/colorBrown</item>
+        <item>@string/colorWalnut</item>
+        <item>@string/colorBlue</item>
+        <item>@string/colorMalibu</item>
+        <item>@string/colorGreen</item>
+        <item>@string/colorYellowGreen</item>
+        <item>@string/colorMint</item>
+        <item>@string/colorYellow</item>
+        <item>@string/colorPink</item>
+        <item>@string/colorViolet</item>
+        <item>@string/colorMagenta</item>
+        <item>@string/colorPurple</item>
+    </string-array>
+
+    <string-array name="textColorCategory">
+        <item>@string/colorBlack</item>
+        <item>@string/colorWhite</item>
+        <item>@string/colorGray</item>
         <item>@string/colorRed</item>
         <item>@string/colorCrimson</item>
         <item>@string/colorSalmon</item>

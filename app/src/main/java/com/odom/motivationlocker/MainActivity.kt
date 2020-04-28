@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
     val fragment = MyPreferenceFragment()
     // 광고
     lateinit var mAdView : AdView
-    private lateinit var mInterstitialAd: InterstitialAd
     private val adSize: AdSize
         get() {
             val display = windowManager.defaultDisplay
@@ -35,26 +34,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-//        // 초기실행시 전면 광고
-//        mInterstitialAd = InterstitialAd(this)
-//        //전면 광고 테스트 전용 광고 단위 ID
-//        mInterstitialAd.adUnitId = resources.getString(R.string.TEST_fullscreen_ad_unit_id)
-//        mInterstitialAd.loadAd(AdRequest.Builder().build())
-//
-//        mInterstitialAd.adListener = object : AdListener() {
-//            override fun onAdLoaded() {
-//                if (mInterstitialAd.isLoaded) {
-//                    mInterstitialAd.show()
-//                }else {
-//                    Log.d("Msg ", "The interstitial wasn't loaded yet.")
-//                }
-//            }
-//
-//            override fun onAdOpened() {}
-//            override fun onAdFailedToLoad(errorCode: Int) {}
-//        }
+        window.statusBarColor = resources.getColor(R.color.colorGray)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
+        setContentView(R.layout.activity_main)
     }
 
     override fun onStart() {

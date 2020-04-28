@@ -5,15 +5,12 @@ import android.content.Context
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginTop
-import com.odom.motivationlocker.R
 import kotlinx.android.synthetic.main.activity_motivation_locker.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -97,6 +94,7 @@ class motivationLockerActivity : AppCompatActivity() {
             1 -> {
                 myLayout.setBackgroundColor(resources.getColor(R.color.colorGray))
                 window.statusBarColor = resources.getColor(R.color.colorGray)
+                window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
             2 ->  {
                 myLayout.setBackgroundColor(resources.getColor(R.color.colorBlack))
@@ -178,16 +176,16 @@ class motivationLockerActivity : AppCompatActivity() {
         // 글자색
         when(textColor){
             0 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorWhite))
-                writerTextView.setTextColor(resources.getColor(R.color.colorWhite))
+                sayingTextView.setTextColor(resources.getColor(R.color.colorBlack))
+                writerTextView.setTextColor(resources.getColor(R.color.colorBlack))
             }
             1 ->  {
                 sayingTextView.setTextColor(resources.getColor(R.color.colorGray))
                 writerTextView.setTextColor(resources.getColor(R.color.colorGray))
             }
             2 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorBlack))
-                writerTextView.setTextColor(resources.getColor(R.color.colorBlack))
+                sayingTextView.setTextColor(resources.getColor(R.color.colorWhite))
+                writerTextView.setTextColor(resources.getColor(R.color.colorWhite))
             }
             3 ->  {
                 sayingTextView.setTextColor(resources.getColor(R.color.colorRed))

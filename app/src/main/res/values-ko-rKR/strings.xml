@@ -53,7 +53,7 @@
     <string name="textSizeLarge">L</string>
     <string name="textSizeXLarge">XL</string>
     <string name="textSizeXXLarge">XXL</string>
-
+    <string name="app_running_message">실행 중입니다</string>
 
 
 </resources>

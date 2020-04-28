@@ -1,10 +1,7 @@
 package com.odom.motivationlocker
 
 import android.annotation.SuppressLint
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
@@ -61,8 +58,14 @@ class LockScreenService : Service() {
 
             // Notification 알림 객체 설정
             val builder = Notification.Builder(this, ANDROID_CHANNEL_ID)
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText("SmartTracker Running")
+                .setContentTitle(getString(R.string.app_running_message))
+                .setSmallIcon(R.drawable.android_chrome_192x192)
+
+            // 클릭시 메인 액티비티로 이동
+            val intent = Intent(this, MainActivity::class.java)
+            val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+            builder.setContentIntent(pendingIntent)
+
             val notification = builder.build()
 
             // Notification 알림과 함께 포그라운드 서비스 시작
