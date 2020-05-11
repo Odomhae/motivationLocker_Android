@@ -2,22 +2,26 @@ package com.odom.motivationlocker
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.*
+import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.Gravity
 import android.view.View
-import com.odom.motivationlocker.R
+import android.widget.Toast
 import com.google.android.gms.ads.*
-import com.google.android.gms.ads.AdListener
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
 
     val fragment = MyPreferenceFragment()
+    //퍼미션 응답 처리 코드
+    private val PermissionsCode = 100
     // 광고
     lateinit var mAdView : AdView
     private val adSize: AdSize
@@ -39,6 +43,38 @@ class MainActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         setContentView(R.layout.activity_main)
+        checkPermission()
+    }
+
+    fun checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                val intent =  Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName"))
+                startActivityForResult(intent, PermissionsCode)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PermissionsCode) {
+            if (Settings.canDrawOverlays(this)) {
+                Log.d("TAG", "권한 설정됨")
+                val toast = Toast.makeText(applicationContext, R.string.permission_set_message, Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.TOP,  Gravity.CENTER, 550)
+                toast.show()
+                onResume()
+            }else{
+                Log.d("TAG", "권한 거절됨")
+                finish()
+                val toast = Toast.makeText(applicationContext, R.string.permission_denied_message, Toast.LENGTH_LONG)
+                toast.setGravity(Gravity.TOP, Gravity.CENTER, 550)
+                toast.show()
+            }
+        }
     }
 
     override fun onStart() {

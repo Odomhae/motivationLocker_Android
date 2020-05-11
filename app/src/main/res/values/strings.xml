@@ -21,6 +21,9 @@
 
     <string name="app_running_message">App is running</string>
 
+    <string name="permission_denied_message">Permission denied</string>
+    <string name="permission_set_message">Permission set</string>
+
     <string name="languageKorean">Korean</string>
     <string name="languageEnglish">English</string>
 
