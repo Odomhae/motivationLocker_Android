@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         window.statusBarColor = resources.getColor(R.color.colorGray)
+        window.setTitleColor(resources.getColor(R.color.colorGray))
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         setContentView(R.layout.activity_main)
