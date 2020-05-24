@@ -8,7 +8,7 @@
     tools:context="com.odom.motivationlocker.MainActivity">
 
     <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+        android:id="@+id/adMobView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:adSize="BANNER"
@@ -18,6 +18,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </com.google.android.gms.ads.AdView>
+
+    <com.kakao.adfit.ads.ba.BannerAdView
+        android:id="@+id/adFitView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="bottom" />
 
     <FrameLayout
         android:id="@+id/preferenceContent"
@@ -29,8 +35,10 @@
         android:addStatesFromChildren="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adView">
-
+        app:layout_constraintTop_toBottomOf="@+id/adFitView">
     </FrameLayout>
+
+
+
 
 </LinearLayout>
