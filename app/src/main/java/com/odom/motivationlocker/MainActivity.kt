@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity() {
 
             @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
             fun onResume() {
-                Toast.makeText(applicationContext, "resue", Toast.LENGTH_LONG).show()
                 adFitView.resume()
             }
 
