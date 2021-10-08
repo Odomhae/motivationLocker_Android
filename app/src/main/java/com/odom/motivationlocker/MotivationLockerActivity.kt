@@ -16,7 +16,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.random.Random
 
-class motivationLockerActivity : AppCompatActivity() {
+class MotivationLockerActivity : AppCompatActivity() {
 
     var saying : JSONObject? = null
 
@@ -42,12 +42,6 @@ class motivationLockerActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_motivation_locker)
 
-        // 설정에 따라
-        fun getInt( key : String) : Int{
-            val prefs = getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
-            return prefs.getInt(key, 0)
-        }
-
         // 언어, 배경색, 글자색, 글자 크기, 출처표기 여부
         val language = getInt("language")
         val backgroundColor = getInt("backgroundColor")
@@ -55,7 +49,63 @@ class motivationLockerActivity : AppCompatActivity() {
         val textSize = getInt("textSize")
         val showSource = getInt("showSource")
 
-        // 언어
+        setLanguage(language)
+        setBackgroundColor(backgroundColor)
+        setTextColor(textColor)
+        setTextSize(textSize)
+
+        // 출처 표기 안하면 투명하게
+        if(showSource == 1)
+            writerTextView.setTextColor(getColor(R.color.colorTransparent))
+
+        //시작, 끝점 계산해서 잠금해제
+        var startX = 0
+        var startY = 0
+
+        var endX = 0
+        var endY = 0
+
+        myLayout.setOnTouchListener { v, event ->
+            when(event.action){
+                MotionEvent.ACTION_DOWN -> {
+                    // 초기값
+                    startX =  event.x.toInt()
+                    startY =  event.y.toInt()
+
+                    Log.d("start x", startX.toString() )
+                    Log.d("start y", startY.toString() )
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+                    // 이동 값
+                    endX = event.x.toInt()
+                    endY = event.y.toInt()
+
+                    Log.d("end x", endX.toString() )
+                    Log.d("end y", endY.toString() )
+                }
+
+                   // 이동 끝내고 조건 맞으면 헤제
+                    else -> {
+                       // Log.d("gazaa", (((endX-startX)*(endX-startX)) + ((endY-startY)*(endY-startY))).toString())
+                        if( ((endX- startX)*(endX - startX)) + ((endY - startY)*(endY- startY)) >= 80000 )
+                            finish()
+                    }
+            }
+
+            true
+        }
+
+    }
+
+    // 설정에 따라
+    private fun getInt( key : String) : Int{
+        val prefs = getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
+        return prefs.getInt(key, 0)
+    }
+
+    // 언어
+    private fun setLanguage(language: Int){
         when(language){
             // 영어
             0 -> {
@@ -76,37 +126,38 @@ class motivationLockerActivity : AppCompatActivity() {
                 val sayingArray = JSONArray(json)
                 saying = sayingArray.getJSONObject(Random.nextInt(sayingArray.length()))
                 sayingTextView.text = saying?.getString("quote")
-                // 작가?
                 writerTextView.text = saying?.getString("writer")
-
             }
         }
 
-        // 배경색
+    }
+
+    // 배경색
+    private fun setBackgroundColor(backgroundColor : Int){
         when(backgroundColor){
             0 -> {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorWhite))
+                myLayout.setBackgroundColor(getColor(R.color.colorWhite))
                 // 삳태바도 같은 색으로 api 21 이상
-                window.statusBarColor = resources.getColor(R.color.colorWhite)
+                window.statusBarColor = getColor(R.color.colorWhite)
                 //상태바 글씨 보이게
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
             1 -> {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorGray))
-                window.statusBarColor = resources.getColor(R.color.colorGray)
+                myLayout.setBackgroundColor(getColor(R.color.colorGray))
+                window.statusBarColor = getColor(R.color.colorGray)
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
             2 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorBlack))
-                window.statusBarColor = resources.getColor(R.color.colorBlack)
+                myLayout.setBackgroundColor(getColor(R.color.colorBlack))
+                window.statusBarColor = getColor(R.color.colorBlack)
             }
             3 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorRed))
-                window.statusBarColor = resources.getColor(R.color.colorRed)
+                myLayout.setBackgroundColor(getColor(R.color.colorRed))
+                window.statusBarColor = getColor(R.color.colorRed)
             }
             4 -> {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorCrimson))
-                window.statusBarColor = resources.getColor(R.color.colorCrimson)
+                myLayout.setBackgroundColor(getColor(R.color.colorCrimson))
+                window.statusBarColor = getColor(R.color.colorCrimson)
             }
             5 ->  {
                 myLayout.setBackgroundColor(resources.getColor(R.color.colorSalmon))
@@ -173,7 +224,11 @@ class motivationLockerActivity : AppCompatActivity() {
             }
 
         }
-        // 글자색
+
+    }
+
+    // 글자색
+    private fun setTextColor(textColor : Int ){
         when(textColor){
             0 ->  {
                 sayingTextView.setTextColor(resources.getColor(R.color.colorBlack))
@@ -256,7 +311,10 @@ class motivationLockerActivity : AppCompatActivity() {
                 writerTextView.setTextColor(resources.getColor(R.color.colorPurple))
             }
         }
-        // 글자크기
+    }
+
+    // 글자크기
+    private fun setTextSize(textSize : Int){
         when(textSize){
             0 ->  {
                 sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
@@ -286,48 +344,6 @@ class motivationLockerActivity : AppCompatActivity() {
                 writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 70f)
 
             }
-        }
-
-        // 출처 표기 안하면 투명하게
-        if(showSource == 1)
-            writerTextView.setTextColor(resources.getColor(R.color.colorTransparent))
-
-        //시작, 끝점 계산해서 잠금해제
-        var startX = 0
-        var startY = 0
-
-        var endX = 0
-        var endY = 0
-
-        myLayout.setOnTouchListener { v, event ->
-            when(event.action){
-                MotionEvent.ACTION_DOWN -> {
-                    // 초기값
-                    startX =  event.x.toInt()
-                    startY =  event.y.toInt()
-
-                    Log.d("start x", startX.toString() )
-                    Log.d("start y", startY.toString() )
-                }
-
-                MotionEvent.ACTION_MOVE -> {
-                    // 이동 값
-                    endX = event.x.toInt()
-                    endY = event.y.toInt()
-
-                    Log.d("end x", endX.toString() )
-                    Log.d("end y", endY.toString() )
-                }
-
-                   // 이동 끝내고 조건 맞으면 헤제
-                    else -> {
-                        Log.d("gazaa", (((endX-startX)*(endX-startX)) + ((endY-startY)*(endY-startY))).toString())
-                        if( ((endX- startX)*(endX - startX)) + ((endY - startY)*(endY- startY)) >= 80000 )
-                            finish()
-                    }
-            }
-
-            true
         }
 
     }

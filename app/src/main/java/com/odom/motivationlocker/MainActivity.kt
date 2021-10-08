@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         // 애드핏 광고
         val adFitView = adFitView!!
-        adFitView.setClientId("DAN-1h8212o70hv1i")
+        adFitView.setClientId("DAN-1h8212o70hvi") //  DAN-1h8212o70hvi
 
         // activity 또는 fragment의 lifecycle에 따라 호출
         lifecycle.addObserver(object : LifecycleObserver {
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         adFitView.loadAd()  // 광고 요청
     }
 
-    fun checkPermission() {
+    private fun checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
                 val intent =  Intent(
@@ -143,6 +143,12 @@ class MainActivity : AppCompatActivity() {
             editor.putInt(key, value).apply()
         }
 
+        // 설정에 따라
+        private fun getInt( key : String) : Int{
+            val prefs = context.getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
+            return prefs.getInt(key, 0)
+        }
+
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
 
@@ -151,7 +157,7 @@ class MainActivity : AppCompatActivity() {
 
             // 언어 종류 요약정보에 현재 선택된 항목 보여줌
             val languageCategoryPref = findPreference("languageCategory") as ListPreference
-            languageCategoryPref.summary = preferenceScreen.sharedPreferences.getString("language", "")
+            languageCategoryPref.summary = languageCategoryPref.entries[getInt("language")]
             // 요약정보도 같이 변경
             languageCategoryPref.setOnPreferenceChangeListener { preference, newValue ->
                 val index = languageCategoryPref.findIndexOfValue(newValue.toString())
@@ -164,6 +170,7 @@ class MainActivity : AppCompatActivity() {
 
             // 배경색
             val backgroundColorCategoryPref = findPreference("backgroundColorCategory") as ListPreference
+            backgroundColorCategoryPref.summary = backgroundColorCategoryPref.entries[getInt("backgroundColor")]
             backgroundColorCategoryPref.setOnPreferenceChangeListener { preference, newValue ->
                 val index = backgroundColorCategoryPref.findIndexOfValue(newValue.toString())
                 setInts(context, "backgroundColor", index)
@@ -174,6 +181,7 @@ class MainActivity : AppCompatActivity() {
 
             // 글자색
             val textColorCategoryPref = findPreference("textColorCategory") as ListPreference
+            textColorCategoryPref.summary = textColorCategoryPref.entries[getInt("textColor")]
             textColorCategoryPref.setOnPreferenceChangeListener { preference, newValue ->
                 val index = textColorCategoryPref.findIndexOfValue(newValue.toString())
                 setInts(context, "textColor", index)
@@ -184,6 +192,7 @@ class MainActivity : AppCompatActivity() {
 
             //글자크기
             val textSizeCategoryPref = findPreference("textSizeCategory") as ListPreference
+            textSizeCategoryPref.summary = textSizeCategoryPref.entries[getInt("textSize")]
             textSizeCategoryPref.setOnPreferenceChangeListener{preference, newValue ->
                 val index = textSizeCategoryPref.findIndexOfValue(newValue.toString())
                 setInts(context, "textSize", index)

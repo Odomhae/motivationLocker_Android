@@ -23,7 +23,7 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/TEST_admob_app_id"/>
 
-        <activity android:name="com.odom.motivationlocker.motivationLockerActivity"></activity>
+        <activity android:name="com.odom.motivationlocker.MotivationLockerActivity"></activity>
 
         <service
             android:name="com.odom.motivationlocker.LockScreenService"
