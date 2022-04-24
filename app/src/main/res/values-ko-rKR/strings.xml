@@ -5,8 +5,8 @@
     <!-- 테스트용 배너 광고 -->
     <string name="TEST_banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <!-- 테스트용 전면 광고 -->
-    <string name="TEST_fullscreen_video_ad_unit_id">ca-app-pub-3940256099942544/8691691433</string>
-    <string name="TEST_fullscreen_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+<!--    <string name="TEST_fullscreen_video_ad_unit_id">ca-app-pub-3940256099942544/8691691433</string>-->
+<!--    <string name="TEST_fullscreen_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>-->
     <!--  테스트용 애드몹 앱 아이디 -->
     <string name="TEST_admob_app_id"> ca-app-pub-3940256099942544~3347511713</string>
 

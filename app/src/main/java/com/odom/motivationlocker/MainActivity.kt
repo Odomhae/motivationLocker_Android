@@ -48,32 +48,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
         checkPermission()
-
-        // 애드핏 광고
-        val adFitView = adFitView!!
-        adFitView.setClientId("DAN-1h8212o70hvi") //  DAN-1h8212o70hvi
-
-        // activity 또는 fragment의 lifecycle에 따라 호출
-        lifecycle.addObserver(object : LifecycleObserver {
-
-            @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-            fun onResume() {
-                adFitView.resume()
-            }
-
-            @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-            fun onPause() {
-                adFitView.pause()
-            }
-
-            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-            fun onDestroy() {
-                adFitView.destroy()
-            }
-
-        })
-
-        adFitView.loadAd()  // 광고 요청
     }
 
     private fun checkPermission() {
@@ -124,12 +98,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadBanner() {
-        mAdView.adUnitId = resources.getString(R.string.TEST_banner_ad_unit_id)
+        mAdView.adUnitId = resources.getString(R.string.REAL_banner_ad_unit_id)
         mAdView.adSize = adSize
 
         val adRequest = AdRequest
             .Builder()
-            .addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()
+            .build()
+           // .addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build()
 
         // Start loading the ad in the background.
         mAdView.loadAd(adRequest)
