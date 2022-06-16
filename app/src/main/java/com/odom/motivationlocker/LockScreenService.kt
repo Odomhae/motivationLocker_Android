@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
+import androidx.annotation.RequiresApi
 import com.odom.motivationlocker.R
 
 class LockScreenService : Service() {
@@ -29,6 +30,7 @@ class LockScreenService : Service() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     @SuppressLint("ObsoleteSdkInt")
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
@@ -63,7 +65,8 @@ class LockScreenService : Service() {
 
             // 클릭시 메인 액티비티로 이동
             val intent = Intent(this, MainActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+            // 31버전 대응.  0대신 PendingIntent.FLAG_MUTABLE
+            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
             builder.setContentIntent(pendingIntent)
 
             val notification = builder.build()
