@@ -75,7 +75,7 @@ class LockScreenService : Service() {
             startForeground(NOTIFICATION_ID, notification)
         }
 
-        return START_REDELIVER_INTENT
+        return START_STICKY//START_REDELIVER_INTENT
     }
 
     override fun onDestroy() {
