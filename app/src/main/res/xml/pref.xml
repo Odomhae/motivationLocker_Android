@@ -2,11 +2,11 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory
-        android:title="@string/lockScreen_setting"
-        android:layout="@layout/preference_category">
+<!--    <PreferenceCategory-->
+<!--        android:title="@string/lockScreen_setting"-->
+<!--        android:layout="@layout/preference_category">-->
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="false"
             android:key="useLockScreen"
             android:title="@string/app_activation" />
@@ -39,11 +39,11 @@
             android:key="textSizeCategory"
             android:title="@string/text_size" />
 
-        <SwitchPreference
+        <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="showSourcePref"
             android:title="@string/show_source" />
 
-    </PreferenceCategory>
+<!--    </PreferenceCategory>-->
 
 </PreferenceScreen>

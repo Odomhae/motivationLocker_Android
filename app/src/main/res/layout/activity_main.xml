@@ -7,6 +7,16 @@
     android:orientation="vertical"
     tools:context="com.odom.motivationlocker.MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/lockScreen_setting"
+        android:textColor="@color/colorBlack"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginVertical="10dp"
+        android:background="@color/colorGray" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

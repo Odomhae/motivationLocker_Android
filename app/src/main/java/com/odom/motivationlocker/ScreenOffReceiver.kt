@@ -8,8 +8,8 @@ import android.util.Log
 class ScreenOffReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         when (intent?.action) {
-            Intent.ACTION_SCREEN_OFF -> {
-                Log.d(" ", "화면꺼짐")
+            Intent.ACTION_SCREEN_ON -> {
+                Log.d("====tttag", "화면켜짐")
 
                 // 화면꺼지면 locker 액티비티 실행
                 val intent = Intent(context, MotivationLockerActivity::class.java)

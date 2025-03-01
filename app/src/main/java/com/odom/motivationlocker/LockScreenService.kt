@@ -25,7 +25,7 @@ class LockScreenService : Service() {
         // null인 경우만 실행
         if(receiver ==null){
             receiver = ScreenOffReceiver()
-            val filter = IntentFilter(Intent.ACTION_SCREEN_OFF)
+            val filter = IntentFilter(Intent.ACTION_SCREEN_ON)
             registerReceiver(receiver, filter)
         }
     }
@@ -41,7 +41,7 @@ class LockScreenService : Service() {
                 // 리시버 null이면 새로 생성하고 등록함
                 if(receiver == null){
                     receiver = ScreenOffReceiver()
-                    val filter = IntentFilter(Intent.ACTION_SCREEN_OFF)
+                    val filter = IntentFilter(Intent.ACTION_SCREEN_ON)
                     registerReceiver(receiver, filter)
                 }
             }
