@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
 import android.util.DisplayMetrics
@@ -15,14 +14,20 @@ import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import androidx.core.view.OnApplyWindowInsetsListener
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.google.android.gms.ads.*
 import com.google.android.gms.tasks.Task
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManagerFactory
-import kotlinx.android.synthetic.main.activity_main.*
+import com.odom.motivationlocker.databinding.ActivityMainBinding
 
 
 class MainActivity : AppCompatActivity() {
@@ -59,6 +64,8 @@ class MainActivity : AppCompatActivity() {
             return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth)
         }
 
+    private lateinit var binding: ActivityMainBinding // 자동 생성된 바인딩 클래스
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -66,7 +73,29 @@ class MainActivity : AppCompatActivity() {
         window.setTitleColor(resources.getColor(R.color.colorGray))
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val contentView: View = this.findViewById(android.R.id.content)
+        ViewCompat.setOnApplyWindowInsetsListener(contentView, object : OnApplyWindowInsetsListener {
+            override fun onApplyWindowInsets(v: View, insets: WindowInsetsCompat): WindowInsetsCompat {
+                val innerPadding = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+                v.setPadding(0, innerPadding.top, 0, innerPadding.bottom)
+
+                return insets
+            }
+        })
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            val isLightStatusBars =
+                AppCompatDelegate.getDefaultNightMode() !== AppCompatDelegate.MODE_NIGHT_YES
+            val compat: WindowInsetsControllerCompat = WindowInsetsControllerCompat(
+                this.getWindow(), this.getWindow().getDecorView()
+            )
+            compat.setAppearanceLightStatusBars(isLightStatusBars)
+            compat.setAppearanceLightNavigationBars(isLightStatusBars)
+        }
+
         this.onBackPressedDispatcher.addCallback(this, callback)
 
         supportFragmentManager.beginTransaction().replace(R.id.preferenceContent, SettingPreferencesFragment()).commit()
@@ -137,7 +166,7 @@ class MainActivity : AppCompatActivity() {
         // 배너 광고
         MobileAds.initialize(this) {}
         mAdView = AdView(this)
-        adMobView.addView(mAdView)
+        binding.adMobView.addView(mAdView)
         loadBanner()
     }
 

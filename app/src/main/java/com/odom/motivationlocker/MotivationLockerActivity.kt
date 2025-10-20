@@ -11,7 +11,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_motivation_locker.*
+import com.odom.motivationlocker.databinding.ActivityMotivationLockerBinding
 import org.json.JSONArray
 import org.json.JSONObject
 import kotlin.random.Random
@@ -20,10 +20,13 @@ class MotivationLockerActivity : AppCompatActivity() {
 
     var saying : JSONObject? = null
 
+    private lateinit var binding: ActivityMotivationLockerBinding // 자동 생성된 바인딩 클래스
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_motivation_locker)
+        binding = ActivityMotivationLockerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         // 기존 잠금화면보다 먼저 나타나도록
         // 버전별로
         if(Build.VERSION.SDK_INT >= VERSION_CODES.O_MR1){
@@ -40,8 +43,6 @@ class MotivationLockerActivity : AppCompatActivity() {
             window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD)
         }
 
-        setContentView(R.layout.activity_motivation_locker)
-
         // 언어, 배경색, 글자색, 글자 크기, 출처표기 여부
         val language = getInt("language")
         val backgroundColor = getInt("backgroundColor")
@@ -56,7 +57,7 @@ class MotivationLockerActivity : AppCompatActivity() {
 
         // 출처 표기 안하면 투명하게
         if(showSource == 1)
-            writerTextView.setTextColor(getColor(R.color.colorTransparent))
+            binding.writerTextView.setTextColor(getColor(R.color.colorTransparent))
 
         //시작, 끝점 계산해서 잠금해제
         var startX = 0
@@ -65,7 +66,7 @@ class MotivationLockerActivity : AppCompatActivity() {
         var endX = 0
         var endY = 0
 
-        myLayout.setOnTouchListener { v, event ->
+        binding.myLayout.setOnTouchListener { v, event ->
             when(event.action){
                 MotionEvent.ACTION_DOWN -> {
                     // 초기값
@@ -116,17 +117,17 @@ class MotivationLockerActivity : AppCompatActivity() {
                 // 랜덤으로 퀴즈 선택
                 saying = sayingArray.getJSONObject(Random.nextInt(sayingArray.length()))
                 //글 보여줌
-                sayingTextView.text = saying?.getString("quote")
+                binding.sayingTextView.text = saying?.getString("quote")
                 // 작가 보여줌
-                writerTextView.text = saying?.getString("writer")
+                binding.writerTextView.text = saying?.getString("writer")
             }
             //
             1-> {
                 val json = assets.open("korean.json").reader().readText()
                 val sayingArray = JSONArray(json)
                 saying = sayingArray.getJSONObject(Random.nextInt(sayingArray.length()))
-                sayingTextView.text = saying?.getString("quote")
-                writerTextView.text = saying?.getString("writer")
+                binding.sayingTextView.text = saying?.getString("quote")
+                binding.writerTextView.text = saying?.getString("writer")
             }
         }
 
@@ -136,90 +137,90 @@ class MotivationLockerActivity : AppCompatActivity() {
     private fun setBackgroundColor(backgroundColor : Int){
         when(backgroundColor){
             0 -> {
-                myLayout.setBackgroundColor(getColor(R.color.colorWhite))
+                binding.myLayout.setBackgroundColor(getColor(R.color.colorWhite))
                 // 삳태바도 같은 색으로 api 21 이상
                 window.statusBarColor = getColor(R.color.colorWhite)
                 //상태바 글씨 보이게
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
             1 -> {
-                myLayout.setBackgroundColor(getColor(R.color.colorGray))
+                binding.myLayout.setBackgroundColor(getColor(R.color.colorGray))
                 window.statusBarColor = getColor(R.color.colorGray)
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
             2 ->  {
-                myLayout.setBackgroundColor(getColor(R.color.colorBlack))
+                binding.myLayout.setBackgroundColor(getColor(R.color.colorBlack))
                 window.statusBarColor = getColor(R.color.colorBlack)
             }
             3 ->  {
-                myLayout.setBackgroundColor(getColor(R.color.colorRed))
+                binding.myLayout.setBackgroundColor(getColor(R.color.colorRed))
                 window.statusBarColor = getColor(R.color.colorRed)
             }
             4 -> {
-                myLayout.setBackgroundColor(getColor(R.color.colorCrimson))
+                binding.myLayout.setBackgroundColor(getColor(R.color.colorCrimson))
                 window.statusBarColor = getColor(R.color.colorCrimson)
             }
             5 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorSalmon))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorSalmon))
                 window.statusBarColor = resources.getColor(R.color.colorSalmon)
             }
             6 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorBeige))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorBeige))
                 window.statusBarColor = resources.getColor(R.color.colorBeige)
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
             }
             7 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorOrange))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorOrange))
                 window.statusBarColor = resources.getColor(R.color.colorOrange)
             }
             8 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorBrown))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorBrown))
                 window.statusBarColor = resources.getColor(R.color.colorBrown)
             }
             9 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorWalnut))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorWalnut))
                 window.statusBarColor = resources.getColor(R.color.colorWalnut)
             }
             10 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorBlue))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorBlue))
                 window.statusBarColor = resources.getColor(R.color.colorBlue)
             }
             11 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorMalibu))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorMalibu))
                 window.statusBarColor = resources.getColor(R.color.colorMalibu)
             }
             12 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorGreen))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorGreen))
                 window.statusBarColor = resources.getColor(R.color.colorGreen)
             }
             13 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorYellowGreen))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorYellowGreen))
                 window.statusBarColor = resources.getColor(R.color.colorYellowGreen)
             }
             14 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorMint))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorMint))
                 window.statusBarColor = resources.getColor(R.color.colorMint)
             }
             15 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorYellow))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorYellow))
                 window.statusBarColor = resources.getColor(R.color.colorYellow)
                 window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
             }
             16 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorPink))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorPink))
                 window.statusBarColor = resources.getColor(R.color.colorPink)
             }
             17 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorViolet))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorViolet))
                 window.statusBarColor = resources.getColor(R.color.colorViolet)
             }
             18 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorMagenta))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorMagenta))
                 window.statusBarColor = resources.getColor(R.color.colorMagenta)
             }
             19 ->  {
-                myLayout.setBackgroundColor(resources.getColor(R.color.colorPurple))
+                binding.myLayout.setBackgroundColor(resources.getColor(R.color.colorPurple))
                 window.statusBarColor = resources.getColor(R.color.colorPurple)
             }
 
@@ -231,84 +232,84 @@ class MotivationLockerActivity : AppCompatActivity() {
     private fun setTextColor(textColor : Int ){
         when(textColor){
             0 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorBlack))
-                writerTextView.setTextColor(resources.getColor(R.color.colorBlack))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorBlack))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorBlack))
             }
             1 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorGray))
-                writerTextView.setTextColor(resources.getColor(R.color.colorGray))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorGray))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorGray))
             }
             2 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorWhite))
-                writerTextView.setTextColor(resources.getColor(R.color.colorWhite))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorWhite))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorWhite))
             }
             3 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorRed))
-                writerTextView.setTextColor(resources.getColor(R.color.colorRed))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorRed))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorRed))
             }
             4 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorCrimson))
-                writerTextView.setTextColor(resources.getColor(R.color.colorCrimson))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorCrimson))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorCrimson))
             }
             5 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorSalmon))
-                writerTextView.setTextColor(resources.getColor(R.color.colorSalmon))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorSalmon))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorSalmon))
             }
             6 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorBeige))
-                writerTextView.setTextColor(resources.getColor(R.color.colorBeige))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorBeige))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorBeige))
             }
             7 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorOrange))
-                writerTextView.setTextColor(resources.getColor(R.color.colorOrange))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorOrange))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorOrange))
             }
             8 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorBrown))
-                writerTextView.setTextColor(resources.getColor(R.color.colorBrown))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorBrown))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorBrown))
             }
             9 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorWalnut))
-                writerTextView.setTextColor(resources.getColor(R.color.colorWalnut))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorWalnut))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorWalnut))
             }
             10 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorBlue))
-                writerTextView.setTextColor(resources.getColor(R.color.colorBlue))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorBlue))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorBlue))
             }
             11 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorMalibu))
-                writerTextView.setTextColor(resources.getColor(R.color.colorMalibu))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorMalibu))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorMalibu))
             }
             12 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorGreen))
-                writerTextView.setTextColor(resources.getColor(R.color.colorGreen))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorGreen))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorGreen))
             }
             13 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorYellowGreen))
-                writerTextView.setTextColor(resources.getColor(R.color.colorYellowGreen))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorYellowGreen))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorYellowGreen))
             }
             14 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorMint))
-                writerTextView.setTextColor(resources.getColor(R.color.colorMint))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorMint))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorMint))
             }
             15 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorYellow))
-                writerTextView.setTextColor(resources.getColor(R.color.colorYellow))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorYellow))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorYellow))
             }
             16 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorPink))
-                writerTextView.setTextColor(resources.getColor(R.color.colorPink))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorPink))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorPink))
             }
             17 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorViolet))
-                writerTextView.setTextColor(resources.getColor(R.color.colorViolet))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorViolet))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorViolet))
             }
             18 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorMagenta))
-                writerTextView.setTextColor(resources.getColor(R.color.colorMagenta))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorMagenta))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorMagenta))
             }
             19 ->  {
-                sayingTextView.setTextColor(resources.getColor(R.color.colorPurple))
-                writerTextView.setTextColor(resources.getColor(R.color.colorPurple))
+                binding.sayingTextView.setTextColor(resources.getColor(R.color.colorPurple))
+                binding.writerTextView.setTextColor(resources.getColor(R.color.colorPurple))
             }
         }
     }
@@ -317,31 +318,31 @@ class MotivationLockerActivity : AppCompatActivity() {
     private fun setTextSize(textSize : Int){
         when(textSize){
             0 ->  {
-                sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
-                blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
-                writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15f)
+                binding.sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
+                binding.blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20f)
+                binding.writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15f)
             }
             1 ->  {
-                sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36f)
-                blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36f)
-                writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25f)
+                binding.sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36f)
+                binding.blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 36f)
+                binding.writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 25f)
             }
             2 ->  {
-                sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
-                blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
-                writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 35f)
+                binding.sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
+                binding.blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
+                binding.writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 35f)
 
             }
             3 ->  {
-                sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 75f)
-                blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 75f)
-                writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
+                binding.sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 75f)
+                binding.blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 75f)
+                binding.writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 50f)
 
             }
             4 ->  {
-                sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 100f)
-                blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 100f)
-                writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 70f)
+                binding.sayingTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 100f)
+                binding.blankTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 100f)
+                binding.writerTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 70f)
 
             }
         }
