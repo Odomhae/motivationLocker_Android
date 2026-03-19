@@ -191,8 +191,8 @@ class MainActivity : AppCompatActivity() {
 
             val switchPreference = findPreference<SwitchPreferenceCompat>("useLockScreen")
             val languagePreference = findPreference<androidx.preference.ListPreference>("languageCategory")
-            val backGroundColorPreference = findPreference<androidx.preference.ListPreference>("backgroundColorCategory")
-            val textColorPreference = findPreference<androidx.preference.ListPreference>("textColorCategory")
+            val backGroundColorPreference = findPreference<ColorSelectorDialogPreference>("backgroundColorCategory")
+            val textColorPreference = findPreference<ColorSelectorDialogPreference>("textColorCategory")
             val textSizePreference = findPreference<androidx.preference.ListPreference>("textSizeCategory")
             val switchSourcePreference = findPreference<SwitchPreferenceCompat>("showSourcePref")
 
@@ -208,8 +208,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             languagePreference?.summary = languagePreference?.entries?.get(getInt("language"))
-            backGroundColorPreference?.summary = backGroundColorPreference?.entries?.get(getInt("backgroundColor"))
-            textColorPreference?.summary = textColorPreference?.entries?.get(getInt("textColor"))
+            backGroundColorPreference?.summary = String.format("#%06X", 0xFFFFFF and getInt("backgroundColor"))
+            textColorPreference?.summary = String.format("#%06X", 0xFFFFFF and getInt("textColor"))
             textSizePreference?.summary = textSizePreference?.entries?.get(getInt("textSize"))
 
 
@@ -242,21 +242,19 @@ class MainActivity : AppCompatActivity() {
 
             // 배경색
             backGroundColorPreference?.setOnPreferenceChangeListener { _, newValue ->
-                backGroundColorPreference.summary = newValue.toString()
-
-                val index = backGroundColorPreference.findIndexOfValue(newValue.toString())
-                setInts(requireContext(), "backgroundColor", index)
-
+                val color = newValue as Int
+                Log.d("==ttMainActivity", "Background color hex: ${String.format("#%06X", 0xFFFFFF and color)}")
+                backGroundColorPreference?.summary = String.format("#%06X", 0xFFFFFF and color)
+                setInts(requireContext(), "backgroundColorCategory", color)
                 true
             }
 
             // 글자색
             textColorPreference?.setOnPreferenceChangeListener { _, newValue ->
-                textColorPreference.summary = newValue.toString()
-
-                val index = textColorPreference.findIndexOfValue(newValue.toString())
-                setInts(requireContext(), "textColor", index)
-
+                val color = newValue as Int
+                Log.d("==ttMainActivity", "Text color hex: ${String.format("#%06X", 0xFFFFFF and color)}")
+                textColorPreference?.summary = String.format("#%06X", 0xFFFFFF and color)
+                setInts(requireContext(), "textColorCategory", color)
                 true
             }
 
@@ -294,7 +292,11 @@ class MainActivity : AppCompatActivity() {
         // 설정에 따라
         private fun getInt( key : String) : Int{
             val prefs = requireContext().getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
-            return prefs.getInt(key, 0)
+            return when (key) {
+                "backgroundColor" -> prefs.getInt("backgroundColorCategory", android.graphics.Color.WHITE)
+                "textColor" -> prefs.getInt("textColorCategory", android.graphics.Color.BLACK)
+                else -> prefs.getInt(key, 0)
+            }
         }
 
     }

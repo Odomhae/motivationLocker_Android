@@ -18,17 +18,13 @@
             android:key="languageCategory"
             android:title="@string/language_setting" />
 
-        <ListPreference
-            android:defaultValue="1"
-            android:entries="@array/colorCategory"
-            android:entryValues="@array/colorCategory"
+        <com.odom.motivationlocker.ColorSelectorDialogPreference
+            android:defaultValue="@color/colorWhite"
             android:key="backgroundColorCategory"
             android:title="@string/background_color" />
 
-        <ListPreference
-            android:defaultValue="1"
-            android:entries="@array/textColorCategory"
-            android:entryValues="@array/textColorCategory"
+        <com.odom.motivationlocker.ColorSelectorDialogPreference
+            android:defaultValue="@color/colorBlack"
             android:key="textColorCategory"
             android:title="@string/text_color" />
 
