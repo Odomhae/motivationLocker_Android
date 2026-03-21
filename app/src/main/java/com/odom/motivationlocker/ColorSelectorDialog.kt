@@ -87,14 +87,14 @@ class ColorSelectorDialog : DialogFragment(), View.OnClickListener {
                         imageButton.setBackgroundColor(ContextCompat.getColor(requireContext(), colorID))
                     }
 
-                    if (selectedColor == colorID) {
-                        // Set the text color according to the brightness of the color
-                        if (Color.red(colorARGB) + Color.green(colorARGB) + Color.blue(colorARGB) < 384) {
-                            imageButton.setImageResource(R.drawable.ic_selected_white)
-                        } else {
-                            imageButton.setImageResource(R.drawable.ic_selected_black)
-                        }
-                    }
+//                    if (selectedColor == colorID) {
+//                        // Set the text color according to the brightness of the color
+//                        if (Color.red(colorARGB) + Color.green(colorARGB) + Color.blue(colorARGB) < 384) {
+//                            imageButton.setImageResource(R.drawable.ic_selected_white)
+//                        } else {
+//                            imageButton.setImageResource(R.drawable.ic_selected_black)
+//                        }
+//                    }
 
                 } else {
                     imageButton.background = null

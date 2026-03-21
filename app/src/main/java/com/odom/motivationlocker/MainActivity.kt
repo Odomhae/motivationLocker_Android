@@ -186,8 +186,15 @@ class MainActivity : AppCompatActivity() {
 
     class SettingPreferencesFragment : PreferenceFragmentCompat() {
 
+        // 색상 변경 카운트 (3번 변경 시 광고 표시)
+        private var colorChangeCount = 0
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.pref, rootKey)
+
+            // SharedPreferences에서 colorChangeCount 초기화
+            val prefs = requireContext().getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
+            colorChangeCount = prefs.getInt("colorChangeCount", 0)
 
             val switchPreference = findPreference<SwitchPreferenceCompat>("useLockScreen")
             val languagePreference = findPreference<androidx.preference.ListPreference>("languageCategory")
@@ -244,8 +251,12 @@ class MainActivity : AppCompatActivity() {
             backGroundColorPreference?.setOnPreferenceChangeListener { _, newValue ->
                 val color = newValue as Int
                 Log.d("==ttMainActivity", "Background color hex: ${String.format("#%06X", 0xFFFFFF and color)}")
-                backGroundColorPreference?.summary = String.format("#%06X", 0xFFFFFF and color)
+                backGroundColorPreference.summary = String.format("#%06X", 0xFFFFFF and color)
                 setInts(requireContext(), "backgroundColorCategory", color)
+                
+                // 색상 변경 카운트 증가 및 광고 처리
+                trackColorChange()
+                
                 true
             }
 
@@ -253,8 +264,12 @@ class MainActivity : AppCompatActivity() {
             textColorPreference?.setOnPreferenceChangeListener { _, newValue ->
                 val color = newValue as Int
                 Log.d("==ttMainActivity", "Text color hex: ${String.format("#%06X", 0xFFFFFF and color)}")
-                textColorPreference?.summary = String.format("#%06X", 0xFFFFFF and color)
+                textColorPreference.summary = String.format("#%06X", 0xFFFFFF and color)
                 setInts(requireContext(), "textColorCategory", color)
+                
+                // 색상 변경 카운트 증가 및 광고 처리
+                trackColorChange()
+                
                 true
             }
 
@@ -280,7 +295,29 @@ class MainActivity : AppCompatActivity() {
 
                 true
             }
+        }
 
+        // 색상 변경 카운트 및 광고 처리
+        private fun trackColorChange() {
+            
+            val prefs = requireContext().getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
+            colorChangeCount = prefs.getInt("colorChangeCount", 0)
+            colorChangeCount++
+            
+            // SharedPreferences에 colorChangeCount 저장
+            val editor = prefs.edit()
+            editor.putInt("colorChangeCount", colorChangeCount)
+            editor.apply()
+            
+            if (colorChangeCount % 3 == 0) {
+                showAd()
+            }
+            
+        }
+        
+        // 광고 표시 메소드
+        private fun showAd() {
+            Toast.makeText(requireContext(), "광고가 표시됩니다", Toast.LENGTH_SHORT).show()
         }
 
         private fun setInts(context: Context, key : String, value : Int) {
