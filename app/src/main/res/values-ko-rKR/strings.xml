@@ -9,10 +9,12 @@
 <!--    <string name="TEST_fullscreen_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>-->
     <!--  테스트용 애드몹 앱 아이디 -->
     <string name="TEST_admob_app_id"> ca-app-pub-3940256099942544~3347511713</string>
+    <string name="TEST_ADMOB_FULLSCREEN_ID">ca-app-pub-3940256099942544/1033173712</string>
 
     <!-- 진짜 -->
     <string name="REAL_admob_app_id"> ca-app-pub-6729344454320392~6582777262</string>
     <string name="REAL_banner_ad_unit_id">ca-app-pub-6729344454320392/4684206381</string>
+    <string name="REAL_ADMOB_FULLSCREEN_ID">ca-app-pub-6729344454320392/1856239890</string>
 
 
     <string name="languageEnglish">영어</string>

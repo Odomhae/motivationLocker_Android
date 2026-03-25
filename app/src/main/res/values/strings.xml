@@ -8,9 +8,11 @@
 <!--    <string name="TEST_fullscreen_video_ad_unit_id">ca-app-pub-3940256099942544/8691691433</string>-->
 <!--    <string name="TEST_fullscreen_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>-->
     <string name="TEST_admob_app_id"> ca-app-pub-3940256099942544~3347511713</string>
+    <string name="TEST_ADMOB_FULLSCREEN_ID">ca-app-pub-3940256099942544/1033173712</string>
 
     <string name="REAL_admob_app_id"> ca-app-pub-6729344454320392~6582777262</string>
     <string name="REAL_banner_ad_unit_id">ca-app-pub-6729344454320392/4684206381</string>
+    <string name="REAL_ADMOB_FULLSCREEN_ID">ca-app-pub-6729344454320392/1856239890</string>
 
     <string name="app_activation">App Activation</string>
     <string name="language_setting">Language</string>

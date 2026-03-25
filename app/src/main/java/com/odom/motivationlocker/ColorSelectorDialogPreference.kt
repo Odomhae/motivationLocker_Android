@@ -84,7 +84,7 @@ class ColorSelectorDialogPreference @JvmOverloads constructor(
     }
 
     override fun getSummary(): CharSequence {
-        return String.format("#%06X", 0xFFFFFF and color)
+        return ""//String.format("#%06X", 0xFFFFFF and color)
     }
 
     override fun onBindViewHolder(holder: PreferenceViewHolder) {

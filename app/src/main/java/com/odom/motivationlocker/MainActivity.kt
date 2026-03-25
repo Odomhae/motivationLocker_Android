@@ -171,7 +171,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadBanner() {
-        mAdView.adUnitId = resources.getString(R.string.REAL_banner_ad_unit_id)
+        mAdView.adUnitId = resources.getString(R.string.TEST_banner_ad_unit_id)
         mAdView.setAdSize(adSize)
 
         val adRequest = AdRequest
@@ -186,11 +186,15 @@ class MainActivity : AppCompatActivity() {
 
     class SettingPreferencesFragment : PreferenceFragmentCompat() {
 
+        private lateinit var adManager: AdManager
+
         // 색상 변경 카운트 (3번 변경 시 광고 표시)
         private var colorChangeCount = 0
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.pref, rootKey)
+
+            adManager = AdManager(requireContext())
 
             // SharedPreferences에서 colorChangeCount 초기화
             val prefs = requireContext().getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
@@ -215,8 +219,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             languagePreference?.summary = languagePreference?.entries?.get(getInt("language"))
-            backGroundColorPreference?.summary = String.format("#%06X", 0xFFFFFF and getInt("backgroundColor"))
-            textColorPreference?.summary = String.format("#%06X", 0xFFFFFF and getInt("textColor"))
+          //  backGroundColorPreference?.summary = String.format("#%06X", 0xFFFFFF and getInt("backgroundColor"))
+          //  textColorPreference?.summary = String.format("#%06X", 0xFFFFFF and getInt("textColor"))
             textSizePreference?.summary = textSizePreference?.entries?.get(getInt("textSize"))
 
 
@@ -251,7 +255,7 @@ class MainActivity : AppCompatActivity() {
             backGroundColorPreference?.setOnPreferenceChangeListener { _, newValue ->
                 val color = newValue as Int
                 Log.d("==ttMainActivity", "Background color hex: ${String.format("#%06X", 0xFFFFFF and color)}")
-                backGroundColorPreference.summary = String.format("#%06X", 0xFFFFFF and color)
+               // backGroundColorPreference.summary = String.format("#%06X", 0xFFFFFF and color)
                 setInts(requireContext(), "backgroundColorCategory", color)
                 
                 // 색상 변경 카운트 증가 및 광고 처리
@@ -264,7 +268,7 @@ class MainActivity : AppCompatActivity() {
             textColorPreference?.setOnPreferenceChangeListener { _, newValue ->
                 val color = newValue as Int
                 Log.d("==ttMainActivity", "Text color hex: ${String.format("#%06X", 0xFFFFFF and color)}")
-                textColorPreference.summary = String.format("#%06X", 0xFFFFFF and color)
+              //  textColorPreference.summary = String.format("#%06X", 0xFFFFFF and color)
                 setInts(requireContext(), "textColorCategory", color)
                 
                 // 색상 변경 카운트 증가 및 광고 처리
@@ -310,14 +314,10 @@ class MainActivity : AppCompatActivity() {
             editor.apply()
             
             if (colorChangeCount % 3 == 0) {
-                showAd()
+                // 광고 표시 메소드
+                adManager.showInterstitialAd(requireActivity())
             }
             
-        }
-        
-        // 광고 표시 메소드
-        private fun showAd() {
-            Toast.makeText(requireContext(), "광고가 표시됩니다", Toast.LENGTH_SHORT).show()
         }
 
         private fun setInts(context: Context, key : String, value : Int) {
