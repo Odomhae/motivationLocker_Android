@@ -14,6 +14,8 @@ import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -191,6 +193,22 @@ class MainActivity : AppCompatActivity() {
         // 색상 변경 카운트 (3번 변경 시 광고 표시)
         private var colorChangeCount = 0
 
+        // Photo Picker는 Fragment가 STARTED 상태가 되기 전에 등록되어야 하므로 필드로 선언
+        private val photoPickerLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+            if (uri != null) {
+                requireContext().contentResolver.takePersistableUriPermission(
+                    uri, Intent.FLAG_GRANT_READ_URI_PERMISSION
+                )
+                val prefs = requireContext().getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
+                prefs.edit().putString("backgroundPhotoUri", uri.toString()).apply()
+
+                findPreference<androidx.preference.Preference>("backgroundPhotoPicker")?.summary =
+                    getString(R.string.background_photo_selected)
+
+                trackColorChange()
+            }
+        }
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.pref, rootKey)
 
@@ -207,6 +225,9 @@ class MainActivity : AppCompatActivity() {
             val textSizePreference = findPreference<androidx.preference.ListPreference>("textSizeCategory")
             val switchSourcePreference = findPreference<SwitchPreferenceCompat>("showSourcePref")
             val dailyNotificationPreference = findPreference<SwitchPreferenceCompat>("dailyNotificationEnabled")
+            val backgroundTypePreference = findPreference<androidx.preference.ListPreference>("backgroundTypeCategory")
+            val backgroundGradientPreference = findPreference<GradientSelectorDialogPreference>("backgroundGradientCategory")
+            val backgroundPhotoPickerPreference = findPreference<androidx.preference.Preference>("backgroundPhotoPicker")
 
 
             // 앱이 시작됬을대 이미 퀴즈잠금화면 사용이 체크되어있으면 서비스 실행
@@ -223,6 +244,17 @@ class MainActivity : AppCompatActivity() {
           //  backGroundColorPreference?.summary = String.format("#%06X", 0xFFFFFF and getInt("backgroundColor"))
           //  textColorPreference?.summary = String.format("#%06X", 0xFFFFFF and getInt("textColor"))
             textSizePreference?.summary = textSizePreference?.entries?.get(getInt("textSize"))
+
+            // 배경 종류 - 저장된 값에 따라 그라데이션/사진 설정 항목만 노출
+            val backgroundType = getInt("backgroundType")
+            backgroundTypePreference?.summary = backgroundTypePreference?.entries?.get(backgroundType)
+            backgroundGradientPreference?.isVisible = backgroundType == 1
+            backgroundPhotoPickerPreference?.isVisible = backgroundType == 2
+            backgroundPhotoPickerPreference?.summary = if (prefs.getString("backgroundPhotoUri", null) != null) {
+                getString(R.string.background_photo_selected)
+            } else {
+                getString(R.string.background_photo_not_selected)
+            }
 
 
             // 사용여부
@@ -318,6 +350,38 @@ class MainActivity : AppCompatActivity() {
                     DailyNotificationScheduler.cancel(requireContext())
                     true
                 }
+            }
+
+            // 배경 종류
+            backgroundTypePreference?.setOnPreferenceChangeListener { _, newValue ->
+                backgroundTypePreference.summary = newValue.toString()
+
+                val index = backgroundTypePreference.findIndexOfValue(newValue.toString())
+                setInts(requireContext(), "backgroundType", index)
+
+                backgroundGradientPreference?.isVisible = index == 1
+                backgroundPhotoPickerPreference?.isVisible = index == 2
+
+                true
+            }
+
+            // 그라데이션 프리셋
+            backgroundGradientPreference?.setOnPreferenceChangeListener { _, newValue ->
+                val presetIndex = newValue as Int
+                setInts(requireContext(), "backgroundGradientPreset", presetIndex)
+
+                // 색상 변경 카운트 증가 및 광고 처리
+                trackColorChange()
+
+                true
+            }
+
+            // 배경 사진 선택
+            backgroundPhotoPickerPreference?.setOnPreferenceClickListener {
+                photoPickerLauncher.launch(
+                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                )
+                true
             }
         }
 

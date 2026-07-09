@@ -18,10 +18,27 @@
             android:key="languageCategory"
             android:title="@string/language_setting" />
 
+        <ListPreference
+            android:defaultValue="@string/backgroundTypeSolid"
+            android:entries="@array/backgroundTypeCategory"
+            android:entryValues="@array/backgroundTypeCategory"
+            android:key="backgroundTypeCategory"
+            android:title="@string/background_type_title" />
+
         <com.odom.motivationlocker.ColorSelectorDialogPreference
             android:defaultValue="@color/colorWhite"
             android:key="backgroundColorCategory"
             android:title="@string/background_color" />
+
+        <com.odom.motivationlocker.GradientSelectorDialogPreference
+            android:defaultValue="0"
+            android:key="backgroundGradientCategory"
+            android:title="@string/background_gradient_title" />
+
+        <Preference
+            android:key="backgroundPhotoPicker"
+            android:summary="@string/background_photo_not_selected"
+            android:title="@string/background_photo_picker_title" />
 
         <com.odom.motivationlocker.ColorSelectorDialogPreference
             android:defaultValue="@color/colorBlack"

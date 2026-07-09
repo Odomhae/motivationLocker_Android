@@ -21,6 +21,15 @@
     <string name="text_size">Text Size</string>
     <string name="show_source">Source Indication</string>
     <string name="daily_notification_title">Daily Quote Notification</string>
+    <string name="background_type_title">Background Type</string>
+    <string name="background_gradient_title">Gradient</string>
+    <string name="background_photo_picker_title">Choose Photo</string>
+    <string name="background_photo_not_selected">No photo selected</string>
+    <string name="background_photo_selected">Photo selected</string>
+
+    <string name="backgroundTypeSolid">Solid Color</string>
+    <string name="backgroundTypeGradient">Gradient</string>
+    <string name="backgroundTypePhoto">Photo</string>
 
     <string name="app_running_message">App is running</string>
     <string name="daily_notification_channel_name">Daily Quotes</string>
@@ -117,6 +126,12 @@
         <item>@string/textSizeLarge</item>
         <item>@string/textSizeXLarge</item>
         <item>@string/textSizeXXLarge</item>
+    </string-array>
+
+    <string-array name="backgroundTypeCategory">
+        <item>@string/backgroundTypeSolid</item>
+        <item>@string/backgroundTypeGradient</item>
+        <item>@string/backgroundTypePhoto</item>
     </string-array>
 
 

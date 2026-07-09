@@ -2,6 +2,10 @@ package com.odom.motivationlocker
 
 import android.app.KeyguardManager
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.GradientDrawable
+import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
@@ -48,15 +52,18 @@ class MotivationLockerActivity : AppCompatActivity() {
             }
         }
 
-        // 언어, 배경색, 글자색, 글자 크기, 출처표기 여부
+        // 언어, 배경, 글자색, 글자 크기, 출처표기 여부
         val language = getInt("language")
+        val backgroundType = getInt("backgroundType")
         val backgroundColor = getInt("backgroundColor")
+        val backgroundGradientPreset = getInt("backgroundGradientPreset")
+        val backgroundPhotoUri = getSharedPreferences("SETTINGS", Context.MODE_PRIVATE).getString("backgroundPhotoUri", null)
         val textColor = getInt("textColor")
         val textSize = getInt("textSize")
         val showSource = getInt("showSource")
 
         setLanguage(language)
-        setBackgroundColor(backgroundColor)
+        setBackground(backgroundType, backgroundColor, backgroundGradientPreset, backgroundPhotoUri)
         setTextColor(textColor)
         setTextSize(textSize)
 
@@ -135,23 +142,80 @@ class MotivationLockerActivity : AppCompatActivity() {
         binding.writerTextView.text = saying?.writer
     }
 
-    // 배경색
-    private fun setBackgroundColor(backgroundColor : Int){
+    // 배경 (단색 / 그라데이션 / 사진)
+    private fun setBackground(backgroundType: Int, backgroundColor: Int, gradientPresetIndex: Int, photoUriString: String?) {
+        when (backgroundType) {
+            1 -> setGradientBackground(gradientPresetIndex)
+            2 -> setPhotoBackground(photoUriString)
+            else -> setSolidBackground(backgroundColor)
+        }
+    }
+
+    // 단색
+    private fun setSolidBackground(backgroundColor: Int) {
+        binding.scrimView.visibility = View.GONE
         Log.d("Background Color Hex", String.format("#%06X", 0xFFFFFF and backgroundColor))
-        
+
         // Handle -1 (transparent) case by using default white
         val actualColor = if (backgroundColor == -1) {
             android.graphics.Color.WHITE
         } else {
             backgroundColor
         }
-        
-        // Apply the actual stored color
+
         binding.myLayout.setBackgroundColor(actualColor)
-        window.statusBarColor = actualColor
-        
+        applyStatusBarColor(actualColor)
+    }
+
+    // 그라데이션 프리셋
+    private fun setGradientBackground(presetIndex: Int) {
+        binding.scrimView.visibility = View.GONE
+
+        val preset = GradientPresets.ALL.getOrNull(presetIndex) ?: GradientPresets.ALL[0]
+        val startColor = getColor(preset.startColor)
+        val endColor = getColor(preset.endColor)
+
+        binding.myLayout.background = GradientDrawable(
+            GradientDrawable.Orientation.TL_BR,
+            intArrayOf(startColor, endColor)
+        )
+
+        val averageColor = android.graphics.Color.rgb(
+            (android.graphics.Color.red(startColor) + android.graphics.Color.red(endColor)) / 2,
+            (android.graphics.Color.green(startColor) + android.graphics.Color.green(endColor)) / 2,
+            (android.graphics.Color.blue(startColor) + android.graphics.Color.blue(endColor)) / 2
+        )
+        applyStatusBarColor(averageColor)
+    }
+
+    // 사용자 사진 (URI가 없거나 더 이상 열 수 없으면 단색 흰 배경으로 안전하게 대체)
+    private fun setPhotoBackground(photoUriString: String?) {
+        if (photoUriString == null) {
+            setSolidBackground(android.graphics.Color.WHITE)
+            return
+        }
+
+        try {
+            val uri = Uri.parse(photoUriString)
+            val bitmap = contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it) }
+                ?: throw java.io.IOException("사진을 디코딩하지 못함")
+
+            binding.myLayout.background = BitmapDrawable(resources, bitmap)
+            binding.scrimView.visibility = View.VISIBLE
+            // 스크림이 어두운 반투명이라 상태바 아이콘은 밝게 고정
+            window.statusBarColor = android.graphics.Color.TRANSPARENT
+            window.decorView.systemUiVisibility = 0
+        } catch (e: Exception) {
+            Log.w("MotivationLockerActivity", "배경 사진을 불러오지 못함, 기본 배경으로 대체", e)
+            setSolidBackground(android.graphics.Color.WHITE)
+        }
+    }
+
+    private fun applyStatusBarColor(color: Int) {
+        window.statusBarColor = color
+
         // 상태바 글씨 색상 결정 (배경색이 밝으면 어두운 글씨, 어두우면 밝은 글씨)
-        val brightness = (android.graphics.Color.red(actualColor) + android.graphics.Color.green(actualColor) + android.graphics.Color.blue(actualColor)) / 3
+        val brightness = (android.graphics.Color.red(color) + android.graphics.Color.green(color) + android.graphics.Color.blue(color)) / 3
         if (brightness > 128) {
             // 밝은 배경색 -> 어두운 상태바 글씨
             window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR

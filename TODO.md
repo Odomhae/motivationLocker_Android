@@ -63,10 +63,12 @@
 - [ ] **미착수** — 6번과 동일한 이유로 실제 데이터 수집은 이번 세션 범위 밖. `QuoteRepository.parseQuotes`가 대량 데이터의 개별 오류를 허용하도록 이미 대비되어 있어, 데이터만 준비되면 asset 교체만으로 반영 가능
 
 ### 8. 배경 커스텀
-- 그라데이션 프리셋: 기존 20색 2개 조합 → `GradientDrawable`, 15~20개 프리셋
-- 사용자 사진: Photo Picker(`PickVisualMedia`) — 권한 불필요
-- 사진 위 반투명 스크림 오버레이로 텍스트 가독성 확보
-- URI는 SharedPreferences에 저장 (persistable URI permission 필요)
+- [x] 그라데이션 프리셋 — 기존 20색 조합 16개(`GradientPresets`), `GradientSelectorDialog`/`GradientSelectorDialogPreference`가 `ColorSelectorDialog` 구조를 재사용해 원형 스와치로 미리보기·선택
+- [x] 사용자 사진 — `ActivityResultContracts.PickVisualMedia()`(런타임 권한 불필요), `takePersistableUriPermission`으로 URI 영속화
+- [x] 사진 위 반투명 스크림(`scrimView`, `activity_motivation_locker.xml`)으로 텍스트 가독성 확보
+- [x] `backgroundType`(단색/그라데이션/사진)·`backgroundGradientPreset`·`backgroundPhotoUri`를 `"SETTINGS"` SharedPreferences에 저장, 기본값은 기존과 동일한 단색이라 기존 사용자 영향 없음
+- [x] 사진 URI가 더 이상 유효하지 않으면(삭제됨 등) 크래시 대신 흰색 단색 배경으로 자동 대체(`MotivationLockerActivity.setPhotoBackground`)
+- [ ] 실기기에서 그라데이션 렌더링/Photo Picker 실행/스크림 가독성 실제 확인 — 이 세션에서는 대상 기기가 없어 미수행
 
 ### 9. 홈화면 위젯
 - 클래식 `AppWidgetProvider` + RemoteViews (Compose 미사용 프로젝트에 적합)

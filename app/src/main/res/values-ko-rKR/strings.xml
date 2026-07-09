@@ -28,6 +28,15 @@
     <string name="text_size">글자 크기</string>
     <string name="show_source">출처 표시</string>
     <string name="daily_notification_title">데일리 명언 알림</string>
+    <string name="background_type_title">배경 종류</string>
+    <string name="background_gradient_title">그라데이션</string>
+    <string name="background_photo_picker_title">사진 선택</string>
+    <string name="background_photo_not_selected">선택된 사진 없음</string>
+    <string name="background_photo_selected">사진 선택됨</string>
+
+    <string name="backgroundTypeSolid">단색</string>
+    <string name="backgroundTypeGradient">그라데이션</string>
+    <string name="backgroundTypePhoto">사진</string>
 
 
     <string name="colorBlack">검정</string>
