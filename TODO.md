@@ -24,26 +24,28 @@
 ## 🔧 버그 수정
 
 ### 3. 키가드 해제 로직 수정 (우선)
-- 문제: `onCreate`에서 `requestDismissKeyguard` 즉시 호출 → 핀/패턴 기기에서 명언 위로 핀 입력창이 덮일 수 있음
-- 수정: `KeyguardManager.isKeyguardSecure()` 분기
+- [x] `KeyguardManager.isKeyguardSecure()` 분기 적용 (`MotivationLockerActivity.onCreate`)
   - 잠금 없음: 기존처럼 즉시 해제 (스와이프 → 홈)
-  - 핀/패턴: 즉시 해제 요청 제거, 스와이프 → `finish()` → 시스템 잠금화면 자연 진입
-- 실기기(핀 설정) 테스트 필수
+  - 핀/패턴/비밀번호: 즉시 해제 요청 제거, 스와이프 → `finish()` → 시스템 잠금화면 자연 진입
+- [ ] 실기기(핀 설정) 테스트 — 이 세션에서는 대상 기기가 없어 미수행
 
 ### 4. 전면광고 ID 확인
 - `AdManager`가 `TEST_ADMOB_FULLSCREEN_ID` 문자열 리소스 사용 중
 - 실제 광고 단위 ID인지 확인 — 테스트 ID라면 수익 미발생 상태
+- 사용자 요청으로 이번 작업 범위에서 제외됨 (별도 진행 필요)
 
 ---
 
 ## ✨ 신규 기능 (우선순위 순)
 
 ### 5. 데일리 알림
-- WorkManager `PeriodicWorkRequest` (또는 정확한 시간 필요 시 AlarmManager)
-- `QuoteRepository.getRandomQuote()` 재사용, `BigTextStyle`로 명언 전문 표시
-- 알림 시간 사용자 설정 (기본 오전 8시)
-- Android 13+ `POST_NOTIFICATIONS` 런타임 권한 — 맥락 있는 온보딩 화면에서 요청
-- 의존성 추가: `androidx.work:work-runtime-ktx`
+- [x] `androidx.work:work-runtime-ktx` 의존성 추가
+- [x] `QuoteNotificationWorker` — `QuoteRepository.getRandomQuote()` 재사용, `BigTextStyle`로 명언 전문 표시, 전용 알림 채널(IMPORTANCE_DEFAULT) 생성
+- [x] `DailyNotificationScheduler` — WorkManager `PeriodicWorkRequest`(24시간 주기) + `initialDelay`로 다음 오전 10시 계산
+- [x] `pref.xml`에 `dailyNotificationEnabled` 스위치 추가 (기본 꺼짐), 켤 때만 Android 13+ `POST_NOTIFICATIONS` 런타임 권한 요청(맥락 있는 요청), 거부 시 스위치 원복
+- [x] 기존 `MainActivity.checkPermission()`의 무조건적 `POST_NOTIFICATIONS` 요청 제거 (데일리 알림 스위치로 통합)
+- 시간 선택 UI는 만들지 않음 — 매일 오전 10시 고정 (사용자 확정 사항)
+- [ ] 실기기에서 오전 10시 알림 실제 수신 확인 — 이 세션에서는 대상 기기가 없어 미수행
 
 ### 6. 언어 추가
 - 순서: 일본어 → 스페인어 → 인도네시아어 → 포르투갈어(브라질)

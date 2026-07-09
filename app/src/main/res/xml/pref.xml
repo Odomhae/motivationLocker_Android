@@ -40,6 +40,11 @@
             android:key="showSourcePref"
             android:title="@string/show_source" />
 
+        <SwitchPreferenceCompat
+            android:defaultValue="false"
+            android:key="dailyNotificationEnabled"
+            android:title="@string/daily_notification_title" />
+
 <!--    </PreferenceCategory>-->
 
 </PreferenceScreen>

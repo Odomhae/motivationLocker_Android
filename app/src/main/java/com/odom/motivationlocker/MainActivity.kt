@@ -110,12 +110,8 @@ class MainActivity : AppCompatActivity() {
                 Uri.parse("package:$packageName"))
             startActivityForResult(intent, PermissionsCode)
         }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1000)
-            }
-        }
+        // POST_NOTIFICATIONS(Android 13+)는 데일리 알림 스위치를 켤 때만 맥락 있게 요청한다.
+        // (SettingPreferencesFragment의 dailyNotificationEnabled 리스너 참고)
     }
 
     //  앱 리뷰
@@ -186,6 +182,10 @@ class MainActivity : AppCompatActivity() {
 
     class SettingPreferencesFragment : PreferenceFragmentCompat() {
 
+        companion object {
+            private const val DAILY_NOTIFICATION_PERMISSION_CODE = 1001
+        }
+
         private lateinit var adManager: AdManager
 
         // 색상 변경 카운트 (3번 변경 시 광고 표시)
@@ -206,6 +206,7 @@ class MainActivity : AppCompatActivity() {
             val textColorPreference = findPreference<ColorSelectorDialogPreference>("textColorCategory")
             val textSizePreference = findPreference<androidx.preference.ListPreference>("textSizeCategory")
             val switchSourcePreference = findPreference<SwitchPreferenceCompat>("showSourcePref")
+            val dailyNotificationPreference = findPreference<SwitchPreferenceCompat>("dailyNotificationEnabled")
 
 
             // 앱이 시작됬을대 이미 퀴즈잠금화면 사용이 체크되어있으면 서비스 실행
@@ -298,6 +299,40 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 true
+            }
+
+            // 데일리 명언 알림
+            dailyNotificationPreference?.setOnPreferenceChangeListener { _, newValue ->
+                if (newValue == true) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                        ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED
+                    ) {
+                        // 권한 응답 전까지는 스위치를 켜지 않고, 응답 콜백에서 결과에 따라 처리
+                        requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), DAILY_NOTIFICATION_PERMISSION_CODE)
+                        false
+                    } else {
+                        DailyNotificationScheduler.schedule(requireContext())
+                        true
+                    }
+                } else {
+                    DailyNotificationScheduler.cancel(requireContext())
+                    true
+                }
+            }
+        }
+
+        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+            if (requestCode == DAILY_NOTIFICATION_PERMISSION_CODE) {
+                val dailyNotificationPreference = findPreference<SwitchPreferenceCompat>("dailyNotificationEnabled")
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    dailyNotificationPreference?.isChecked = true
+                    DailyNotificationScheduler.schedule(requireContext())
+                } else {
+                    dailyNotificationPreference?.isChecked = false
+                    Toast.makeText(requireContext(), R.string.daily_notification_permission_denied, Toast.LENGTH_SHORT).show()
+                }
             }
         }
 

@@ -26,18 +26,26 @@ class MotivationLockerActivity : AppCompatActivity() {
         setContentView(binding.root)
         // 기존 잠금화면보다 먼저 나타나도록
         // 버전별로
+        val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+        // 핀/패턴/비밀번호가 설정된 기기에서는 잠금을 해제하지 않는다.
+        // 해제 요청을 하지 않아야 스와이프 후 finish()될 때 시스템 잠금화면(PIN 입력)이 자연스럽게 나타난다.
+        val isKeyguardSecure = keyguardManager.isKeyguardSecure
+
         if(Build.VERSION.SDK_INT >= VERSION_CODES.O_MR1){
             // 잠금화면에서 보여지게
             setShowWhenLocked(true)
-            // 기존 잠금화면 해제
-            val keyguardManager = getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
-            keyguardManager.requestDismissKeyguard(this, null)
+            // 잠금이 없는 기기에서만 기존 잠금화면 해제
+            if (!isKeyguardSecure) {
+                keyguardManager.requestDismissKeyguard(this, null)
+            }
 
         }else{
             // 잠금화면에서 보여지게
             window.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED)
-            // 기존 잠금화면 해제
-            window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD)
+            // 잠금이 없는 기기에서만 기존 잠금화면 해제
+            if (!isKeyguardSecure) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD)
+            }
         }
 
         // 언어, 배경색, 글자색, 글자 크기, 출처표기 여부
