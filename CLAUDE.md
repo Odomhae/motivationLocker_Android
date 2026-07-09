@@ -1,0 +1,51 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project
+
+"명언 잠금화면" (Motivation Locker) — a native Android app (Kotlin, single `app` module, no Compose) that replaces the system lock screen with a full-screen quote. Published on Google Play as `com.odom.motivationlocker`.
+
+## Build & Run
+
+Standard Gradle Android project; no custom scripts.
+
+```
+./gradlew assembleDebug        # debug APK
+./gradlew assembleRelease      # release APK (see app/build.gradle for signing/proguard config)
+./gradlew test                 # JVM unit tests (app/src/test)
+./gradlew connectedAndroidTest # instrumented tests (app/src/androidTest), needs a device/emulator
+./gradlew clean
+```
+
+There is currently only one test class on each side (`ExampleUnitTest`, `ExampleInstrumentedTest`) — no real test suite exists yet.
+
+- `compileSdk`/`targetSdk` 35, `minSdk` 23, Java/Kotlin target 17.
+- `viewBinding` is enabled; there is no Compose.
+- Kotlin 1.9.24, `mavenCentral()` (no `jcenter()`), current AndroidX/Play Services versions (appcompat 1.7.0, core-ktx 1.13.1, play-services-ads 23.6.0, etc.) — see `TODO.md` §1 for the full list and rationale.
+- The system JDK on this machine is Java 8, which is too old for AGP 8.3.2. Build with a JDK 11+ (e.g. Android Studio's bundled JBR) via `JAVA_HOME`, for example: `JAVA_HOME="/c/Program Files/Android/Android Studio/jbr" ./gradlew assembleDebug` (adjust path per machine).
+
+## Architecture
+
+The whole app is four cooperating pieces wired together through `SharedPreferences`, not a ViewModel/repository layer:
+
+1. **`MainActivity`** — the settings screen (`androidx.preference` framework, `SettingPreferencesFragment` backed by `res/xml/pref.xml`). Toggling `useLockScreen` starts/stops `LockScreenService`. All preference changes (language, background/text color, text size, "show source") are written directly into a raw `SharedPreferences` file named `"SETTINGS"` (not the default preference file) via ad-hoc `setInts(context, key, value)`/`getInt(key)` helpers — colors and enum-like settings are stored as `Int`, not through the Preference framework's own persistence.
+2. **`LockScreenService`** — a foreground `Service` (required on API 26+, uses `startForeground`) whose only job is to keep a `ScreenOffReceiver` registered for `ACTION_SCREEN_ON` for the life of the app.
+3. **`ScreenOffReceiver`** — on `ACTION_SCREEN_ON`, launches `MotivationLockerActivity` on top of everything (`FLAG_ACTIVITY_NEW_TASK | FLAG_ACTIVITY_CLEAR_TOP`). This is the actual "lock screen replacement" moment.
+4. **`MotivationLockerActivity`** — reads the same `"SETTINGS"` SharedPreferences, loads a random quote from `assets/English.json` or `assets/korean.json` (chosen by the `language` int: `0`=English, `1`=Korean), applies background/text color/size, and dismisses itself on a big-enough swipe gesture (distance-squared threshold against `MotionEvent` down/move deltas). On API 27+ it uses `setShowWhenLocked` + `requestDismissKeyguard`; below that, legacy `WindowManager` flags (`FLAG_SHOW_WHEN_LOCKED`/`FLAG_DISMISS_KEYGUARD`).
+
+Quote assets (`app/src/main/assets/English.json`, `korean.json`) are flat JSON arrays of `{ "id", "quote", "writer" }` objects, parsed with `org.json` (no Moshi/Gson). Loading/parsing/caching is centralized in `QuoteRepository` (an `object` singleton, no DI framework in this app) — `QuoteRepository.getRandomQuote(context, language)` returns a `Quote` data class instance and caches the parsed list per language after the first read. `MotivationLockerActivity.setLanguage()` calls this rather than duplicating JSON parsing per language; when adding a new language, extend `QuoteRepository.LANGUAGE_FILES` (language-index → asset filename) rather than adding another `when` branch.
+
+### Ads (AdMob)
+
+- `MainActivity` loads a banner ad and shows it in `activity_main.xml`.
+- `AdManager` (constructed per-fragment in `SettingPreferencesFragment`) preloads/shows an interstitial every 3rd color change (`colorChangeCount % 3 == 0`, tracked in the `"SETTINGS"` prefs file — a *different* counter than `AdManager`'s own unused `GENERATE_COUNT_KEY`/`SCAN_COUNT_KEY` constants in its `ad_counter` prefs file, which aren't currently wired to anything).
+- Ad unit IDs live in `res/values/strings.xml` as paired `TEST_*`/`REAL_*` strings. As of this writing, both the banner (`MainActivity.loadBanner`) and the interstitial (`AdManager.loadInterstitialAd`) reference the `TEST_*` string resources, not the `REAL_*` ones — see `TODO.md` item 4.
+
+### Known cross-file quirk
+
+`ColorSelectorDialogBuilder.kt` declares `package com.odom.ledscreen` (a leftover from the vendored [HeryLopez/ColorSelector](https://github.com/HeryLopez/ColorSelector) library it's adapted from), while every other file in `app/src/main/java/com/odom/motivationlocker/` — including `ColorSelectorDialogPreference`, which imports it explicitly — uses `com.odom.motivationlocker`. Don't "fix" the package name without checking both sides of that import.
+
+### Localization
+
+Only Korean (`values-ko-rKR`) and default (English) `strings.xml` exist. `TODO.md` lists a planned order for adding more languages (Japanese → Spanish → Indonesian → Brazilian Portuguese), which touches three places together: a new `assets/*.json` quote file, `pref.xml`'s language `ListPreference` entries, and the store listing.
