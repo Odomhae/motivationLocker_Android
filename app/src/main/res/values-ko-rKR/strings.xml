@@ -33,6 +33,9 @@
     <string name="background_photo_picker_title">사진 선택</string>
     <string name="background_photo_not_selected">선택된 사진 없음</string>
     <string name="background_photo_selected">사진 선택됨</string>
+    <string name="background_settings_title">배경 설정</string>
+    <string name="text_settings_title">글자 설정</string>
+    <string name="settings_dialog_close">닫기</string>
 
     <string name="exit_confirm_message">앱을 종료하시겠습니까?</string>
     <string name="exit_confirm_positive">종료</string>

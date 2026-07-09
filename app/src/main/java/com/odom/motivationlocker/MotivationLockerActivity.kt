@@ -11,6 +11,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
@@ -21,9 +23,18 @@ import com.odom.motivationlocker.databinding.ActivityMotivationLockerBinding
 
 class MotivationLockerActivity : AppCompatActivity() {
 
+    companion object {
+        // 다른 앱의 알람/푸시로 화면이 켜졌을 때, 기기의 화면 절전시간 내내 이 화면이
+        // 켜져있지 않도록 일정 시간 뒤 자동으로 닫는다(배터리 소모 방지).
+        private const val AUTO_DISMISS_DELAY_MS = 8000L
+    }
+
     var saying : Quote? = null
 
     private lateinit var binding: ActivityMotivationLockerBinding // 자동 생성된 바인딩 클래스
+
+    private val autoDismissHandler = Handler(Looper.getMainLooper())
+    private val autoDismissRunnable = Runnable { finish() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,6 +122,12 @@ class MotivationLockerActivity : AppCompatActivity() {
             true
         }
 
+        autoDismissHandler.postDelayed(autoDismissRunnable, AUTO_DISMISS_DELAY_MS)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        autoDismissHandler.removeCallbacks(autoDismissRunnable)
     }
 
     // 설정에 따라
@@ -253,19 +270,14 @@ class MotivationLockerActivity : AppCompatActivity() {
     }
 
     // 글자색
+    // Color.WHITE(0xFFFFFFFF)는 부호있는 Int로 -1과 같은 값이라, 여기서 -1을 "미설정"으로
+    // 취급해 검정으로 강제하면 사용자가 고른 흰색 글자색이 항상 검정으로 보이는 버그가 생긴다.
     private fun setTextColor(textColor : Int ){
         Log.d("Selected Text Color ", textColor.toString() + "")
         Log.d("Text Color Hex", String.format("#%06X", 0xFFFFFF and textColor))
-        
-        // Handle -1 (transparent) case by using default black
-        val actualColor = if (textColor == -1) {
-            android.graphics.Color.BLACK
-        } else {
-            textColor
-        }
 
-        binding.sayingTextView.setTextColor(actualColor)
-        binding.writerTextView.setTextColor(actualColor)
+        binding.sayingTextView.setTextColor(textColor)
+        binding.writerTextView.setTextColor(textColor)
     }
 
     // 글자크기

@@ -214,6 +214,9 @@ class MainActivity : AppCompatActivity() {
         // 색상 변경 카운트 (3번 변경 시 광고 표시)
         private var colorChangeCount = 0
 
+        // "배경 설정" 다이얼로그가 열려있는 동안, 사진 선택 완료 콜백에서 썸네일을 즉시 갱신하기 위한 참조
+        private var backgroundDialog: BackgroundSettingsDialogFragment? = null
+
         // Photo Picker는 Fragment가 STARTED 상태가 되기 전에 등록되어야 하므로 필드로 선언
         private val photoPickerLauncher = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
@@ -223,8 +226,8 @@ class MainActivity : AppCompatActivity() {
                 val prefs = requireContext().getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
                 prefs.edit().putString("backgroundPhotoUri", uri.toString()).apply()
 
-                findPreference<androidx.preference.Preference>("backgroundPhotoPicker")?.summary =
-                    getString(R.string.background_photo_selected)
+                backgroundDialog?.updatePhotoPreview(uri)
+                refreshBackgroundSettingsSummary()
 
                 trackColorChange()
             }
@@ -241,14 +244,10 @@ class MainActivity : AppCompatActivity() {
 
             val switchPreference = findPreference<SwitchPreferenceCompat>("useLockScreen")
             val languagePreference = findPreference<androidx.preference.ListPreference>("languageCategory")
-            val backGroundColorPreference = findPreference<ColorSelectorDialogPreference>("backgroundColorCategory")
-            val textColorPreference = findPreference<ColorSelectorDialogPreference>("textColorCategory")
-            val textSizePreference = findPreference<androidx.preference.ListPreference>("textSizeCategory")
             val switchSourcePreference = findPreference<SwitchPreferenceCompat>("showSourcePref")
             val dailyNotificationPreference = findPreference<SwitchPreferenceCompat>("dailyNotificationEnabled")
-            val backgroundTypePreference = findPreference<androidx.preference.ListPreference>("backgroundTypeCategory")
-            val backgroundGradientPreference = findPreference<GradientSelectorDialogPreference>("backgroundGradientCategory")
-            val backgroundPhotoPickerPreference = findPreference<androidx.preference.Preference>("backgroundPhotoPicker")
+            val backgroundSettingsPreference = findPreference<androidx.preference.Preference>("backgroundSettingsEntry")
+            val textSettingsPreference = findPreference<androidx.preference.Preference>("textSettingsEntry")
 
 
             // 앱이 시작됬을대 이미 퀴즈잠금화면 사용이 체크되어있으면 서비스 실행
@@ -262,20 +261,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             languagePreference?.summary = languagePreference?.entries?.get(getInt("language"))
-          //  backGroundColorPreference?.summary = String.format("#%06X", 0xFFFFFF and getInt("backgroundColor"))
-          //  textColorPreference?.summary = String.format("#%06X", 0xFFFFFF and getInt("textColor"))
-            textSizePreference?.summary = textSizePreference?.entries?.get(getInt("textSize"))
-
-            // 배경 종류 - 저장된 값에 따라 그라데이션/사진 설정 항목만 노출
-            val backgroundType = getInt("backgroundType")
-            backgroundTypePreference?.summary = backgroundTypePreference?.entries?.get(backgroundType)
-            backgroundGradientPreference?.isVisible = backgroundType == 1
-            backgroundPhotoPickerPreference?.isVisible = backgroundType == 2
-            backgroundPhotoPickerPreference?.summary = if (prefs.getString("backgroundPhotoUri", null) != null) {
-                getString(R.string.background_photo_selected)
-            } else {
-                getString(R.string.background_photo_not_selected)
-            }
+            refreshBackgroundSettingsSummary()
+            refreshTextSettingsSummary()
 
 
             // 사용여부
@@ -301,42 +288,6 @@ class MainActivity : AppCompatActivity() {
 
                 val index = languagePreference.findIndexOfValue(newValue.toString())
                 setInts(requireContext(), "language", index)
-
-                true
-            }
-
-            // 배경색
-            backGroundColorPreference?.setOnPreferenceChangeListener { _, newValue ->
-                val color = newValue as Int
-                Log.d("==ttMainActivity", "Background color hex: ${String.format("#%06X", 0xFFFFFF and color)}")
-               // backGroundColorPreference.summary = String.format("#%06X", 0xFFFFFF and color)
-                setInts(requireContext(), "backgroundColorCategory", color)
-                
-                // 색상 변경 카운트 증가 및 광고 처리
-                trackColorChange()
-                
-                true
-            }
-
-            // 글자색
-            textColorPreference?.setOnPreferenceChangeListener { _, newValue ->
-                val color = newValue as Int
-                Log.d("==ttMainActivity", "Text color hex: ${String.format("#%06X", 0xFFFFFF and color)}")
-              //  textColorPreference.summary = String.format("#%06X", 0xFFFFFF and color)
-                setInts(requireContext(), "textColorCategory", color)
-                
-                // 색상 변경 카운트 증가 및 광고 처리
-                trackColorChange()
-                
-                true
-            }
-
-            // 글자 크기
-            textSizePreference?.setOnPreferenceChangeListener { _, newValue ->
-                textSizePreference.summary = newValue.toString()
-
-                val index = textSizePreference.findIndexOfValue(newValue.toString())
-                setInts(requireContext(), "textSize", index)
 
                 true
             }
@@ -373,35 +324,28 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            // 배경 종류
-            backgroundTypePreference?.setOnPreferenceChangeListener { _, newValue ->
-                backgroundTypePreference.summary = newValue.toString()
-
-                val index = backgroundTypePreference.findIndexOfValue(newValue.toString())
-                setInts(requireContext(), "backgroundType", index)
-
-                backgroundGradientPreference?.isVisible = index == 1
-                backgroundPhotoPickerPreference?.isVisible = index == 2
-
+            // 배경 설정 (단색/그라데이션/사진 통합 팝업)
+            backgroundSettingsPreference?.setOnPreferenceClickListener {
+                val dialog = BackgroundSettingsDialogFragment()
+                dialog.onSummaryRefreshNeeded = { refreshBackgroundSettingsSummary() }
+                dialog.onColorChangeTracked = { trackColorChange() }
+                dialog.onPhotoPickRequested = {
+                    photoPickerLauncher.launch(
+                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                    )
+                }
+                dialog.onDialogDismissed = { backgroundDialog = null }
+                backgroundDialog = dialog
+                dialog.show(parentFragmentManager, "backgroundSettings")
                 true
             }
 
-            // 그라데이션 프리셋
-            backgroundGradientPreference?.setOnPreferenceChangeListener { _, newValue ->
-                val presetIndex = newValue as Int
-                setInts(requireContext(), "backgroundGradientPreset", presetIndex)
-
-                // 색상 변경 카운트 증가 및 광고 처리
-                trackColorChange()
-
-                true
-            }
-
-            // 배경 사진 선택
-            backgroundPhotoPickerPreference?.setOnPreferenceClickListener {
-                photoPickerLauncher.launch(
-                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                )
+            // 글자 설정 (글자색/글자크기 통합 팝업)
+            textSettingsPreference?.setOnPreferenceClickListener {
+                val dialog = TextSettingsDialogFragment()
+                dialog.onSummaryRefreshNeeded = { refreshTextSettingsSummary() }
+                dialog.onColorChangeTracked = { trackColorChange() }
+                dialog.show(parentFragmentManager, "textSettings")
                 true
             }
         }
@@ -454,6 +398,43 @@ class MainActivity : AppCompatActivity() {
                 "textColor" -> prefs.getInt("textColorCategory", android.graphics.Color.BLACK)
                 else -> prefs.getInt(key, 0)
             }
+        }
+
+        // "배경 설정" 1줄의 summary를 현재 배경 종류에 맞춰 갱신
+        private fun refreshBackgroundSettingsSummary() {
+            findPreference<androidx.preference.Preference>("backgroundSettingsEntry")?.summary = backgroundSettingsSummary()
+        }
+
+        private fun backgroundSettingsSummary(): String {
+            val prefs = requireContext().getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
+            return when (getInt("backgroundType")) {
+                1 -> {
+                    val presetIndex = prefs.getInt("backgroundGradientPreset", 0)
+                    "${getString(R.string.backgroundTypeGradient)} · ${presetIndex + 1}"
+                }
+                2 -> {
+                    val hasPhoto = prefs.getString("backgroundPhotoUri", null) != null
+                    val photoState = getString(if (hasPhoto) R.string.background_photo_selected else R.string.background_photo_not_selected)
+                    "${getString(R.string.backgroundTypePhoto)} · $photoState"
+                }
+                else -> {
+                    val color = getInt("backgroundColor")
+                    "${getString(R.string.backgroundTypeSolid)} · ${String.format("#%06X", 0xFFFFFF and color)}"
+                }
+            }
+        }
+
+        // "글자 설정" 1줄의 summary를 현재 글자색/크기에 맞춰 갱신
+        private fun refreshTextSettingsSummary() {
+            findPreference<androidx.preference.Preference>("textSettingsEntry")?.summary = textSettingsSummary()
+        }
+
+        private fun textSettingsSummary(): String {
+            val prefs = requireContext().getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
+            val color = getInt("textColor")
+            val sizeIndex = prefs.getInt("textSize", 0)
+            val sizeLabel = resources.getStringArray(R.array.textSizeCategory).getOrElse(sizeIndex) { "" }
+            return "${String.format("#%06X", 0xFFFFFF and color)} · $sizeLabel"
         }
 
     }

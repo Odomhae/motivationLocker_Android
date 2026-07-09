@@ -26,6 +26,9 @@
     <string name="background_photo_picker_title">Choose Photo</string>
     <string name="background_photo_not_selected">No photo selected</string>
     <string name="background_photo_selected">Photo selected</string>
+    <string name="background_settings_title">Background Settings</string>
+    <string name="text_settings_title">Text Settings</string>
+    <string name="settings_dialog_close">Close</string>
 
     <string name="exit_confirm_message">Exit the app?</string>
     <string name="exit_confirm_positive">Exit</string>
