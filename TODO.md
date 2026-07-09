@@ -63,7 +63,7 @@
 - [ ] **미착수** — 6번과 동일한 이유로 실제 데이터 수집은 이번 세션 범위 밖. `QuoteRepository.parseQuotes`가 대량 데이터의 개별 오류를 허용하도록 이미 대비되어 있어, 데이터만 준비되면 asset 교체만으로 반영 가능
 
 ### 8. 배경 커스텀
-- [x] 그라데이션 프리셋 — 기존 20색 조합 16개(`GradientPresets`), `GradientSelectorDialog`/`GradientSelectorDialogPreference`가 `ColorSelectorDialog` 구조를 재사용해 원형 스와치로 미리보기·선택
+- [x] 그라데이션 — ~~기존 20색 조합 16개 고정 프리셋~~ → 14번 항목에서 "선택한 배경색 기반 동적 계산"으로 재설계됨
 - [x] 사용자 사진 — `ActivityResultContracts.PickVisualMedia()`(런타임 권한 불필요), `takePersistableUriPermission`으로 URI 영속화
 - [x] 사진 위 반투명 스크림(`scrimView`, `activity_motivation_locker.xml`)으로 텍스트 가독성 확보
 - [x] `backgroundType`(단색/그라데이션/사진)·`backgroundGradientPreset`·`backgroundPhotoUri`를 `"SETTINGS"` SharedPreferences에 저장, 기본값은 기존과 동일한 단색이라 기존 사용자 영향 없음
@@ -99,6 +99,14 @@
 - [x] 배너 광고는 `onStart()`에서 미리 `loadAd()`해 둬서 다이얼로그가 뜰 때 바로 보이도록 함(`exitAdView`), 여러 번 열어도 안전하도록 이전 부모에서 제거 후 재부착
 - [x] 리뷰 요청(`reviewApp()`)은 실제 종료를 확정한 시점 한 곳으로 통일(기존엔 첫 번째 누름에서도 매번 시도하던 것 정리)
 - [ ] 실기기에서 다이얼로그 내 배너 광고 실제 표시 확인 — 이 세션에서는 대상 기기가 없어 미수행
+
+### 14. 사진 배경 왜곡/회전 수정 + 그라데이션을 선택 배경색 기반으로 재설계 (TODO 원안에는 없던 추가 항목)
+- [x] `androidx.exifinterface:exifinterface:1.3.7` 추가 — `content://` URI에서도 EXIF `Orientation`을 안정적으로 읽기 위함
+- [x] 사진 배경을 `View.background`(종횡비 무시하고 늘어남)가 아닌 `scaleType="centerCrop"` `ImageView`(`photoBackgroundView`)로 렌더링해 "늘어지는 현상" 수정
+- [x] `MotivationLockerActivity.decodeOrientedBitmap()`으로 EXIF `Orientation`에 따라 비트맵을 회전/반전 보정 — "가로사진이 세로로 나오는 현상" 수정
+- [x] `GradientPresets`를 고정 리소스-id 목록에서, 선택된 배경색(`backgroundColorCategory`)을 기준으로 HSV 공간에서 8가지 뚜렷이 다른 변형(밝게/어둡게/보색/인접색조/파스텔 등)을 그때그때 계산하는 `forBaseColor(baseColor)` 함수로 재설계 — "그라데이션이 배경색과 무관함" + "옵션들이 비슷해 구별 안 됨" 두 문제를 함께 해결
+- [x] `GradientSelectorDialog`/`GradientSelectorDialogPreference`가 `"SETTINGS"`의 `backgroundColorCategory`를 직접 읽어 그라데이션 미리보기/선택 목록을 계산하도록 변경
+- [ ] 실기기에서 사진 방향/크롭, 그라데이션 시각적 구별 실제 확인 — 이 세션에서는 대상 기기가 없어 미수행
 
 ---
 

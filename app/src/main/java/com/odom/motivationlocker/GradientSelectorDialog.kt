@@ -9,17 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 
 // ColorSelectorDialog와 동일한 원형 그리드 구조를 재사용하되, 각 스와치를 2색 그라데이션으로 그린다.
-// 프리셋이 고정 리스트라 ColorSelectorDialogBuilder 같은 별도 빌더는 두지 않는다.
+// 프리셋은 baseColor(선택된 배경색)를 기준으로 그때그때 계산되므로 ColorSelectorDialogBuilder 같은
+// 별도 빌더는 두지 않는다.
 class GradientSelectorDialog : DialogFragment(), View.OnClickListener {
     private lateinit var tagDialog: String
     lateinit var onDialogGradientClickListener: OnDialogGradientClickListener
 
+    var baseColor: Int = Color.WHITE
     var selectedPresetIndex: Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -45,7 +46,7 @@ class GradientSelectorDialog : DialogFragment(), View.OnClickListener {
         val margin = (4 * scale + 0.5f).toInt()
         layoutParamsCircles.setMargins(margin, margin, margin, margin)
 
-        val presets = GradientPresets.ALL
+        val presets = GradientPresets.forBaseColor(baseColor)
         var rows = presets.size / 4
         if (presets.size % 4 != 0) rows += 1
 
@@ -68,17 +69,15 @@ class GradientSelectorDialog : DialogFragment(), View.OnClickListener {
                     imageButton.setOnClickListener(this)
 
                     imageButton.setBackgroundResource(R.drawable.circle)
-                    val startColor = ContextCompat.getColor(requireContext(), preset.startColor)
-                    val endColor = ContextCompat.getColor(requireContext(), preset.endColor)
                     (imageButton.background as GradientDrawable).apply {
                         orientation = GradientDrawable.Orientation.TL_BR
-                        setColors(intArrayOf(startColor, endColor))
+                        setColors(intArrayOf(preset.startColor, preset.endColor))
                     }
 
                     if (selectedPresetIndex == index) {
                         // 두 색상의 평균 밝기로 체크 아이콘 색 결정
-                        val avgBrightness = (Color.red(startColor) + Color.green(startColor) + Color.blue(startColor) +
-                            Color.red(endColor) + Color.green(endColor) + Color.blue(endColor)) / 2
+                        val avgBrightness = (Color.red(preset.startColor) + Color.green(preset.startColor) + Color.blue(preset.startColor) +
+                            Color.red(preset.endColor) + Color.green(preset.endColor) + Color.blue(preset.endColor)) / 2
                         if (avgBrightness < 384) {
                             imageButton.setImageResource(R.drawable.ic_selected_white)
                         } else {

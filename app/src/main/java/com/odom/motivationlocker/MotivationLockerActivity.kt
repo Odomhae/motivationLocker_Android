@@ -2,9 +2,11 @@ package com.odom.motivationlocker
 
 import android.app.KeyguardManager
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
+import android.graphics.Matrix
 import android.graphics.drawable.GradientDrawable
+import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
@@ -145,7 +147,7 @@ class MotivationLockerActivity : AppCompatActivity() {
     // 배경 (단색 / 그라데이션 / 사진)
     private fun setBackground(backgroundType: Int, backgroundColor: Int, gradientPresetIndex: Int, photoUriString: String?) {
         when (backgroundType) {
-            1 -> setGradientBackground(gradientPresetIndex)
+            1 -> setGradientBackground(gradientPresetIndex, backgroundColor)
             2 -> setPhotoBackground(photoUriString)
             else -> setSolidBackground(backgroundColor)
         }
@@ -154,6 +156,7 @@ class MotivationLockerActivity : AppCompatActivity() {
     // 단색
     private fun setSolidBackground(backgroundColor: Int) {
         binding.scrimView.visibility = View.GONE
+        binding.photoBackgroundView.visibility = View.GONE
         Log.d("Background Color Hex", String.format("#%06X", 0xFFFFFF and backgroundColor))
 
         // Handle -1 (transparent) case by using default white
@@ -167,23 +170,23 @@ class MotivationLockerActivity : AppCompatActivity() {
         applyStatusBarColor(actualColor)
     }
 
-    // 그라데이션 프리셋
-    private fun setGradientBackground(presetIndex: Int) {
+    // 그라데이션 (선택된 배경색을 기준으로 계산된 프리셋)
+    private fun setGradientBackground(presetIndex: Int, baseColor: Int) {
         binding.scrimView.visibility = View.GONE
+        binding.photoBackgroundView.visibility = View.GONE
 
-        val preset = GradientPresets.ALL.getOrNull(presetIndex) ?: GradientPresets.ALL[0]
-        val startColor = getColor(preset.startColor)
-        val endColor = getColor(preset.endColor)
+        val presets = GradientPresets.forBaseColor(baseColor)
+        val preset = presets.getOrNull(presetIndex) ?: presets[0]
 
         binding.myLayout.background = GradientDrawable(
             GradientDrawable.Orientation.TL_BR,
-            intArrayOf(startColor, endColor)
+            intArrayOf(preset.startColor, preset.endColor)
         )
 
         val averageColor = android.graphics.Color.rgb(
-            (android.graphics.Color.red(startColor) + android.graphics.Color.red(endColor)) / 2,
-            (android.graphics.Color.green(startColor) + android.graphics.Color.green(endColor)) / 2,
-            (android.graphics.Color.blue(startColor) + android.graphics.Color.blue(endColor)) / 2
+            (android.graphics.Color.red(preset.startColor) + android.graphics.Color.red(preset.endColor)) / 2,
+            (android.graphics.Color.green(preset.startColor) + android.graphics.Color.green(preset.endColor)) / 2,
+            (android.graphics.Color.blue(preset.startColor) + android.graphics.Color.blue(preset.endColor)) / 2
         )
         applyStatusBarColor(averageColor)
     }
@@ -197,10 +200,11 @@ class MotivationLockerActivity : AppCompatActivity() {
 
         try {
             val uri = Uri.parse(photoUriString)
-            val bitmap = contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it) }
-                ?: throw java.io.IOException("사진을 디코딩하지 못함")
+            val bitmap = decodeOrientedBitmap(uri) ?: throw java.io.IOException("사진을 디코딩하지 못함")
 
-            binding.myLayout.background = BitmapDrawable(resources, bitmap)
+            binding.myLayout.background = null
+            binding.photoBackgroundView.setImageBitmap(bitmap)
+            binding.photoBackgroundView.visibility = View.VISIBLE
             binding.scrimView.visibility = View.VISIBLE
             // 스크림이 어두운 반투명이라 상태바 아이콘은 밝게 고정
             window.statusBarColor = android.graphics.Color.TRANSPARENT
@@ -209,6 +213,29 @@ class MotivationLockerActivity : AppCompatActivity() {
             Log.w("MotivationLockerActivity", "배경 사진을 불러오지 못함, 기본 배경으로 대체", e)
             setSolidBackground(android.graphics.Color.WHITE)
         }
+    }
+
+    // EXIF Orientation을 반영해 올바른 방향의 비트맵을 반환한다.
+    // BitmapFactory.decodeStream()은 EXIF 회전 정보를 무시하므로, 가로로 찍힌 사진이
+    // 그대로 세로로 디코딩되는 경우(카메라 회전 저장 방식)를 여기서 보정한다.
+    private fun decodeOrientedBitmap(uri: Uri): Bitmap? {
+        val orientation = contentResolver.openInputStream(uri)?.use { stream ->
+            ExifInterface(stream).getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
+        } ?: ExifInterface.ORIENTATION_NORMAL
+
+        val bitmap = contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it) } ?: return null
+
+        val matrix = Matrix()
+        when (orientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> matrix.postRotate(90f)
+            ExifInterface.ORIENTATION_ROTATE_180 -> matrix.postRotate(180f)
+            ExifInterface.ORIENTATION_ROTATE_270 -> matrix.postRotate(270f)
+            ExifInterface.ORIENTATION_FLIP_HORIZONTAL -> matrix.postScale(-1f, 1f)
+            ExifInterface.ORIENTATION_FLIP_VERTICAL -> matrix.postScale(1f, -1f)
+            else -> return bitmap
+        }
+
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
 
     private fun applyStatusBarColor(color: Int) {

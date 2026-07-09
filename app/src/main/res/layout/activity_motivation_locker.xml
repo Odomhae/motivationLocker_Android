@@ -8,6 +8,18 @@
     android:background="@color/colorPrimary"
     tools:context="com.odom.motivationlocker.MotivationLockerActivity">
 
+    <ImageView
+        android:id="@+id/photoBackgroundView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
     <View
         android:id="@+id/scrimView"
         android:layout_width="0dp"
