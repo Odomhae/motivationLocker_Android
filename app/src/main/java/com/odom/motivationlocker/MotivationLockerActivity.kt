@@ -12,13 +12,10 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.odom.motivationlocker.databinding.ActivityMotivationLockerBinding
-import org.json.JSONArray
-import org.json.JSONObject
-import kotlin.random.Random
 
 class MotivationLockerActivity : AppCompatActivity() {
 
-    var saying : JSONObject? = null
+    var saying : Quote? = null
 
     private lateinit var binding: ActivityMotivationLockerBinding // 자동 생성된 바인딩 클래스
 
@@ -122,30 +119,12 @@ class MotivationLockerActivity : AppCompatActivity() {
 
     // 언어
     private fun setLanguage(language: Int){
-        when(language){
-            // 영어
-            0 -> {
-                // 글 데이터 가져옴
-                // asset 폴더의 korean.json 파일
-                val json = assets.open("English.json").reader().readText()
-                val sayingArray = JSONArray(json)
-                // 랜덤으로 퀴즈 선택
-                saying = sayingArray.getJSONObject(Random.nextInt(sayingArray.length()))
-                //글 보여줌
-                binding.sayingTextView.text = saying?.getString("quote")
-                // 작가 보여줌
-                binding.writerTextView.text = saying?.getString("writer")
-            }
-            //
-            1-> {
-                val json = assets.open("korean.json").reader().readText()
-                val sayingArray = JSONArray(json)
-                saying = sayingArray.getJSONObject(Random.nextInt(sayingArray.length()))
-                binding.sayingTextView.text = saying?.getString("quote")
-                binding.writerTextView.text = saying?.getString("writer")
-            }
-        }
-
+        // 랜덤으로 명언 선택 (QuoteRepository가 언어별 assets 로딩/캐싱을 담당)
+        saying = QuoteRepository.getRandomQuote(this, language)
+        // 글 보여줌
+        binding.sayingTextView.text = saying?.quote
+        // 작가 보여줌
+        binding.writerTextView.text = saying?.writer
     }
 
     // 배경색
