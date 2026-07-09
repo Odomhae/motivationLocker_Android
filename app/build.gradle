@@ -34,6 +34,14 @@ android {
         viewBinding true
     }
 
+    testOptions {
+        unitTests {
+            // android.util.Log 등 android.jar의 스텁 메서드가 로컬 JVM 테스트에서
+            // 예외를 던지는 대신 기본값을 반환하도록 함(QuoteRepositoryTest의 Log.w 호출 등)
+            returnDefaultValues = true
+        }
+    }
+
 }
 
 dependencies {
@@ -44,6 +52,8 @@ dependencies {
     implementation 'com.google.android.play:review:2.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
+    // JVM 단위 테스트에서 org.json을 실제로 동작시키기 위함(안드로이드 SDK의 org.json 스텁은 로컬 테스트에서 예외를 던짐)
+    testImplementation 'org.json:json:20231013'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
     implementation 'com.google.android.gms:play-services-ads:23.6.0'

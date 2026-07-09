@@ -48,9 +48,11 @@
 - [ ] 실기기에서 오전 10시 알림 실제 수신 확인 — 이 세션에서는 대상 기기가 없어 미수행
 
 ### 6. 언어 추가
+- [x] 코드 인프라 준비 완료 — `QuoteRepository`가 `parseQuotes(json)`을 별도 순수 함수로 분리해 asset 없이도 테스트 가능(`QuoteRepositoryTest`), 개별 항목이 깨져 있어도 해당 항목만 건너뛰고 전체 언어 로딩은 실패하지 않음, asset 자체가 없거나 못 열리면 기본 언어(영어)로 자동 폴백
+- [ ] **실제 콘텐츠는 미착수** — 언어권 원어 명언은 LLM이 임의로 생성하면 실존 인물 오귀속 위험이 있어 별도로 데이터를 수집/검증해야 함(직접 준비하거나 다음 세션에서 출처와 함께 진행)
 - 순서: 일본어 → 스페인어 → 인도네시아어 → 포르투갈어(브라질)
 - 번역이 아닌 각 언어권 원어 명언 수집 (품질)
-- 작업: assets에 JSON 추가 → `QuoteRepository.LANGUAGE_FILES`에 항목 추가 → `pref.xml` 언어 목록 추가
+- 작업: assets에 JSON 추가 → `QuoteRepository.LANGUAGE_FILES`에 새 인덱스로 항목 추가(기존 인덱스 재배치 금지 — `language` 값이 SharedPreferences에 정수로 영속됨) → `pref.xml`/`strings.xml`의 `languageCategory` 배열 끝에 추가
 - JSON 형식: `[{ "id": 1, "quote": "...", "writer": "- ..." }]`
 - 언어 추가 시 스토어 페이지도 해당 언어로 현지화 등록
 
@@ -58,6 +60,7 @@
 - 현재: 한국어 241개 / 영어 236개
 - Quotable API 등 오픈 데이터셋 활용 (퍼블릭 도메인/CC 라이선스 확인)
 - 목표: 언어당 1,000개 이상
+- [ ] **미착수** — 6번과 동일한 이유로 실제 데이터 수집은 이번 세션 범위 밖. `QuoteRepository.parseQuotes`가 대량 데이터의 개별 오류를 허용하도록 이미 대비되어 있어, 데이터만 준비되면 asset 교체만으로 반영 가능
 
 ### 8. 배경 커스텀
 - 그라데이션 프리셋: 기존 20색 2개 조합 → `GradientDrawable`, 15~20개 프리셋
