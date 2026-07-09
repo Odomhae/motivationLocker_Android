@@ -1,6 +1,7 @@
 package com.odom.motivationlocker
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.drawable.GradientDrawable
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
@@ -29,6 +30,11 @@ class GradientSelectorDialogPreference @JvmOverloads constructor(
         dialog.selectedPresetIndex = presetIndex
         dialog.onDialogGradientClickListener = this
         dialog.show((context as androidx.fragment.app.FragmentActivity).supportFragmentManager, "gradientPicker")
+    }
+
+    // pref.xml의 android:defaultValue="0"을 올바르게 읽기 위해 오버라이드(관례상 명시적으로 통일).
+    override fun onGetDefaultValue(a: TypedArray, index: Int): Any {
+        return a.getInt(index, 0)
     }
 
     override fun onSetInitialValue(defaultValue: Any?) {

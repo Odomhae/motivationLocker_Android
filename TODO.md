@@ -75,6 +75,30 @@
 - 크기 2종: 2x2 카드, 4x2 가로
 - WorkManager로 주기 갱신, 탭 시 앱 실행
 - `QuoteRepository` 재사용
+- 사용자 요청으로 이번 범위에서 제외됨 (별도 진행 필요)
+
+### 11. 설정 화면 디자인 모더나이제이션 (TODO 원안에는 없던 추가 항목)
+- [x] `com.google.android.material:material:1.12.0` 의존성 추가
+- [x] `AppTheme` parent를 `Theme.AppCompat.Light.DarkActionBar` → `Theme.Material3.Light.NoActionBar`로 전환 (다크 모드는 추가하지 않음 — 사용자 확정 사항, `.DayNight.` 변형 아닌 `.Light.` 명시 사용)
+- [x] 설정 화면 전용 Material 3 색상 팔레트 추가(`colors.xml`의 `settings*` 항목) — 배경/글자색 피커용 기존 20색과는 분리
+- [x] `activity_main.xml`의 손으로 그린 회색 타이틀바+구분선을 `MaterialToolbar`로 교체, `preferenceContent`에 서피스 색상/여백 적용
+- [x] `MainActivity`에서 중복되던 상태바 색상 하드코딩 정리, `setSupportActionBar(binding.toolbar)` 연결
+- 범위는 설정 화면(`MainActivity`)로 한정 — 잠금화면(`MotivationLockerActivity`)은 배경/글자색을 사용자가 직접 고르는 구조라 테마 변경의 영향을 받지 않음, 색상/그라데이션 선택 다이얼로그(`ColorSelectorDialog`/`GradientSelectorDialog`)도 이번 범위 밖
+- [ ] 실기기에서 툴바 색상/엘리베이션, 프리퍼런스 리스트 여백 등 실제 렌더링 확인 — 이 세션에서는 대상 기기가 없어 미수행
+
+### 12. 색상/그라데이션 선택 다이얼로그 체크 표시 + 초기 기본값 버그 수정 (TODO 원안에는 없던 추가 항목)
+- [x] `ColorSelectorDialogPreference`에 `onGetDefaultValue` 오버라이드 추가 — 이게 없어서 `textColorCategory`(기본값 검정)가 최초 실행 시 항상 흰색으로 잘못 초기화되던 버그 수정
+- [x] 하드코딩된 hex 문자열 왕복(일부 색상이 `colors.xml`과 불일치했음, 예 `colorRed`)을 제거하고 `ContextCompat.getColor()`로 직접 리소스 색상 해석하도록 변경. 20색 전체에 대해 정확한 역매핑(현재 색 → 팔레트 인덱스) 가능해짐 — 기존엔 5색만 매핑되어 있어 나머지는 항상 흰색으로 오판정되던 버그도 같이 해결됨
+- [x] `ColorSelectorDialog`에 주석 처리돼 있던 선택 체크 아이콘(`ic_selected_white`/`ic_selected_black`) 로직 복원
+- [x] `GradientSelectorDialog`/`GradientSelectorDialogPreference`에도 동일한 체크 표시 + `onGetDefaultValue` 적용(일관성)
+- [ ] 실기기에서 체크 아이콘 실제 렌더링 확인 — 이 세션에서는 대상 기기가 없어 미수행
+
+### 13. 뒤로가기 → 배너 광고 포함 종료 확인 다이얼로그 (TODO 원안에는 없던 추가 항목)
+- [x] 기존 "2초 내 두 번 눌러야 종료"(Toast) 패턴 제거
+- [x] 뒤로가기 1회 시 `AlertDialog`로 종료 확인(`exit_confirm_message` + 종료/취소 버튼) 표시, 다이얼로그 안에 미리 로드해 둔 배너 광고(`AdSize.BANNER`) 노출
+- [x] 배너 광고는 `onStart()`에서 미리 `loadAd()`해 둬서 다이얼로그가 뜰 때 바로 보이도록 함(`exitAdView`), 여러 번 열어도 안전하도록 이전 부모에서 제거 후 재부착
+- [x] 리뷰 요청(`reviewApp()`)은 실제 종료를 확정한 시점 한 곳으로 통일(기존엔 첫 번째 누름에서도 매번 시도하던 것 정리)
+- [ ] 실기기에서 다이얼로그 내 배너 광고 실제 표시 확인 — 이 세션에서는 대상 기기가 없어 미수행
 
 ---
 

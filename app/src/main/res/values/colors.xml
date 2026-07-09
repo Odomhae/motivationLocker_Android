@@ -28,4 +28,17 @@
 
     <color name="colorTransparent">@android:color/transparent</color>
 
+    <!-- 설정 화면(MainActivity) 전용 Material 3 팔레트. 위 20색은 배경/글자색 피커 전용이라 건드리지 않음 -->
+    <color name="settingsPrimary">#4A54E1</color>
+    <color name="settingsOnPrimary">#FFFFFF</color>
+    <color name="settingsPrimaryContainer">#E2E1FF</color>
+    <color name="settingsOnPrimaryContainer">#131060</color>
+    <color name="settingsSecondary">#5B5D72</color>
+    <color name="settingsBackground">#FAFAFC</color>
+    <color name="settingsOnBackground">#1B1B1F</color>
+    <color name="settingsSurface">#FAFAFC</color>
+    <color name="settingsOnSurface">#1B1B1F</color>
+    <color name="settingsSurfaceVariant">#E3E1EC</color>
+    <color name="settingsOutline">#C8C6D0</color>
+
 </resources>

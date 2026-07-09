@@ -27,6 +27,10 @@
     <string name="background_photo_not_selected">No photo selected</string>
     <string name="background_photo_selected">Photo selected</string>
 
+    <string name="exit_confirm_message">Exit the app?</string>
+    <string name="exit_confirm_positive">Exit</string>
+    <string name="exit_confirm_negative">Cancel</string>
+
     <string name="backgroundTypeSolid">Solid Color</string>
     <string name="backgroundTypeGradient">Gradient</string>
     <string name="backgroundTypePhoto">Photo</string>

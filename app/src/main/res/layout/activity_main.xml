@@ -7,26 +7,23 @@
     android:orientation="vertical"
     tools:context="com.odom.motivationlocker.MainActivity">
 
-    <TextView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/lockScreen_setting"
-        android:textColor="@color/colorBlack"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:layout_marginVertical="10dp"
-        android:background="@color/colorGray" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/colorBlack"/>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar"
+        app:title="@string/lockScreen_setting"
+        app:titleTextColor="?attr/colorOnPrimary" />
 
     <FrameLayout
         android:id="@+id/preferenceContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:background="?attr/colorSurface"
+        android:paddingTop="8dp"
         android:addStatesFromChildren="false">
     </FrameLayout>
 

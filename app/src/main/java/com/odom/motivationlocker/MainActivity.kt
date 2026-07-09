@@ -12,10 +12,13 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -34,19 +37,9 @@ import com.odom.motivationlocker.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    // 뒤로가기 2번 종료
-    var backPressTime = 0L
     private val callback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
-            // 뒤로가기 클릭 시 실행시킬 코드
-            if (System.currentTimeMillis() - backPressTime > 2000){
-                backPressTime = System.currentTimeMillis()
-                Toast.makeText(this@MainActivity, "한번 더 누르면 앱이 종료됩니다" , Toast.LENGTH_SHORT).show()
-                reviewApp()
-            } else {
-                reviewApp()
-                finish()
-            }
+            showExitConfirmDialog()
         }
     }
 
@@ -54,6 +47,8 @@ class MainActivity : AppCompatActivity() {
     private val PermissionsCode = 100
     // 광고
     lateinit var mAdView : AdView
+    // 뒤로가기 종료 확인 다이얼로그에 표시할, 미리 로드해 둔 배너 광고
+    private lateinit var exitAdView: AdView
     private val adSize: AdSize
         get() {
             val display = windowManager.defaultDisplay
@@ -71,12 +66,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        window.statusBarColor = resources.getColor(R.color.colorGray)
-        window.setTitleColor(resources.getColor(R.color.colorGray))
+        window.statusBarColor = resources.getColor(R.color.settingsPrimary)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
         val contentView: View = this.findViewById(android.R.id.content)
         ViewCompat.setOnApplyWindowInsetsListener(contentView, object : OnApplyWindowInsetsListener {
@@ -114,6 +109,26 @@ class MainActivity : AppCompatActivity() {
         }
         // POST_NOTIFICATIONS(Android 13+)는 데일리 알림 스위치를 켤 때만 맥락 있게 요청한다.
         // (SettingPreferencesFragment의 dailyNotificationEnabled 리스너 참고)
+    }
+
+    // 뒤로가기 시 미리 로드해 둔 배너 광고가 포함된 종료 확인 다이얼로그 표시
+    private fun showExitConfirmDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_exit_confirm, null)
+        val adContainer = dialogView.findViewById<FrameLayout>(R.id.exitAdContainer)
+
+        // 다이얼로그를 여러 번 열어도 안전하도록, 이전에 붙어 있던 부모가 있으면 먼저 제거
+        (exitAdView.parent as? ViewGroup)?.removeView(exitAdView)
+        adContainer.addView(exitAdView)
+
+        AlertDialog.Builder(this)
+            .setMessage(R.string.exit_confirm_message)
+            .setView(dialogView)
+            .setPositiveButton(R.string.exit_confirm_positive) { _, _ ->
+                reviewApp()
+                finish()
+            }
+            .setNegativeButton(R.string.exit_confirm_negative, null)
+            .show()
     }
 
     //  앱 리뷰
@@ -158,7 +173,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        window.statusBarColor = resources.getColor(R.color.colorGray)
+        window.statusBarColor = resources.getColor(R.color.settingsPrimary)
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         // 배너 광고
@@ -166,6 +181,12 @@ class MainActivity : AppCompatActivity() {
         mAdView = AdView(this)
         binding.adMobView.addView(mAdView)
         loadBanner()
+
+        // 뒤로가기 종료 확인 다이얼로그용 배너 광고를 미리 로드(다이얼로그가 뜰 때 바로 보이도록)
+        exitAdView = AdView(this)
+        exitAdView.adUnitId = resources.getString(R.string.TEST_banner_ad_unit_id)
+        exitAdView.setAdSize(AdSize.BANNER)
+        exitAdView.loadAd(AdRequest.Builder().build())
     }
 
     private fun loadBanner() {

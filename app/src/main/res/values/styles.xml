@@ -1,13 +1,18 @@
 <resources>
 
-    <!-- Base application theme.  -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" >
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="windowNoTitle">true</item>
+    <!-- Base application theme. Material 3, 라이트 전용(다크 모드 미지원). -->
+    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/settingsPrimary</item>
+        <item name="colorOnPrimary">@color/settingsOnPrimary</item>
+        <item name="colorPrimaryContainer">@color/settingsPrimaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/settingsOnPrimaryContainer</item>
+        <item name="colorSecondary">@color/settingsSecondary</item>
+        <item name="android:colorBackground">@color/settingsBackground</item>
+        <item name="colorOnBackground">@color/settingsOnBackground</item>
+        <item name="colorSurface">@color/settingsSurface</item>
+        <item name="colorOnSurface">@color/settingsOnSurface</item>
+        <item name="colorSurfaceVariant">@color/settingsSurfaceVariant</item>
+        <item name="colorOutline">@color/settingsOutline</item>
     </style>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.odom.motivationlocker
 
+import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.Gravity
@@ -72,6 +73,17 @@ class GradientSelectorDialog : DialogFragment(), View.OnClickListener {
                     (imageButton.background as GradientDrawable).apply {
                         orientation = GradientDrawable.Orientation.TL_BR
                         setColors(intArrayOf(startColor, endColor))
+                    }
+
+                    if (selectedPresetIndex == index) {
+                        // 두 색상의 평균 밝기로 체크 아이콘 색 결정
+                        val avgBrightness = (Color.red(startColor) + Color.green(startColor) + Color.blue(startColor) +
+                            Color.red(endColor) + Color.green(endColor) + Color.blue(endColor)) / 2
+                        if (avgBrightness < 384) {
+                            imageButton.setImageResource(R.drawable.ic_selected_white)
+                        } else {
+                            imageButton.setImageResource(R.drawable.ic_selected_black)
+                        }
                     }
                 } else {
                     imageButton.background = null
