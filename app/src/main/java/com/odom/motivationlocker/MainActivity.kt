@@ -185,7 +185,7 @@ class MainActivity : AppCompatActivity() {
         // 뒤로가기 종료 확인 다이얼로그용 배너 광고를 미리 로드(다이얼로그가 뜰 때 바로 보이도록)
         exitAdView = AdView(this)
         exitAdView.adUnitId = resources.getString(R.string.TEST_banner_ad_unit_id)
-        exitAdView.setAdSize(AdSize.BANNER)
+        exitAdView.setAdSize(AdSize.MEDIUM_RECTANGLE)
         exitAdView.loadAd(AdRequest.Builder().build())
     }
 
