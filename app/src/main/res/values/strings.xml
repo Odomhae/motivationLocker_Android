@@ -34,6 +34,13 @@
     <string name="exit_confirm_positive">Exit</string>
     <string name="exit_confirm_negative">Cancel</string>
 
+    <string name="update_force_title">Update Required</string>
+    <string name="update_force_message">Please update to the latest version for a better experience.</string>
+    <string name="update_recommended_title">New Version Available</string>
+    <string name="update_recommended_message">A new version is available. Would you like to update?</string>
+    <string name="update_go_to_store">Go to Store</string>
+    <string name="update_later">Later</string>
+
     <string name="backgroundTypeSolid">Solid Color</string>
     <string name="backgroundTypeGradient">Gradient</string>
     <string name="backgroundTypePhoto">Photo</string>
@@ -47,6 +54,7 @@
 
     <string name="languageKorean">Korean</string>
     <string name="languageEnglish">English</string>
+    <string name="languageFrench">French</string>
 
     <string name="colorWhite">White</string>
     <string name="colorGray">Gray</string>
@@ -79,6 +87,7 @@
     <string-array name="languageCategory">
         <item>@string/languageEnglish</item>
         <item>@string/languageKorean</item>
+        <item>@string/languageFrench</item>
     </string-array>
 
     <string-array name="colorCategory">

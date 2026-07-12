@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="24dp"
+    android:paddingBottom="8dp">
+
+    <!-- 아이콘 원형 배경 -->
+    <FrameLayout
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_update_icon"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_update"
+            android:contentDescription="@null" />
+    </FrameLayout>
+
+    <!-- 제목 -->
+    <TextView
+        android:id="@+id/updateDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:textColor="@color/settingsOnBackground"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:letterSpacing="0.01"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- 본문 -->
+    <TextView
+        android:id="@+id/updateDialogMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.4"
+        android:textColor="@color/settingsSecondary"
+        android:textSize="14sp" />
+
+    <!-- 광고 컨테이너 -->
+    <FrameLayout
+        android:id="@+id/updateAdContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:minHeight="50dp" />
+
+</LinearLayout>

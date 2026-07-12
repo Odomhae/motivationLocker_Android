@@ -14,9 +14,11 @@ object QuoteRepository {
     // 2) 아래 LANGUAGE_FILES에 새 인덱스로 항목 추가 — 기존 인덱스는 재사용/재배치 금지.
     //    "language" 값은 SharedPreferences에 정수로 영속되므로 순서가 바뀌면 기존 사용자 설정이 깨진다.
     // 3) res/values/strings.xml(및 values-ko-rKR 등)의 languageCategory 배열 끝에 항목 추가
+    // 4) RemoteConfigManager.LANGUAGE_CONFIG_KEYS에도 같은 인덱스로 Remote Config 키 추가
     private val LANGUAGE_FILES = mapOf(
         0 to "English.json",
-        1 to "korean.json"
+        1 to "korean.json",
+        2 to "French.json"
     )
 
     private const val DEFAULT_LANGUAGE = 0

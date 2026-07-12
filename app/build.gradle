@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'org.jetbrains.kotlin.android'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     namespace "com.odom.motivationlocker"
     compileSdkVersion 35
@@ -65,4 +67,8 @@ dependencies {
 
     // 사진 배경의 EXIF 회전 정보를 content:// URI에서도 안정적으로 읽기 위함
     implementation 'androidx.exifinterface:exifinterface:1.3.7'
+
+    // Firebase Remote Config (앱 버전 체크 및 강제/권장 업데이트)
+    implementation platform('com.google.firebase:firebase-bom:33.7.0')
+    implementation 'com.google.firebase:firebase-config-ktx'
 }

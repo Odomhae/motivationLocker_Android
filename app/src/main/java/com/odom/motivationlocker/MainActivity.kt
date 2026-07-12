@@ -19,6 +19,8 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import android.widget.TextView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -33,6 +35,7 @@ import com.google.android.gms.tasks.Task
 import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.odom.motivationlocker.databinding.ActivityMainBinding
+import androidx.core.net.toUri
 
 
 class MainActivity : AppCompatActivity() {
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var mAdView : AdView
     // 뒤로가기 종료 확인 다이얼로그에 표시할, 미리 로드해 둔 배너 광고
     private lateinit var exitAdView: AdView
+    private lateinit var updateAdView: AdView
     private val adSize: AdSize
         get() {
             val display = windowManager.defaultDisplay
@@ -98,6 +102,8 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.preferenceContent, SettingPreferencesFragment()).commit()
 
         checkPermission()
+
+        checkAppUpdate()
     }
 
     private fun checkPermission() {
@@ -109,6 +115,73 @@ class MainActivity : AppCompatActivity() {
         }
         // POST_NOTIFICATIONS(Android 13+)는 데일리 알림 스위치를 켤 때만 맥락 있게 요청한다.
         // (SettingPreferencesFragment의 dailyNotificationEnabled 리스너 참고)
+    }
+
+    private fun checkAppUpdate() {
+        val versionCode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            packageManager.getPackageInfo(packageName, 0).longVersionCode
+        } else {
+            @Suppress("DEPRECATION")
+            packageManager.getPackageInfo(packageName, 0).versionCode.toLong()
+        }
+        RemoteConfigManager.checkForUpdate(versionCode) { status ->
+            runOnUiThread {
+                when (status) {
+                    RemoteConfigManager.UpdateStatus.ForceUpdate -> showForceUpdateDialog()
+                    RemoteConfigManager.UpdateStatus.RecommendedUpdate -> showRecommendedUpdateDialog()
+                    RemoteConfigManager.UpdateStatus.UpToDate -> Unit
+                }
+            }
+        }
+    }
+
+    private fun buildUpdateDialogView(title: String, message: String): android.view.View {
+        val view = layoutInflater.inflate(R.layout.dialog_update, null)
+        view.findViewById<TextView>(R.id.updateDialogTitle).text = title
+        view.findViewById<TextView>(R.id.updateDialogMessage).text = message
+        val adContainer = view.findViewById<FrameLayout>(R.id.updateAdContainer)
+        (updateAdView.parent as? ViewGroup)?.removeView(updateAdView)
+        adContainer.addView(updateAdView)
+        return view
+    }
+
+    private fun showForceUpdateDialog() {
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setView(buildUpdateDialogView(
+                getString(R.string.update_force_title),
+                getString(R.string.update_force_message)
+            ))
+            .setPositiveButton(getString(R.string.update_go_to_store)) { _, _ -> openPlayStore() }
+            .setCancelable(false)
+            .show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).apply {
+            setTextColor(ContextCompat.getColor(context, R.color.colorRed))
+            typeface = android.graphics.Typeface.DEFAULT_BOLD
+        }
+    }
+
+    private fun showRecommendedUpdateDialog() {
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setView(buildUpdateDialogView(
+                getString(R.string.update_recommended_title),
+                getString(R.string.update_recommended_message)
+            ))
+            .setPositiveButton(getString(R.string.update_go_to_store)) { _, _ -> openPlayStore() }
+            .setNegativeButton(getString(R.string.update_later), null)
+            .show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).apply {
+            setTextColor(ContextCompat.getColor(context, R.color.colorRed))
+            typeface = android.graphics.Typeface.DEFAULT_BOLD
+        }
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).apply {
+            setTextColor(ContextCompat.getColor(context, R.color.settingsSecondary))
+        }
+    }
+
+    private fun openPlayStore() {
+        val intent = Intent(Intent.ACTION_VIEW,
+            "https://play.google.com/store/apps/details?id=$packageName".toUri())
+        startActivity(intent)
     }
 
     // 뒤로가기 시 미리 로드해 둔 배너 광고가 포함된 종료 확인 다이얼로그 표시
@@ -187,6 +260,12 @@ class MainActivity : AppCompatActivity() {
         exitAdView.adUnitId = resources.getString(R.string.TEST_banner_ad_unit_id)
         exitAdView.setAdSize(AdSize.MEDIUM_RECTANGLE)
         exitAdView.loadAd(AdRequest.Builder().build())
+
+        // 업데이트 다이얼로그용 배너 광고 미리 로드
+        updateAdView = AdView(this)
+        updateAdView.adUnitId = resources.getString(R.string.TEST_banner_ad_unit_id)
+        updateAdView.setAdSize(AdSize.MEDIUM_RECTANGLE)
+        updateAdView.loadAd(AdRequest.Builder().build())
     }
 
     private fun loadBanner() {

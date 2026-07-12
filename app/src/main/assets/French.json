@@ -1,0 +1,127 @@
+  [
+  {
+    "id": 1,
+    "quote": "Aimer,\nc'est agir.",
+    "writer": "- Victor Hugo"
+  },
+  {
+    "id": 2,
+    "quote": "Au milieu de l'hiver,\nj'ai découvert en moi\nun invincible été.",
+    "writer": "- Albert Camus"
+  },
+  {
+    "id": 3,
+    "quote": "Le cœur a ses raisons\nque la raison\nne connaît point.",
+    "writer": "- Blaise Pascal"
+  },
+  {
+    "id": 4,
+    "quote": "On ne voit bien\nqu'avec le cœur.\nL'essentiel est invisible\npour les yeux.",
+    "writer": "- Antoine de Saint-Exupéry"
+  },
+  {
+    "id": 5,
+    "quote": "Je pense,\ndonc je suis.",
+    "writer": "- René Descartes"
+  },
+  {
+    "id": 6,
+    "quote": "Il n'y a qu'un héroïsme\nau monde :\nc'est de voir le monde\ntel qu'il est,\net de l'aimer.",
+    "writer": "- Romain Rolland"
+  },
+  {
+    "id": 7,
+    "quote": "Impossible\nn'est pas français.",
+    "writer": "- Napoléon Bonaparte"
+  },
+  {
+    "id": 8,
+    "quote": "Le véritable voyage de découverte\nne consiste pas à chercher\nde nouveaux paysages,\nmais à avoir de nouveaux yeux.",
+    "writer": "- Marcel Proust"
+  },
+  {
+    "id": 9,
+    "quote": "Aide-toi,\nle ciel t'aidera.",
+    "writer": "- Jean de La Fontaine"
+  },
+  {
+    "id": 10,
+    "quote": "La vie est courte,\nl'art est long,\nl'occasion fugitive,\nl'expérience trompeuse.",
+    "writer": "- Hippocrate (trad. française)"
+  },
+  {
+    "id": 11,
+    "quote": "Ce que nous savons\nest une goutte d'eau ;\nce que nous ignorons\nest un océan.",
+    "writer": "- Isaac Newton (trad. française)"
+  },
+  {
+    "id": 12,
+    "quote": "L'optimisme est la foi\nqui mène à l'accomplissement ;\nrien ne peut être fait\nsans espoir et confiance.",
+    "writer": "- Helen Keller (trad. française)"
+  },
+  {
+    "id": 13,
+    "quote": "La vie, c'est comme\nune bicyclette,\nil faut avancer\npour ne pas perdre\nl'équilibre.",
+    "writer": "- Albert Einstein (trad. française)"
+  },
+  {
+    "id": 14,
+    "quote": "Connais-toi toi-même.",
+    "writer": "- Socrate (trad. française)"
+  },
+  {
+    "id": 15,
+    "quote": "Celui qui déplace des montagnes\ncommence par enlever\nde petites pierres.",
+    "writer": "- Confucius (trad. française)"
+  },
+  {
+    "id": 16,
+    "quote": "La seule façon de faire\ndu bon travail\nest d'aimer\nce que vous faites.",
+    "writer": "- Steve Jobs (trad. française)"
+  },
+  {
+    "id": 17,
+    "quote": "Le courage,\nc'est de chercher la vérité\net de la dire.",
+    "writer": "- Jean Jaurès"
+  },
+  {
+    "id": 18,
+    "quote": "Il faut toujours viser la lune,\ncar même en cas d'échec,\non atterrit dans les étoiles.",
+    "writer": "- Oscar Wilde (trad. française)"
+  },
+  {
+    "id": 19,
+    "quote": "Le bonheur\nn'est pas quelque chose\nque vous remettez à plus tard,\nmais quelque chose\nque vous concevez\ndans le présent.",
+    "writer": "- Jim Rohn (trad. française)"
+  },
+  {
+    "id": 20,
+    "quote": "Soyez le changement\nque vous voulez voir\ndans le monde.",
+    "writer": "- Mahatma Gandhi (trad. française)"
+  },
+  {
+    "id": 21,
+    "quote": "Dans le milieu de la difficulté\nse trouve l'opportunité.",
+    "writer": "- Albert Einstein (trad. française)"
+  },
+  {
+    "id": 22,
+    "quote": "Ce n'est pas parce que\nles choses sont difficiles\nque nous n'osons pas,\nc'est parce que\nnous n'osons pas\nqu'elles sont difficiles.",
+    "writer": "- Sénèque (trad. française)"
+  },
+  {
+    "id": 23,
+    "quote": "Notre plus grande gloire\nn'est pas de ne jamais tomber,\nmais de nous relever\nà chaque fois\nque nous tombons.",
+    "writer": "- Confucius (trad. française)"
+  },
+  {
+    "id": 24,
+    "quote": "Le secret du succès\nest la constance\ndans le but.",
+    "writer": "- Benjamin Disraeli (trad. française)"
+  },
+  {
+    "id": 25,
+    "quote": "Tout ce que l'esprit\nde l'homme peut concevoir\net croire,\nil peut l'accomplir.",
+    "writer": "- Napoleon Hill (trad. française)"
+  }
+]

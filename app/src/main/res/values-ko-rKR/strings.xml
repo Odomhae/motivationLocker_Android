@@ -19,6 +19,7 @@
 
     <string name="languageEnglish">영어</string>
     <string name="languageKorean">한국어</string>
+    <string name="languageFrench">프랑스어</string>
 
     <string name="lockScreen_setting">잠금화면 설정</string>
     <string name="app_activation">앱 활성화</string>
@@ -40,6 +41,13 @@
     <string name="exit_confirm_message">앱을 종료하시겠습니까?</string>
     <string name="exit_confirm_positive">종료</string>
     <string name="exit_confirm_negative">취소</string>
+
+    <string name="update_force_title">업데이트 필요</string>
+    <string name="update_force_message">더 나은 서비스를 위해 최신 버전으로 업데이트해 주세요.</string>
+    <string name="update_recommended_title">새 버전 출시</string>
+    <string name="update_recommended_message">새 버전이 출시되었습니다. 업데이트하시겠습니까?</string>
+    <string name="update_go_to_store">스토어로 이동</string>
+    <string name="update_later">나중에</string>
 
     <string name="backgroundTypeSolid">단색</string>
     <string name="backgroundTypeGradient">그라데이션</string>

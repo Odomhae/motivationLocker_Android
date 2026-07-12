@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "776469917159",
+    "project_id": "motivation-locker-431f7",
+    "storage_bucket": "motivation-locker-431f7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776469917159:android:649d55b21f332ad5dd6142",
+        "android_client_info": {
+          "package_name": "com.odom.motivationlocker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2TQEy7Tu0i9wXFypdV9TnS_AAB3Ctq3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
