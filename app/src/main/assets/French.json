@@ -1,4 +1,4 @@
-  [
+[
   {
     "id": 1,
     "quote": "Aimer,\nc'est agir.",
@@ -123,5 +123,880 @@
     "id": 25,
     "quote": "Tout ce que l'esprit\nde l'homme peut concevoir\net croire,\nil peut l'accomplir.",
     "writer": "- Napoleon Hill (trad. française)"
+  },
+  {
+    "id": 26,
+    "quote": "Il faut cultiver\nnotre jardin.",
+    "writer": "- Voltaire"
+  },
+  {
+    "id": 27,
+    "quote": "Le doute n'est pas\nun état agréable,\nmais la certitude\nest absurde.",
+    "writer": "- Voltaire"
+  },
+  {
+    "id": 28,
+    "quote": "J'ai décidé d'être heureux\nparce que c'est bon\npour la santé.",
+    "writer": "- Voltaire"
+  },
+  {
+    "id": 29,
+    "quote": "Le travail éloigne de nous\ntrois grands maux :\nl'ennui, le vice\net le besoin.",
+    "writer": "- Voltaire"
+  },
+  {
+    "id": 30,
+    "quote": "L'homme n'est qu'un roseau,\nle plus faible de la nature,\nmais c'est\nun roseau pensant.",
+    "writer": "- Blaise Pascal"
+  },
+  {
+    "id": 31,
+    "quote": "L'homme est né libre,\net partout\nil est dans les fers.",
+    "writer": "- Jean-Jacques Rousseau"
+  },
+  {
+    "id": 32,
+    "quote": "La patience est amère,\nmais son fruit\nest doux.",
+    "writer": "- Jean-Jacques Rousseau"
+  },
+  {
+    "id": 33,
+    "quote": "Ceux qui vivent,\nce sont ceux\nqui luttent.",
+    "writer": "- Victor Hugo"
+  },
+  {
+    "id": 34,
+    "quote": "Le rire, c'est le soleil ;\nil chasse l'hiver\ndu visage humain.",
+    "writer": "- Victor Hugo"
+  },
+  {
+    "id": 35,
+    "quote": "La musique exprime\nce qui ne peut être dit\net sur quoi il est impossible\nde rester silencieux.",
+    "writer": "- Victor Hugo"
+  },
+  {
+    "id": 36,
+    "quote": "Savoir, penser, rêver.\nTout est là.",
+    "writer": "- Victor Hugo"
+  },
+  {
+    "id": 37,
+    "quote": "La mélancolie,\nc'est le bonheur\nd'être triste.",
+    "writer": "- Victor Hugo"
+  },
+  {
+    "id": 38,
+    "quote": "Il n'y a pas de honte\nà préférer\nle bonheur.",
+    "writer": "- Albert Camus"
+  },
+  {
+    "id": 39,
+    "quote": "La vraie générosité\nenvers l'avenir consiste\nà tout donner\nau présent.",
+    "writer": "- Albert Camus"
+  },
+  {
+    "id": 40,
+    "quote": "L'automne est\nun deuxième printemps\noù chaque feuille\nest une fleur.",
+    "writer": "- Albert Camus"
+  },
+  {
+    "id": 41,
+    "quote": "L'homme est condamné\nà être libre.",
+    "writer": "- Jean-Paul Sartre"
+  },
+  {
+    "id": 42,
+    "quote": "L'existence\nprécède l'essence.",
+    "writer": "- Jean-Paul Sartre"
+  },
+  {
+    "id": 43,
+    "quote": "On ne naît pas femme :\non le devient.",
+    "writer": "- Simone de Beauvoir"
+  },
+  {
+    "id": 44,
+    "quote": "Se vouloir libre,\nc'est aussi vouloir\nles autres libres.",
+    "writer": "- Simone de Beauvoir"
+  },
+  {
+    "id": 45,
+    "quote": "Soyons reconnaissants\naux personnes\nqui nous donnent du bonheur ;\nelles sont les charmants jardiniers\npar qui nos âmes\nsont fleuries.",
+    "writer": "- Marcel Proust"
+  },
+  {
+    "id": 46,
+    "quote": "On ne découvre pas\nde terre nouvelle\nsans consentir à perdre de vue,\nd'abord et longtemps,\ntout rivage.",
+    "writer": "- André Gide"
+  },
+  {
+    "id": 47,
+    "quote": "Choisir,\nc'est renoncer.",
+    "writer": "- André Gide"
+  },
+  {
+    "id": 48,
+    "quote": "La culture ne s'hérite pas,\nelle se conquiert.",
+    "writer": "- André Malraux"
+  },
+  {
+    "id": 49,
+    "quote": "Le vent se lève,\nil faut tenter\nde vivre.",
+    "writer": "- Paul Valéry"
+  },
+  {
+    "id": 50,
+    "quote": "Pour accomplir de grandes choses,\nil ne suffit pas d'agir,\nil faut rêver ;\nil ne suffit pas de calculer,\nil faut croire.",
+    "writer": "- Anatole France"
+  },
+  {
+    "id": 51,
+    "quote": "Fais de ta vie un rêve,\net d'un rêve,\nune réalité.",
+    "writer": "- Antoine de Saint-Exupéry"
+  },
+  {
+    "id": 52,
+    "quote": "Aimer, ce n'est pas\nse regarder l'un l'autre,\nc'est regarder ensemble\ndans la même direction.",
+    "writer": "- Antoine de Saint-Exupéry"
+  },
+  {
+    "id": 53,
+    "quote": "L'avenir, tu n'as point\nà le prévoir,\nmais à le permettre.",
+    "writer": "- Antoine de Saint-Exupéry"
+  },
+  {
+    "id": 54,
+    "quote": "La mode se démode,\nle style jamais.",
+    "writer": "- Coco Chanel"
+  },
+  {
+    "id": 55,
+    "quote": "Pour être irremplaçable,\nil faut être\ndifférente.",
+    "writer": "- Coco Chanel"
+  },
+  {
+    "id": 56,
+    "quote": "Il n'y a qu'un bonheur\ndans la vie,\nc'est d'aimer\net d'être aimé.",
+    "writer": "- George Sand"
+  },
+  {
+    "id": 57,
+    "quote": "La beauté n'est que\nla promesse\ndu bonheur.",
+    "writer": "- Stendhal"
+  },
+  {
+    "id": 58,
+    "quote": "La résignation est\nun suicide quotidien.",
+    "writer": "- Honoré de Balzac"
+  },
+  {
+    "id": 59,
+    "quote": "Le succès est\nune conséquence\net non un but.",
+    "writer": "- Gustave Flaubert"
+  },
+  {
+    "id": 60,
+    "quote": "Il n'y a pour l'homme\nque trois événements :\nnaître, vivre\net mourir.",
+    "writer": "- Jean de La Bruyère"
+  },
+  {
+    "id": 61,
+    "quote": "La plus perdue\nde toutes les journées\nest celle où l'on\nn'a pas ri.",
+    "writer": "- Nicolas de Chamfort"
+  },
+  {
+    "id": 62,
+    "quote": "Les grandes pensées\nviennent du cœur.",
+    "writer": "- Vauvenargues"
+  },
+  {
+    "id": 63,
+    "quote": "Le pessimisme est d'humeur ;\nl'optimisme\nest de volonté.",
+    "writer": "- Alain"
+  },
+  {
+    "id": 64,
+    "quote": "Il faut agir\nen homme de pensée\net penser\nen homme d'action.",
+    "writer": "- Henri Bergson"
+  },
+  {
+    "id": 65,
+    "quote": "Ils ne savaient pas\nque c'était impossible,\nalors ils l'ont fait.",
+    "writer": "- Jean Cocteau (attribué)"
+  },
+  {
+    "id": 66,
+    "quote": "Plus grand est l'obstacle,\nplus grande est la gloire\nde le surmonter.",
+    "writer": "- Molière"
+  },
+  {
+    "id": 67,
+    "quote": "Il faut manger pour vivre\net non pas vivre\npour manger.",
+    "writer": "- Molière"
+  },
+  {
+    "id": 68,
+    "quote": "À vaincre sans péril,\non triomphe\nsans gloire.",
+    "writer": "- Pierre Corneille"
+  },
+  {
+    "id": 69,
+    "quote": "Patience et longueur de temps\nfont plus que force\nni que rage.",
+    "writer": "- Jean de La Fontaine"
+  },
+  {
+    "id": 70,
+    "quote": "Rien ne sert de courir,\nil faut partir\nà point.",
+    "writer": "- Jean de La Fontaine"
+  },
+  {
+    "id": 71,
+    "quote": "Je me presse\nde rire de tout,\nde peur d'être obligé\nd'en pleurer.",
+    "writer": "- Beaumarchais"
+  },
+  {
+    "id": 72,
+    "quote": "Les moments de crise\nproduisent un redoublement\nde vie chez l'homme.",
+    "writer": "- Chateaubriand"
+  },
+  {
+    "id": 73,
+    "quote": "Le génie\nn'a pas de sexe.",
+    "writer": "- Madame de Staël (attribué)"
+  },
+  {
+    "id": 74,
+    "quote": "Il faut toujours dire\nce que l'on voit ;\nsurtout il faut toujours voir\nce que l'on voit.",
+    "writer": "- Charles Péguy"
+  },
+  {
+    "id": 75,
+    "quote": "Il n'y a pas de hasard,\nil n'y a que\ndes rendez-vous.",
+    "writer": "- Paul Éluard"
+  },
+  {
+    "id": 76,
+    "quote": "La femme est\nl'avenir de l'homme.",
+    "writer": "- Louis Aragon"
+  },
+  {
+    "id": 77,
+    "quote": "Il est grand temps\nde rallumer\nles étoiles.",
+    "writer": "- Guillaume Apollinaire"
+  },
+  {
+    "id": 78,
+    "quote": "Il faut être\nabsolument moderne.",
+    "writer": "- Arthur Rimbaud"
+  },
+  {
+    "id": 79,
+    "quote": "La victoire appartient\nau plus persévérant.",
+    "writer": "- Napoléon Bonaparte"
+  },
+  {
+    "id": 80,
+    "quote": "La difficulté attire\nl'homme de caractère,\ncar c'est en l'étreignant\nqu'il se réalise.",
+    "writer": "- Charles de Gaulle"
+  },
+  {
+    "id": 81,
+    "quote": "La chance ne sourit\nqu'aux esprits\nbien préparés.",
+    "writer": "- Louis Pasteur"
+  },
+  {
+    "id": 82,
+    "quote": "Dans la vie,\nrien n'est à craindre,\ntout est à comprendre.",
+    "writer": "- Marie Curie"
+  },
+  {
+    "id": 83,
+    "quote": "Il ne suffit pas\nd'avoir l'esprit bon,\nl'essentiel est\nde l'appliquer bien.",
+    "writer": "- René Descartes"
+  },
+  {
+    "id": 84,
+    "quote": "Il n'y a qu'une passion,\nla passion\ndu bonheur.",
+    "writer": "- Denis Diderot"
+  },
+  {
+    "id": 85,
+    "quote": "Il faut avoir\nbeaucoup étudié\npour savoir peu.",
+    "writer": "- Montesquieu"
+  },
+  {
+    "id": 86,
+    "quote": "Un seul être vous manque,\net tout\nest dépeuplé.",
+    "writer": "- Alphonse de Lamartine"
+  },
+  {
+    "id": 87,
+    "quote": "L'artiste n'est rien\nsans le don,\nmais le don n'est rien\nsans le travail.",
+    "writer": "- Émile Zola"
+  },
+  {
+    "id": 88,
+    "quote": "Il ne faut pas dire\ntoute la vérité,\nmais il ne faut dire\nque la vérité.",
+    "writer": "- Jules Renard"
+  },
+  {
+    "id": 89,
+    "quote": "L'avenir est quelque chose\nqui se surmonte.\nOn ne subit pas l'avenir,\non le fait.",
+    "writer": "- Georges Bernanos"
+  },
+  {
+    "id": 90,
+    "quote": "Impose ta chance,\nserre ton bonheur\net va vers ton risque.",
+    "writer": "- René Char"
+  },
+  {
+    "id": 91,
+    "quote": "Les gens qui ne rient jamais\nne sont pas\ndes gens sérieux.",
+    "writer": "- Sacha Guitry"
+  },
+  {
+    "id": 92,
+    "quote": "De l'audace,\nencore de l'audace,\ntoujours de l'audace.",
+    "writer": "- Georges Danton"
+  },
+  {
+    "id": 93,
+    "quote": "Un sourire coûte moins cher\nque l'électricité,\nmais donne autant\nde lumière.",
+    "writer": "- Abbé Pierre"
+  },
+  {
+    "id": 94,
+    "quote": "L'attention est\nla forme la plus rare\net la plus pure\nde la générosité.",
+    "writer": "- Simone Weil"
+  },
+  {
+    "id": 95,
+    "quote": "Ce qui n'est pas clair\nn'est pas français.",
+    "writer": "- Antoine de Rivarol"
+  },
+  {
+    "id": 96,
+    "quote": "Ce que l'on conçoit bien\ns'énonce clairement,\net les mots pour le dire\narrivent aisément.",
+    "writer": "- Nicolas Boileau"
+  },
+  {
+    "id": 97,
+    "quote": "Le but de la discussion\nne doit pas être la victoire,\nmais l'amélioration.",
+    "writer": "- Joseph Joubert"
+  },
+  {
+    "id": 98,
+    "quote": "Science sans conscience\nn'est que ruine\nde l'âme.",
+    "writer": "- François Rabelais"
+  },
+  {
+    "id": 99,
+    "quote": "Cueillez dès aujourd'hui\nles roses\nde la vie.",
+    "writer": "- Pierre de Ronsard"
+  },
+  {
+    "id": 100,
+    "quote": "La plus grande chose\ndu monde,\nc'est de savoir\nêtre à soi.",
+    "writer": "- Michel de Montaigne"
+  },
+  {
+    "id": 101,
+    "quote": "L'hypocrisie est un hommage\nque le vice rend\nà la vertu.",
+    "writer": "- La Rochefoucauld"
+  },
+  {
+    "id": 102,
+    "quote": "Nous avons tous\nassez de force\npour supporter\nles maux d'autrui.",
+    "writer": "- La Rochefoucauld"
+  },
+  {
+    "id": 103,
+    "quote": "Le silence éternel\nde ces espaces infinis\nm'effraie.",
+    "writer": "- Blaise Pascal"
+  },
+  {
+    "id": 104,
+    "quote": "L'avenir a plusieurs noms.\nPour les faibles, il est l'impossible.\nPour les timides, il est l'inconnu.\nPour les vaillants,\nil est l'idéal.",
+    "writer": "- Victor Hugo"
+  },
+  {
+    "id": 105,
+    "quote": "Rien n'est plus puissant\nqu'une idée\ndont l'heure est venue.",
+    "writer": "- Victor Hugo (attribué)"
+  },
+  {
+    "id": 106,
+    "quote": "Il faut être toujours ivre :\nde vin, de poésie\nou de vertu,\nà votre guise.",
+    "writer": "- Charles Baudelaire"
+  },
+  {
+    "id": 107,
+    "quote": "Le seul vrai langage\nau monde\nest un baiser.",
+    "writer": "- Alfred de Musset"
+  },
+  {
+    "id": 108,
+    "quote": "La parfaite valeur est\nde faire sans témoin\nce qu'on serait capable de faire\ndevant tout le monde.",
+    "writer": "- La Rochefoucauld"
+  },
+  {
+    "id": 109,
+    "quote": "On ne peut donner\nque deux choses à ses enfants :\ndes racines\net des ailes.",
+    "writer": "- Proverbe (souvent cité en France)"
+  },
+  {
+    "id": 110,
+    "quote": "Petit à petit,\nl'oiseau fait\nson nid.",
+    "writer": "- Proverbe français"
+  },
+  {
+    "id": 111,
+    "quote": "Vouloir,\nc'est pouvoir.",
+    "writer": "- Proverbe français"
+  },
+  {
+    "id": 112,
+    "quote": "Après la pluie,\nle beau temps.",
+    "writer": "- Proverbe français"
+  },
+  {
+    "id": 113,
+    "quote": "Qui ne tente rien\nn'a rien.",
+    "writer": "- Proverbe français"
+  },
+  {
+    "id": 114,
+    "quote": "Il n'est jamais trop tard\npour bien faire.",
+    "writer": "- Proverbe français"
+  },
+  {
+    "id": 115,
+    "quote": "C'est en forgeant\nqu'on devient forgeron.",
+    "writer": "- Proverbe français"
+  },
+  {
+    "id": 116,
+    "quote": "Rome ne s'est pas faite\nen un jour.",
+    "writer": "- Proverbe français"
+  },
+  {
+    "id": 117,
+    "quote": "Mieux vaut tard\nque jamais.",
+    "writer": "- Proverbe français"
+  },
+  {
+    "id": 118,
+    "quote": "L'habit ne fait pas\nle moine.",
+    "writer": "- Proverbe français"
+  },
+  {
+    "id": 119,
+    "quote": "À cœur vaillant,\nrien d'impossible.",
+    "writer": "- Jacques Cœur (devise)"
+  },
+  {
+    "id": 120,
+    "quote": "Chaque homme doit inventer\nson chemin.",
+    "writer": "- Jean-Paul Sartre"
+  },
+  {
+    "id": 121,
+    "quote": "Le bonheur est parfois caché\ndans l'inconnu.",
+    "writer": "- Victor Hugo"
+  },
+  {
+    "id": 122,
+    "quote": "Aimer, c'est vivre ;\naimer, c'est voir ;\naimer, c'est être.",
+    "writer": "- Victor Hugo"
+  },
+  {
+    "id": 123,
+    "quote": "On passe une moitié\nde sa vie\nà attendre ceux qu'on aimera\net l'autre moitié\nà quitter ceux qu'on aime.",
+    "writer": "- Victor Hugo"
+  },
+  {
+    "id": 124,
+    "quote": "La liberté commence\noù l'ignorance finit.",
+    "writer": "- Victor Hugo"
+  },
+  {
+    "id": 125,
+    "quote": "Le voyage est\nun retour\nvers l'essentiel.",
+    "writer": "- Proverbe tibétain (trad. française)"
+  },
+  {
+    "id": 126,
+    "quote": "L'imagination est\nplus importante\nque le savoir.",
+    "writer": "- Albert Einstein (trad. française)"
+  },
+  {
+    "id": 127,
+    "quote": "La logique vous mènera\nd'un point A à un point B.\nL'imagination vous mènera\npartout.",
+    "writer": "- Albert Einstein (trad. française)"
+  },
+  {
+    "id": 128,
+    "quote": "Un problème sans solution\nest un problème\nmal posé.",
+    "writer": "- Albert Einstein (trad. française)"
+  },
+  {
+    "id": 129,
+    "quote": "Le succès, c'est d'aller\nd'échec en échec\nsans perdre\nson enthousiasme.",
+    "writer": "- Winston Churchill (trad. française)"
+  },
+  {
+    "id": 130,
+    "quote": "Un pessimiste voit la difficulté\ndans chaque opportunité,\nun optimiste voit l'opportunité\ndans chaque difficulté.",
+    "writer": "- Winston Churchill (trad. française)"
+  },
+  {
+    "id": 131,
+    "quote": "Tout semble impossible\njusqu'à ce qu'on\nle fasse.",
+    "writer": "- Nelson Mandela (trad. française)"
+  },
+  {
+    "id": 132,
+    "quote": "L'éducation est\nl'arme la plus puissante\npour changer\nle monde.",
+    "writer": "- Nelson Mandela (trad. française)"
+  },
+  {
+    "id": 133,
+    "quote": "Je ne perds jamais.\nSoit je gagne,\nsoit j'apprends.",
+    "writer": "- Nelson Mandela (trad. française)"
+  },
+  {
+    "id": 134,
+    "quote": "N'attendez pas.\nLe moment ne sera jamais\ntout à fait parfait.",
+    "writer": "- Napoleon Hill (trad. française)"
+  },
+  {
+    "id": 135,
+    "quote": "Le meilleur moyen\nde prédire l'avenir,\nc'est de le créer.",
+    "writer": "- Peter Drucker (trad. française)"
+  },
+  {
+    "id": 136,
+    "quote": "La simplicité est\nla sophistication\nsuprême.",
+    "writer": "- Léonard de Vinci (trad. française)"
+  },
+  {
+    "id": 137,
+    "quote": "Qui ne doute de rien\nn'apprend rien.",
+    "writer": "- Proverbe (trad. française)"
+  },
+  {
+    "id": 138,
+    "quote": "Un voyage de mille lieues\ncommence toujours\npar un premier pas.",
+    "writer": "- Lao Tseu (trad. française)"
+  },
+  {
+    "id": 139,
+    "quote": "Celui qui connaît les autres\nest savant ;\ncelui qui se connaît lui-même\nest sage.",
+    "writer": "- Lao Tseu (trad. française)"
+  },
+  {
+    "id": 140,
+    "quote": "La chute n'est pas un échec.\nL'échec, c'est de rester\nlà où on est tombé.",
+    "writer": "- Socrate (trad. française)"
+  },
+  {
+    "id": 141,
+    "quote": "Il n'y a qu'un bien : le savoir.\nIl n'y a qu'un mal :\nl'ignorance.",
+    "writer": "- Socrate (trad. française)"
+  },
+  {
+    "id": 142,
+    "quote": "Nous sommes ce que\nnous faisons de manière répétée.\nL'excellence n'est donc pas un acte,\nmais une habitude.",
+    "writer": "- Aristote (trad. française)"
+  },
+  {
+    "id": 143,
+    "quote": "Le bonheur dépend\nde nous-mêmes.",
+    "writer": "- Aristote (trad. française)"
+  },
+  {
+    "id": 144,
+    "quote": "La patience est un arbre\ndont la racine est amère\net dont les fruits\nsont très doux.",
+    "writer": "- Proverbe persan (trad. française)"
+  },
+  {
+    "id": 145,
+    "quote": "Ce n'est pas la montagne\nque nous conquérons,\nmais nous-mêmes.",
+    "writer": "- Edmund Hillary (trad. française)"
+  },
+  {
+    "id": 146,
+    "quote": "Le génie, c'est un pour cent\nd'inspiration\net quatre-vingt-dix-neuf pour cent\nde transpiration.",
+    "writer": "- Thomas Edison (trad. française)"
+  },
+  {
+    "id": 147,
+    "quote": "Je n'ai pas échoué.\nJ'ai simplement trouvé\ndix mille solutions\nqui ne fonctionnent pas.",
+    "writer": "- Thomas Edison (trad. française)"
+  },
+  {
+    "id": 148,
+    "quote": "Que vous pensiez\nêtre capable ou non,\nvous avez raison.",
+    "writer": "- Henry Ford (trad. française)"
+  },
+  {
+    "id": 149,
+    "quote": "Se réunir est un début,\nrester ensemble est un progrès,\ntravailler ensemble\nest la réussite.",
+    "writer": "- Henry Ford (trad. française)"
+  },
+  {
+    "id": 150,
+    "quote": "Tout ce que vous pouvez imaginer\nest réel.",
+    "writer": "- Pablo Picasso (trad. française)"
+  },
+  {
+    "id": 151,
+    "quote": "L'action est\nla clé fondamentale\nde tout succès.",
+    "writer": "- Pablo Picasso (trad. française)"
+  },
+  {
+    "id": 152,
+    "quote": "Si vous pouvez le rêver,\nvous pouvez\nle faire.",
+    "writer": "- Walt Disney (trad. française)"
+  },
+  {
+    "id": 153,
+    "quote": "La meilleure façon\nde commencer,\nc'est d'arrêter de parler\net de commencer à faire.",
+    "writer": "- Walt Disney (trad. française)"
+  },
+  {
+    "id": 154,
+    "quote": "Personne ne peut\nvous faire sentir inférieur\nsans votre consentement.",
+    "writer": "- Eleanor Roosevelt (trad. française)"
+  },
+  {
+    "id": 155,
+    "quote": "L'avenir appartient à ceux\nqui croient à la beauté\nde leurs rêves.",
+    "writer": "- Eleanor Roosevelt (trad. française)"
+  },
+  {
+    "id": 156,
+    "quote": "Faites chaque jour\nune chose\nqui vous fait peur.",
+    "writer": "- Eleanor Roosevelt (trad. française)"
+  },
+  {
+    "id": 157,
+    "quote": "La foi, c'est monter\nla première marche,\nmême quand on ne voit pas\ntout l'escalier.",
+    "writer": "- Martin Luther King (trad. française)"
+  },
+  {
+    "id": 158,
+    "quote": "L'obscurité ne peut pas\nchasser l'obscurité ;\nseule la lumière\nle peut.",
+    "writer": "- Martin Luther King (trad. française)"
+  },
+  {
+    "id": 159,
+    "quote": "Si vous ne pouvez pas voler,\ncourez.\nSi vous ne pouvez pas courir,\nmarchez.\nMais quoi que vous fassiez,\navancez.",
+    "writer": "- Martin Luther King (trad. française)"
+  },
+  {
+    "id": 160,
+    "quote": "Vivez comme si\nvous deviez mourir demain.\nApprenez comme si\nvous deviez vivre toujours.",
+    "writer": "- Mahatma Gandhi (trad. française)"
+  },
+  {
+    "id": 161,
+    "quote": "La vie est un mystère\nqu'il faut vivre,\net non un problème\nà résoudre.",
+    "writer": "- Mahatma Gandhi (trad. française)"
+  },
+  {
+    "id": 162,
+    "quote": "Le voyage de la vie\nn'est pas d'arriver,\nmais de bien\nvoyager.",
+    "writer": "- Proverbe (trad. française)"
+  },
+  {
+    "id": 163,
+    "quote": "Vingt ans après,\nvous serez plus déçu\npar les choses que vous n'avez pas faites\nque par celles\nque vous avez faites.",
+    "writer": "- Mark Twain (trad. française)"
+  },
+  {
+    "id": 164,
+    "quote": "Le secret pour avancer,\nc'est de commencer.",
+    "writer": "- Mark Twain (trad. française)"
+  },
+  {
+    "id": 165,
+    "quote": "La gentillesse est un langage\nque les sourds peuvent entendre\net que les aveugles\npeuvent voir.",
+    "writer": "- Mark Twain (trad. française)"
+  },
+  {
+    "id": 166,
+    "quote": "Hier est derrière,\ndemain est un mystère,\net aujourd'hui\nest un cadeau.",
+    "writer": "- Eleanor Roosevelt (trad. française, attribué)"
+  },
+  {
+    "id": 167,
+    "quote": "Ne jugez pas chaque jour\nà la récolte que vous faites,\nmais aux graines\nque vous semez.",
+    "writer": "- Robert Louis Stevenson (trad. française)"
+  },
+  {
+    "id": 168,
+    "quote": "Ce qui se trouve derrière nous\net ce qui se trouve devant nous\nsont peu de chose\ncomparé à ce qui se trouve\nen nous.",
+    "writer": "- Ralph Waldo Emerson (trad. française, attribué)"
+  },
+  {
+    "id": 169,
+    "quote": "N'allez pas là où\nle chemin peut mener.\nAllez là où il n'y a pas de chemin\net laissez une trace.",
+    "writer": "- Ralph Waldo Emerson (trad. française)"
+  },
+  {
+    "id": 170,
+    "quote": "Le succès n'est pas final,\nl'échec n'est pas fatal :\nc'est le courage de continuer\nqui compte.",
+    "writer": "- Winston Churchill (trad. française, attribué)"
+  },
+  {
+    "id": 171,
+    "quote": "Restez affamés,\nrestez fous.",
+    "writer": "- Steve Jobs (trad. française)"
+  },
+  {
+    "id": 172,
+    "quote": "Votre temps est limité,\nne le gâchez pas\nen menant une existence\nqui n'est pas la vôtre.",
+    "writer": "- Steve Jobs (trad. française)"
+  },
+  {
+    "id": 173,
+    "quote": "L'innovation distingue\nun leader\nd'un suiveur.",
+    "writer": "- Steve Jobs (trad. française)"
+  },
+  {
+    "id": 174,
+    "quote": "Le courage n'est pas\nl'absence de peur,\nmais la capacité\nde la vaincre.",
+    "writer": "- Nelson Mandela (trad. française)"
+  },
+  {
+    "id": 175,
+    "quote": "Il faut toute une vie\npour apprendre\nà vivre.",
+    "writer": "- Sénèque (trad. française)"
+  },
+  {
+    "id": 176,
+    "quote": "La vie n'est pas d'attendre\nque l'orage passe,\nc'est d'apprendre à danser\nsous la pluie.",
+    "writer": "- Sénèque (trad. française, attribué)"
+  },
+  {
+    "id": 177,
+    "quote": "La chance, c'est ce qui arrive\nquand la préparation\nrencontre l'opportunité.",
+    "writer": "- Sénèque (trad. française)"
+  },
+  {
+    "id": 178,
+    "quote": "Nous ne pouvons pas\ndiriger le vent,\nmais nous pouvons\najuster les voiles.",
+    "writer": "- Proverbe (trad. française)"
+  },
+  {
+    "id": 179,
+    "quote": "Le meilleur moment\npour planter un arbre\nétait il y a vingt ans.\nLe deuxième meilleur moment,\nc'est maintenant.",
+    "writer": "- Proverbe chinois (trad. française)"
+  },
+  {
+    "id": 180,
+    "quote": "Mieux vaut allumer une bougie\nque maudire\nl'obscurité.",
+    "writer": "- Proverbe chinois (trad. française)"
+  },
+  {
+    "id": 181,
+    "quote": "Tombe sept fois,\nrelève-toi huit.",
+    "writer": "- Proverbe japonais (trad. française)"
+  },
+  {
+    "id": 182,
+    "quote": "La perfection n'est pas atteinte\nquand il n'y a plus rien à ajouter,\nmais quand il n'y a plus rien\nà retirer.",
+    "writer": "- Antoine de Saint-Exupéry"
+  },
+  {
+    "id": 183,
+    "quote": "Un but sans plan\nne s'appelle\nqu'un souhait.",
+    "writer": "- Antoine de Saint-Exupéry (attribué)"
+  },
+  {
+    "id": 184,
+    "quote": "Ce qui embellit le désert,\nc'est qu'il cache un puits\nquelque part.",
+    "writer": "- Antoine de Saint-Exupéry"
+  },
+  {
+    "id": 185,
+    "quote": "Toutes les grandes personnes\nont d'abord été des enfants,\nmais peu d'entre elles\ns'en souviennent.",
+    "writer": "- Antoine de Saint-Exupéry"
+  },
+  {
+    "id": 186,
+    "quote": "Le temps que tu as perdu\npour ta rose\nfait ta rose\nsi importante.",
+    "writer": "- Antoine de Saint-Exupéry"
+  },
+  {
+    "id": 187,
+    "quote": "Il n'est rien au monde\nd'aussi puissant\nqu'une idée\ndont l'heure est venue.",
+    "writer": "- Victor Hugo (attribué)"
+  },
+  {
+    "id": 188,
+    "quote": "Nos actes\nnous suivent.",
+    "writer": "- Paul Bourget"
+  },
+  {
+    "id": 189,
+    "quote": "On ne force pas\nune curiosité,\non l'éveille.",
+    "writer": "- Daniel Pennac"
+  },
+  {
+    "id": 190,
+    "quote": "Le verbe lire\nne supporte pas\nl'impératif.",
+    "writer": "- Daniel Pennac"
+  },
+  {
+    "id": 191,
+    "quote": "Écrire, c'est une façon\nde parler\nsans être interrompu.",
+    "writer": "- Jules Renard"
+  },
+  {
+    "id": 192,
+    "quote": "Si vous voulez qu'on vous aime,\nsoyez aimable.",
+    "writer": "- Ovide (trad. française)"
+  },
+  {
+    "id": 193,
+    "quote": "La musique donne une âme\nà nos cœurs\net des ailes\nà la pensée.",
+    "writer": "- Platon (trad. française)"
+  },
+  {
+    "id": 194,
+    "quote": "On peut en apprendre plus\nsur une personne en une heure de jeu\nqu'en une année\nde conversation.",
+    "writer": "- Platon (trad. française, attribué)"
+  },
+  {
+    "id": 195,
+    "quote": "Le commencement est\nla moitié\nde tout.",
+    "writer": "- Platon (trad. française)"
+  },
+  {
+    "id": 196,
+    "quote": "Là où il y a une volonté,\nil y a\nun chemin.",
+    "writer": "- Proverbe (trad. française)"
+  },
+  {
+    "id": 197,
+    "quote": "Les fleurs du printemps\nsont les rêves\nde l'hiver.",
+    "writer": "- Khalil Gibran (trad. française)"
+  },
+  {
+    "id": 198,
+    "quote": "Hier n'est qu'un souvenir,\ndemain n'est qu'un rêve.\nMais un aujourd'hui bien vécu\nfait de chaque hier\nun souvenir heureux.",
+    "writer": "- Khalil Gibran (trad. française, attribué)"
+  },
+  {
+    "id": 199,
+    "quote": "La joie de regarder\net de comprendre\nest le plus beau cadeau\nde la nature.",
+    "writer": "- Albert Einstein (trad. française)"
+  },
+  {
+    "id": 200,
+    "quote": "N'essayez pas de devenir\nun homme de succès,\nmais plutôt un homme\nde valeur.",
+    "writer": "- Albert Einstein (trad. française)"
   }
 ]
