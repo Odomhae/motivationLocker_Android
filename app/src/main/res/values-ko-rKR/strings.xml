@@ -87,6 +87,8 @@
     <string name="permission_denied_message">권한 거부됨</string>
     <string name="permission_set_message">권한 설정됨</string>
     <string name="daily_notification_permission_denied">알림 권한이 거부되었습니다</string>
+    <string name="daily_notification_time_summary">매일 %1$s</string>
+    <string name="daily_notification_turn_off">알림 끄기</string>
 
 
 </resources>

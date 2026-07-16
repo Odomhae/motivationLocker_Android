@@ -54,6 +54,8 @@
     <string name="permission_denied_message">Permission denied</string>
     <string name="permission_set_message">Permission set</string>
     <string name="daily_notification_permission_denied">Notification permission denied</string>
+    <string name="daily_notification_time_summary">Every day at %1$s</string>
+    <string name="daily_notification_turn_off">Turn off</string>
 
     <string name="languageKorean">Korean</string>
     <string name="languageEnglish">English</string>

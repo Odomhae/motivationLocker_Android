@@ -18,11 +18,11 @@
             android:key="languageCategory"
             android:title="@string/language_setting" />
 
-        <Preference
+        <com.odom.motivationlocker.ColorIndicatorPreference
             android:key="backgroundSettingsEntry"
             android:title="@string/background_settings_title" />
 
-        <Preference
+        <com.odom.motivationlocker.ColorIndicatorPreference
             android:key="textSettingsEntry"
             android:title="@string/text_settings_title" />
 

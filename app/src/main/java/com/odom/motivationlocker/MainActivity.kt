@@ -1,7 +1,9 @@
 package com.odom.motivationlocker
 
 import android.Manifest
+import android.app.TimePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -36,6 +38,7 @@ import com.google.android.play.core.review.ReviewInfo
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.odom.motivationlocker.databinding.ActivityMainBinding
 import androidx.core.net.toUri
+import java.util.Calendar
 
 
 class MainActivity : AppCompatActivity() {
@@ -342,6 +345,7 @@ class MainActivity : AppCompatActivity() {
             languagePreference?.summary = languagePreference?.entries?.get(getInt("language"))
             refreshBackgroundSettingsSummary()
             refreshTextSettingsSummary()
+            refreshDailyNotificationSummary()
 
 
             // 사용여부
@@ -392,14 +396,16 @@ class MainActivity : AppCompatActivity() {
                     ) {
                         // 권한 응답 전까지는 스위치를 켜지 않고, 응답 콜백에서 결과에 따라 처리
                         requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), DAILY_NOTIFICATION_PERMISSION_CODE)
-                        false
                     } else {
-                        DailyNotificationScheduler.schedule(requireContext())
-                        true
+                        // 시간 선택을 확정해야 스위치가 켜지므로 여기서는 false를 반환
+                        showNotificationTimePicker()
                     }
+                    false
                 } else {
-                    DailyNotificationScheduler.cancel(requireContext())
-                    true
+                    // 이미 켜진 상태에서 탭하면 바로 끄지 않고 시간 변경 다이얼로그를 띄운다.
+                    // 끄기는 다이얼로그의 "알림 끄기" 버튼으로 처리한다.
+                    showNotificationTimePicker(allowDisable = true)
+                    false
                 }
             }
 
@@ -433,15 +439,58 @@ class MainActivity : AppCompatActivity() {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
             if (requestCode == DAILY_NOTIFICATION_PERMISSION_CODE) {
-                val dailyNotificationPreference = findPreference<SwitchPreferenceCompat>("dailyNotificationEnabled")
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    dailyNotificationPreference?.isChecked = true
-                    DailyNotificationScheduler.schedule(requireContext())
+                    // 시간 선택을 확정하면 스위치가 켜지고 스케줄된다
+                    showNotificationTimePicker()
                 } else {
-                    dailyNotificationPreference?.isChecked = false
+                    findPreference<SwitchPreferenceCompat>("dailyNotificationEnabled")?.isChecked = false
                     Toast.makeText(requireContext(), R.string.daily_notification_permission_denied, Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+        // 알림 받을 시간을 고르는 다이얼로그. 확정 시에만 저장/스케줄/스위치 ON 처리한다.
+        // allowDisable=true(이미 켜진 상태에서 탭)면 "알림 끄기" 버튼을 함께 보여준다.
+        private fun showNotificationTimePicker(allowDisable: Boolean = false) {
+            val context = requireContext()
+            val prefs = context.getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
+            val hour = prefs.getInt(DailyNotificationScheduler.PREF_HOUR, DailyNotificationScheduler.DEFAULT_HOUR)
+            val minute = prefs.getInt(DailyNotificationScheduler.PREF_MINUTE, DailyNotificationScheduler.DEFAULT_MINUTE)
+
+            val dialog = TimePickerDialog(context, { _, pickedHour, pickedMinute ->
+                prefs.edit()
+                    .putInt(DailyNotificationScheduler.PREF_HOUR, pickedHour)
+                    .putInt(DailyNotificationScheduler.PREF_MINUTE, pickedMinute)
+                    .apply()
+                DailyNotificationScheduler.schedule(context)
+                findPreference<SwitchPreferenceCompat>("dailyNotificationEnabled")?.isChecked = true
+                refreshDailyNotificationSummary(enabled = true)
+            }, hour, minute, android.text.format.DateFormat.is24HourFormat(context))
+
+            if (allowDisable) {
+                dialog.setButton(DialogInterface.BUTTON_NEUTRAL, getString(R.string.daily_notification_turn_off)) { _, _ ->
+                    DailyNotificationScheduler.cancel(context)
+                    findPreference<SwitchPreferenceCompat>("dailyNotificationEnabled")?.isChecked = false
+                    refreshDailyNotificationSummary(enabled = false)
+                }
+            }
+            dialog.show()
+        }
+
+        // 알림이 켜져 있으면 "매일 HH:mm"을 summary로 표시하고, 꺼져 있으면 지운다
+        private fun refreshDailyNotificationSummary(enabled: Boolean? = null) {
+            val pref = findPreference<SwitchPreferenceCompat>("dailyNotificationEnabled") ?: return
+            if (!(enabled ?: pref.isChecked)) {
+                pref.summary = null
+                return
+            }
+            val prefs = requireContext().getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
+            val time = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, prefs.getInt(DailyNotificationScheduler.PREF_HOUR, DailyNotificationScheduler.DEFAULT_HOUR))
+                set(Calendar.MINUTE, prefs.getInt(DailyNotificationScheduler.PREF_MINUTE, DailyNotificationScheduler.DEFAULT_MINUTE))
+            }
+            val timeText = android.text.format.DateFormat.getTimeFormat(requireContext()).format(time.time)
+            pref.summary = getString(R.string.daily_notification_time_summary, timeText)
         }
 
         // 색상 변경 카운트 및 광고 처리
@@ -479,41 +528,39 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // "배경 설정" 1줄의 summary를 현재 배경 종류에 맞춰 갱신
+        // "배경 설정" 1줄의 summary와 색상 칩을 현재 배경 종류에 맞춰 갱신.
+        // 색은 hex 문자열 대신 항목 오른쪽 원형 칩(ColorIndicatorPreference)으로 보여준다.
         private fun refreshBackgroundSettingsSummary() {
-            findPreference<androidx.preference.Preference>("backgroundSettingsEntry")?.summary = backgroundSettingsSummary()
-        }
-
-        private fun backgroundSettingsSummary(): String {
+            val pref = findPreference<ColorIndicatorPreference>("backgroundSettingsEntry") ?: return
             val prefs = requireContext().getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
-            return when (getInt("backgroundType")) {
+            when (getInt("backgroundType")) {
                 1 -> {
                     val presetIndex = prefs.getInt("backgroundGradientPreset", 0)
-                    "${getString(R.string.backgroundTypeGradient)} · ${presetIndex + 1}"
+                    val presets = GradientPresets.forBaseColor(getInt("backgroundColor"))
+                    val preset = presets.getOrNull(presetIndex) ?: presets[0]
+                    pref.setIndicatorGradient(preset.startColor, preset.endColor)
+                    pref.summary = getString(R.string.backgroundTypeGradient)
                 }
                 2 -> {
                     val hasPhoto = prefs.getString("backgroundPhotoUri", null) != null
                     val photoState = getString(if (hasPhoto) R.string.background_photo_selected else R.string.background_photo_not_selected)
-                    "${getString(R.string.backgroundTypePhoto)} · $photoState"
+                    pref.clearIndicator()
+                    pref.summary = "${getString(R.string.backgroundTypePhoto)} · $photoState"
                 }
                 else -> {
-                    val color = getInt("backgroundColor")
-                    "${getString(R.string.backgroundTypeSolid)} · ${String.format("#%06X", 0xFFFFFF and color)}"
+                    pref.setIndicatorColor(getInt("backgroundColor"))
+                    pref.summary = getString(R.string.backgroundTypeSolid)
                 }
             }
         }
 
-        // "글자 설정" 1줄의 summary를 현재 글자색/크기에 맞춰 갱신
+        // "글자 설정" 1줄의 summary(글자 크기)와 글자색 칩을 갱신
         private fun refreshTextSettingsSummary() {
-            findPreference<androidx.preference.Preference>("textSettingsEntry")?.summary = textSettingsSummary()
-        }
-
-        private fun textSettingsSummary(): String {
+            val pref = findPreference<ColorIndicatorPreference>("textSettingsEntry") ?: return
             val prefs = requireContext().getSharedPreferences("SETTINGS", Context.MODE_PRIVATE)
-            val color = getInt("textColor")
             val sizeIndex = prefs.getInt("textSize", 0)
-            val sizeLabel = resources.getStringArray(R.array.textSizeCategory).getOrElse(sizeIndex) { "" }
-            return "${String.format("#%06X", 0xFFFFFF and color)} · $sizeLabel"
+            pref.setIndicatorColor(getInt("textColor"))
+            pref.summary = resources.getStringArray(R.array.textSizeCategory).getOrElse(sizeIndex) { "" }
         }
 
     }
