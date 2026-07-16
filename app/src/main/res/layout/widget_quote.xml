@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 홈 화면 위젯 레이아웃. RemoteViews에서 지원하는 뷰만 사용해야 하므로
+     ConstraintLayout 대신 FrameLayout/LinearLayout으로 단순하게 구성. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widgetRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 그라데이션 배경일 때만 비트맵을 그려 넣는 용도(단색일 땐 widgetRoot에 직접 setBackgroundColor) -->
+    <ImageView
+        android:id="@+id/widgetBackgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        tools:ignore="ContentDescription" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/widgetQuoteText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLines="6"
+            android:textSize="12sp"
+            android:textColor="@android:color/black"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/widgetWriterText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:textSize="10sp"
+            android:textColor="@android:color/black"
+            android:text="" />
+
+    </LinearLayout>
+
+    <!-- 앱 실행용 아이콘. 여기만 눌렀을 때는 위젯 전체의 "새 명언" 탭 동작 대신 앱이 열린다. -->
+    <ImageView
+        android:id="@+id/widgetOpenAppIcon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="8dp"
+        android:padding="2dp"
+        android:src="@mipmap/ic_launcher_new"
+        tools:ignore="ContentDescription" />
+</FrameLayout>

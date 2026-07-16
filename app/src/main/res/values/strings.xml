@@ -48,6 +48,9 @@
     <string name="app_running_message">App is running</string>
     <string name="daily_notification_channel_name">Daily Quotes</string>
 
+    <string name="app_widget_label">Quote Widget</string>
+    <string name="app_widget_description">Shows a quote on your home screen. Tap it for a new one.</string>
+
     <string name="permission_denied_message">Permission denied</string>
     <string name="permission_set_message">Permission set</string>
     <string name="daily_notification_permission_denied">Notification permission denied</string>
