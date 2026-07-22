@@ -20,7 +20,7 @@ Standard Gradle Android project; no custom scripts.
 
 Aside from the stock `ExampleUnitTest`/`ExampleInstrumentedTest`, `QuoteRepositoryTest` is the one real unit test class, covering `QuoteRepository.parseQuotes()`. `testOptions.unitTests.returnDefaultValues = true` is set in `app/build.gradle` — without it, any unmocked `android.jar` stub call from test code (notably `android.util.Log`) throws `RuntimeException` instead of no-oping, which is what `QuoteRepository`'s `Log.w()` calls would otherwise hit under plain JVM unit tests.
 
-- `compileSdk`/`targetSdk` 35, `minSdk` 23, Java/Kotlin target 17.
+- `compileSdk`/`targetSdk` 36, `minSdk` 23, Java/Kotlin target 17.
 - `viewBinding` is enabled; there is no Compose.
 - `AppTheme` (`values/styles.xml`) is `Theme.Material3.Light.NoActionBar` — light-only, no `values-night` variant exists and none is planned.
 - Kotlin 1.9.24, `mavenCentral()` (no `jcenter()`), current AndroidX/Play Services versions (appcompat 1.7.0, core-ktx 1.13.1, play-services-ads 23.6.0, etc.) — see `TODO.md` §1 for the full list and rationale.

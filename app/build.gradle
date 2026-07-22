@@ -6,11 +6,11 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     namespace "com.odom.motivationlocker"
-    compileSdkVersion 35
+    compileSdkVersion 36
     defaultConfig {
         applicationId "com.odom.motivationlocker"
         minSdkVersion 23
-        targetSdkVersion 35
+        targetSdkVersion 36
         versionCode 15
         versionName "1.13"
         multiDexEnabled true

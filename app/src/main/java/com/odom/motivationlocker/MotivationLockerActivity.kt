@@ -19,6 +19,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowInsetsControllerCompat
 import com.odom.motivationlocker.databinding.ActivityMotivationLockerBinding
 
 class MotivationLockerActivity : AppCompatActivity() {
@@ -225,7 +226,7 @@ class MotivationLockerActivity : AppCompatActivity() {
             binding.scrimView.visibility = View.VISIBLE
             // 스크림이 어두운 반투명이라 상태바 아이콘은 밝게 고정
             window.statusBarColor = android.graphics.Color.TRANSPARENT
-            window.decorView.systemUiVisibility = 0
+            setStatusBarIconsLight(false)
         } catch (e: Exception) {
             Log.w("MotivationLockerActivity", "배경 사진을 불러오지 못함, 기본 배경으로 대체", e)
             setSolidBackground(android.graphics.Color.WHITE)
@@ -260,13 +261,13 @@ class MotivationLockerActivity : AppCompatActivity() {
 
         // 상태바 글씨 색상 결정 (배경색이 밝으면 어두운 글씨, 어두우면 밝은 글씨)
         val brightness = (android.graphics.Color.red(color) + android.graphics.Color.green(color) + android.graphics.Color.blue(color)) / 3
-        if (brightness > 128) {
-            // 밝은 배경색 -> 어두운 상태바 글씨
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-        } else {
-            // 어두운 배경색 -> 밝은 상태바 글씨
-            window.decorView.systemUiVisibility = 0
-        }
+        setStatusBarIconsLight(brightness > 128)
+    }
+
+    // Android 15+ edge-to-edge 강제 적용 시 window.decorView.systemUiVisibility가 무시되므로
+    // WindowInsetsControllerCompat으로 상태바 아이콘(밝음/어두움)을 설정한다.
+    private fun setStatusBarIconsLight(isLight: Boolean) {
+        WindowInsetsControllerCompat(window, binding.root).isAppearanceLightStatusBars = isLight
     }
 
     // 글자색
