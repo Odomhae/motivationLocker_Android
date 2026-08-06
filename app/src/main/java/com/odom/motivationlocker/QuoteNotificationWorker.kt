@@ -43,6 +43,8 @@ class QuoteNotificationWorker(context: Context, params: WorkerParameters) : Work
 
         NotificationManagerCompat.from(context).notify(NOTIFICATION_ID, notification)
 
+        DailyNotificationScheduler.scheduleNext(context)
+
         return Result.success()
     }
 

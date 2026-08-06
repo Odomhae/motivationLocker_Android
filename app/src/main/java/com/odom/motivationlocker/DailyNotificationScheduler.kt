@@ -1,8 +1,8 @@
 package com.odom.motivationlocker
 
 import android.content.Context
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
@@ -16,13 +16,17 @@ object DailyNotificationScheduler {
     const val PREF_MINUTE = "dailyNotificationMinute"
 
     fun schedule(context: Context) {
-        val request = PeriodicWorkRequestBuilder<QuoteNotificationWorker>(24, TimeUnit.HOURS)
+        scheduleNext(context)
+    }
+
+    fun scheduleNext(context: Context) {
+        val request = OneTimeWorkRequestBuilder<QuoteNotificationWorker>()
             .setInitialDelay(calculateInitialDelayMillis(context), TimeUnit.MILLISECONDS)
             .build()
 
-        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+        WorkManager.getInstance(context).enqueueUniqueWork(
             UNIQUE_WORK_NAME,
-            ExistingPeriodicWorkPolicy.UPDATE,
+            ExistingWorkPolicy.REPLACE,
             request
         )
     }
