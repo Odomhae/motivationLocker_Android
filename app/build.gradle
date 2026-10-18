@@ -71,4 +71,5 @@ dependencies {
     // Firebase Remote Config (앱 버전 체크 및 강제/권장 업데이트)
     implementation platform('com.google.firebase:firebase-bom:33.7.0')
     implementation 'com.google.firebase:firebase-config-ktx'
+    implementation("com.google.firebase:firebase-analytics")
 }

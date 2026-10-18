@@ -1,6 +1,5 @@
 package com.odom.motivationlocker
 
-import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
@@ -8,7 +7,6 @@ import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
-import androidx.annotation.RequiresApi
 import com.odom.motivationlocker.R
 
 class LockScreenService : Service() {
@@ -30,8 +28,6 @@ class LockScreenService : Service() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.S)
-    @SuppressLint("ObsoleteSdkInt")
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
 
@@ -65,14 +61,20 @@ class LockScreenService : Service() {
 
             // 클릭시 메인 액티비티로 이동
             val intent = Intent(this, MainActivity::class.java)
-            // 31버전 대응.  0대신 PendingIntent.FLAG_MUTABLE
-            val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_MUTABLE)
+            val pendingIntentFlags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_MUTABLE else 0
+            val pendingIntent = PendingIntent.getActivity(this, 0, intent, pendingIntentFlags)
             builder.setContentIntent(pendingIntent)
 
             val notification = builder.build()
 
             // Notification 알림과 함께 포그라운드 서비스 시작
-            startForeground(NOTIFICATION_ID, notification)
+            // API 34+: foregroundServiceType을 명시해야 MissingForegroundServiceTypeException 방지
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                startForeground(NOTIFICATION_ID, notification,
+                    android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+            } else {
+                startForeground(NOTIFICATION_ID, notification)
+            }
         }
 
         return START_STICKY//START_REDELIVER_INTENT

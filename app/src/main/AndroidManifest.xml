@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.odom.motivationlocker">
 
     <!-- 포그라운드 서비스 -->
@@ -7,6 +8,8 @@
     <!-- 광고는 인터넷 사용-->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- 다른 앱 위에 표시: Android 10+에서 ScreenOffReceiver가 백그라운드에서
+         MotivationLockerActivity를 띄우려면 이 권한이 있어야 함(백그라운드 액티비티 실행 제한 예외) -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -25,6 +28,12 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/TEST_admob_app_id"/>
+
+        <!-- play-services-measurement-api와 play-services-ads-lite의 AD_SERVICES_CONFIG 충돌 해소 -->
+        <property
+            android:name="android.adservices.AD_SERVICES_CONFIG"
+            android:resource="@xml/gma_ad_services_config"
+            tools:replace="android:resource" />
 
         <activity android:name="com.odom.motivationlocker.MotivationLockerActivity"/>
 

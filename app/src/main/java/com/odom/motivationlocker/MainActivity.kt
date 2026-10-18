@@ -6,13 +6,11 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.Log
-import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
@@ -26,7 +24,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
-import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -49,8 +46,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //퍼미션 응답 처리 코드
-    private val PermissionsCode = 100
     // 광고
     lateinit var mAdView : AdView
     // 뒤로가기 종료 확인 다이얼로그에 표시할, 미리 로드해 둔 배너 광고
@@ -58,12 +53,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var updateAdView: AdView
     private val adSize: AdSize
         get() {
-            val display = windowManager.defaultDisplay
-            val outMetrics = DisplayMetrics()
-            display.getMetrics(outMetrics)
-
-            val density = outMetrics.density
-            val adWidthPixels = outMetrics.widthPixels.toFloat()
+            val density = resources.displayMetrics.density
+            val adWidthPixels = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                windowManager.currentWindowMetrics.bounds.width().toFloat()
+            } else {
+                @Suppress("DEPRECATION")
+                val metrics = DisplayMetrics()
+                @Suppress("DEPRECATION")
+                windowManager.defaultDisplay.getMetrics(metrics)
+                metrics.widthPixels.toFloat()
+            }
             val adWidth = (adWidthPixels / density).toInt()
             return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth)
         }
@@ -73,51 +72,34 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        window.statusBarColor = resources.getColor(R.color.settingsPrimary)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        val isLightBars = AppCompatDelegate.getDefaultNightMode() != AppCompatDelegate.MODE_NIGHT_YES
+        WindowInsetsControllerCompat(window, window.decorView).apply {
+            isAppearanceLightStatusBars = isLightBars
+            isAppearanceLightNavigationBars = isLightBars
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        val contentView: View = this.findViewById(android.R.id.content)
-        ViewCompat.setOnApplyWindowInsetsListener(contentView, object : OnApplyWindowInsetsListener {
-            override fun onApplyWindowInsets(v: View, insets: WindowInsetsCompat): WindowInsetsCompat {
-                val innerPadding = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
-                v.setPadding(0, innerPadding.top, 0, innerPadding.bottom)
-
-                return insets
-            }
-        })
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-            val isLightStatusBars =
-                AppCompatDelegate.getDefaultNightMode() !== AppCompatDelegate.MODE_NIGHT_YES
-            val compat: WindowInsetsControllerCompat = WindowInsetsControllerCompat(
-                this.getWindow(), this.getWindow().getDecorView()
-            )
-            compat.setAppearanceLightStatusBars(isLightStatusBars)
-            compat.setAppearanceLightNavigationBars(isLightStatusBars)
+        // 툴바 top padding = 상태바 높이: 툴바 배경이 상태바 뒤까지 연장되어 색상이 자연스럽게 이어짐
+        ViewCompat.setOnApplyWindowInsetsListener(binding.toolbar) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+            v.setPadding(v.paddingLeft, bars.top, v.paddingRight, v.paddingBottom)
+            insets
+        }
+        // 하단 네비게이션 바 영역이 광고 뷰와 겹치지 않도록
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+            v.setPadding(0, 0, 0, bars.bottom)
+            insets
         }
 
         this.onBackPressedDispatcher.addCallback(this, callback)
 
         supportFragmentManager.beginTransaction().replace(R.id.preferenceContent, SettingPreferencesFragment()).commit()
 
-        checkPermission()
-
         checkAppUpdate()
-    }
-
-    private fun checkPermission() {
-        if (!Settings.canDrawOverlays(this)) {
-            val intent =  Intent(
-                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:$packageName"))
-            startActivityForResult(intent, PermissionsCode)
-        }
-        // POST_NOTIFICATIONS(Android 13+)는 데일리 알림 스위치를 켤 때만 맥락 있게 요청한다.
-        // (SettingPreferencesFragment의 dailyNotificationEnabled 리스너 참고)
     }
 
     private fun checkAppUpdate() {
@@ -226,31 +208,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == PermissionsCode) {
-            if (Settings.canDrawOverlays(this)) {
-                Log.d("TAG", "권한 설정됨")
-                val toast = Toast.makeText(applicationContext, R.string.permission_set_message, Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.TOP,  Gravity.CENTER, 550)
-                toast.show()
-                onResume()
-            }else{
-                Log.d("TAG", "권한 거절됨")
-                finish()
-                val toast = Toast.makeText(applicationContext, R.string.permission_denied_message, Toast.LENGTH_LONG)
-                toast.setGravity(Gravity.TOP, Gravity.CENTER, 550)
-                toast.show()
-            }
-        }
-    }
-
     override fun onStart() {
         super.onStart()
-
-        window.statusBarColor = resources.getColor(R.color.settingsPrimary)
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
         // 배너 광고
         MobileAds.initialize(this) {}
@@ -315,6 +274,36 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // "다른 앱 위에 표시" 설정 화면에서 돌아왔을 때 결과 처리
+        // (이 설정 화면은 resultCode를 돌려주지 않으므로 canDrawOverlays로 직접 재확인)
+        private val overlayPermissionLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            val switchPreference = findPreference<SwitchPreferenceCompat>("useLockScreen") ?: return@registerForActivityResult
+            if (Settings.canDrawOverlays(requireContext())) {
+                Toast.makeText(requireContext(), R.string.permission_set_message, Toast.LENGTH_SHORT).show()
+                switchPreference.isChecked = true
+                startLockScreenService()
+            } else {
+                Toast.makeText(requireContext(), R.string.permission_denied_message, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        private fun startLockScreenService() {
+            val intent = Intent(requireContext(), LockScreenService::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                requireContext().startForegroundService(intent)
+            } else {
+                requireContext().startService(intent)
+            }
+        }
+
+        private fun requestOverlayPermission() {
+            val intent = Intent(
+                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                "package:${requireContext().packageName}".toUri()
+            )
+            overlayPermissionLauncher.launch(intent)
+        }
+
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.pref, rootKey)
 
@@ -333,13 +322,14 @@ class MainActivity : AppCompatActivity() {
 
 
             // 앱이 시작됬을대 이미 퀴즈잠금화면 사용이 체크되어있으면 서비스 실행
+            // 단, 사용자가 시스템 설정에서 "다른 앱 위에 표시" 권한을 회수했다면 잠금화면이 뜰 수 없으므로 스위치를 끈다
             if (switchPreference?.isChecked!!) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    requireActivity().startForegroundService(Intent(requireActivity(), LockScreenService::class.java))
+                if (Settings.canDrawOverlays(requireContext())) {
+                    startLockScreenService()
                 } else {
-                    requireContext().startService(Intent(requireActivity(), LockScreenService::class.java))
+                    switchPreference.isChecked = false
+                    requireContext().stopService(Intent(requireActivity(), LockScreenService::class.java))
                 }
-
             }
 
             languagePreference?.summary = languagePreference?.entries?.get(getInt("language"))
@@ -353,11 +343,13 @@ class MainActivity : AppCompatActivity() {
                 if (newValue == true) {
                     // 잠금화면 사용이 체크된 경우 lockScreenService 실행
                     Log.d("checked", "체크")
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        requireActivity().startForegroundService(Intent(requireActivity(), LockScreenService::class.java))
-                    } else {
-                        requireContext().startService(Intent(requireActivity(), LockScreenService::class.java))
+                    if (!Settings.canDrawOverlays(requireContext())) {
+                        // 권한이 없으면 스위치는 그대로 꺼둔 채 설정 화면으로 보내고,
+                        // 허용하고 돌아오면 overlayPermissionLauncher에서 스위치를 켠다
+                        requestOverlayPermission()
+                        return@setOnPreferenceChangeListener false
                     }
+                    startLockScreenService()
                 } else {
                     // 사용 체크 안됬으면 서비스 중단
                     requireContext().stopService(Intent(requireActivity(), LockScreenService::class.java))

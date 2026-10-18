@@ -14,6 +14,7 @@ Standard Gradle Android project; no custom scripts.
 ./gradlew assembleDebug        # debug APK
 ./gradlew assembleRelease      # release APK (see app/build.gradle for signing/proguard config)
 ./gradlew test                 # JVM unit tests (app/src/test)
+./gradlew test --tests "com.odom.motivationlocker.QuoteRepositoryTest"  # run a single test class
 ./gradlew connectedAndroidTest # instrumented tests (app/src/androidTest), needs a device/emulator
 ./gradlew clean
 ```
@@ -24,7 +25,9 @@ Aside from the stock `ExampleUnitTest`/`ExampleInstrumentedTest`, `QuoteReposito
 - `viewBinding` is enabled; there is no Compose.
 - `AppTheme` (`values/styles.xml`) is `Theme.Material3.Light.NoActionBar` — light-only, no `values-night` variant exists and none is planned.
 - Kotlin 1.9.24, `mavenCentral()` (no `jcenter()`), current AndroidX/Play Services versions (appcompat 1.7.0, core-ktx 1.13.1, play-services-ads 23.6.0, etc.) — see `TODO.md` §1 for the full list and rationale.
-- The system JDK on this machine is Java 8, which is too old for AGP 8.3.2. Build with a JDK 11+ (e.g. Android Studio's bundled JBR) via `JAVA_HOME`, for example: `JAVA_HOME="/c/Program Files/Android/Android Studio/jbr" ./gradlew assembleDebug` (adjust path per machine).
+- The system JDK on this machine is Java 8, which is too old for AGP 8.3.2. Build with a JDK 11+ (e.g. Android Studio's bundled JBR) via `JAVA_HOME`, for example: `JAVA_HOME="/c/Program Files/Android/Android Studio2/jbr" ./gradlew assembleDebug` (the JBR lives under `Android Studio2/jbr` on this machine, not `Android Studio/jbr`).
+- Release builds have `minifyEnabled false` — ProGuard/R8 is intentionally disabled.
+- Firebase Remote Config requires `app/google-services.json` (downloaded from the Firebase console for `com.odom.motivationlocker`) and the `com.google.gms.google-services` plugin already applied in `app/build.gradle`. Without the file the build will fail at the `google-services` plugin step.
 
 ## Architecture
 
@@ -37,7 +40,7 @@ The whole app is four cooperating pieces wired together through `SharedPreferenc
 
 ### Daily notification
 
-A separate, optional path from the lock-screen replacement above: `pref.xml`'s `dailyNotificationEnabled` switch (default off) schedules `DailyNotificationScheduler` (a `WorkManager` `PeriodicWorkRequest`, 24h interval, `initialDelay` computed to land on the next 10:00 — the time is hardcoded, there is no time-picker UI) which runs `QuoteNotificationWorker`. The worker re-reads the same `"SETTINGS"` `language` value, calls `QuoteRepository.getRandomQuote()`, and posts a `BigTextStyle` notification on its own channel (`IMPORTANCE_DEFAULT` — distinct from `LockScreenService`'s silent `IMPORTANCE_NONE` channel, since this one needs to actually alert). `SettingPreferencesFragment`'s listener for this switch is the only place that requests the Android 13+ `POST_NOTIFICATIONS` runtime permission (contextual, at toggle-on time); `MainActivity.checkPermission()` no longer requests it unconditionally at launch.
+A separate, optional path from the lock-screen replacement above: `pref.xml`'s `dailyNotificationEnabled` switch (default off) schedules `DailyNotificationScheduler`, which uses a `WorkManager` `OneTimeWorkRequest` (not `PeriodicWorkRequest`) with self-rescheduling: `QuoteNotificationWorker.doWork()` calls `DailyNotificationScheduler.scheduleNext()` after posting the notification, re-queuing for the next day's target time. The target time is user-configurable via a `TimePickerDialog` shown when toggling the switch on, and stored as `PREF_HOUR`/`PREF_MINUTE` integers in `"SETTINGS"` (default 10:00). The scheduler runs `QuoteNotificationWorker`. The worker re-reads the same `"SETTINGS"` `language` value, calls `QuoteRepository.getRandomQuote()`, and posts a `BigTextStyle` notification on its own channel (`IMPORTANCE_DEFAULT` — distinct from `LockScreenService`'s silent `IMPORTANCE_NONE` channel, since this one needs to actually alert). `SettingPreferencesFragment`'s listener for this switch is the only place that requests the Android 13+ `POST_NOTIFICATIONS` runtime permission (contextual, at toggle-on time); `MainActivity.checkPermission()` no longer requests it unconditionally at launch.
 
 Quote assets (`app/src/main/assets/English.json`, `korean.json`) are flat JSON arrays of `{ "id", "quote", "writer" }` objects, parsed with `org.json` (no Moshi/Gson). Loading/parsing/caching is centralized in `QuoteRepository` (an `object` singleton, no DI framework in this app) — `QuoteRepository.getRandomQuote(context, language)` returns a `Quote` data class instance and caches the parsed list per language after the first read. `MotivationLockerActivity.setLanguage()` calls this rather than duplicating JSON parsing per language.
 
@@ -64,6 +67,33 @@ Both picker dialogs now show a check icon (`ic_selected_white`/`ic_selected_blac
 - `AdManager` (constructed per-fragment in `SettingPreferencesFragment`) preloads/shows an interstitial every 3rd color change (`colorChangeCount % 3 == 0`, tracked in the `"SETTINGS"` prefs file — a *different* counter than `AdManager`'s own unused `GENERATE_COUNT_KEY`/`SCAN_COUNT_KEY` constants in its `ad_counter` prefs file, which aren't currently wired to anything).
 - Ad unit IDs live in `res/values/strings.xml` as paired `TEST_*`/`REAL_*` strings. As of this writing, both banners (`MainActivity.loadBanner`, and the exit-dialog banner below) and the interstitial (`AdManager.loadInterstitialAd`) reference the `TEST_*` string resources, not the `REAL_*` ones — see `TODO.md` item 4.
 - `MainActivity` preloads a second, dedicated `AdView` (`exitAdView`, fixed `AdSize.BANNER`, distinct from the adaptive-sized `mAdView` on the settings screen itself) in `onStart()`, well before it's needed, so it's already loaded by the time `showExitConfirmDialog()` runs. Pressing back no longer does the old "press twice within 2s" `Toast` pattern — it immediately shows an `AlertDialog` (`dialog_exit_confirm.xml`, message + the preloaded `exitAdView` + 종료/취소 buttons). `exitAdView` is moved (not recreated) into the dialog's `FrameLayout` each time, after removing it from whatever parent it was previously attached to (so reopening the dialog doesn't crash with "already has a parent"). `reviewApp()` (Play in-app review prompt) now only fires when the user actually confirms exit, not on every back press like before.
+
+### Home screen widget
+
+`QuoteWidgetProvider` (`AppWidgetProvider` + `RemoteViews`, no Compose) provides a home-screen widget. Key design points:
+- Each widget instance stores its own current quote in a separate `"WIDGET_QUOTES"` SharedPreferences file, keyed by `"quote_<appWidgetId>"`/`"writer_<appWidgetId>"`. This is distinct from the `"SETTINGS"` file.
+- Tapping the widget sends `ACTION_REFRESH_WIDGET` broadcast back to `QuoteWidgetProvider`, which picks a new quote for that instance only. The `PendingIntent` uses `requestCode = appWidgetId` so multiple placed widgets each get a distinct `PendingIntent` (same `requestCode` would cause the last widget's intent to overwrite earlier ones).
+- On `onUpdate`, a new quote is only picked if the widget has no stored quote yet (first placement) — resize/reboot `onUpdate` calls don't randomly replace the displayed quote.
+- Photo backgrounds are not supported (`RemoteViews` can't host custom drawables directly). If `backgroundType == 2` (photo), the widget falls back silently to solid color. Gradient is rendered by drawing a `GradientDrawable` onto a `Bitmap` at `GRADIENT_BITMAP_SIZE_DP` resolution and setting it on a background `ImageView`.
+- Widget text sizes are a separate, scaled-down mapping (`widgetTextSizes()`) from the same `textSize` index — the lock-screen dp values are too large for a widget's smaller canvas.
+- The small icon in the top-right corner (`widgetOpenAppIcon`) opens `MainActivity`; the rest of the widget surface triggers quote refresh.
+
+### Settings screen dialog fragments
+
+Background and text settings are handled by two `DialogFragment`s rather than `Preference`-framework dialogs:
+- **`BackgroundSettingsDialogFragment`** — shows a radio group (solid/gradient/photo) and the relevant picker row for the chosen type. It delegates photo picking to the host (`SettingPreferencesFragment`) via `onPhotoPickRequested` because `ActivityResultContracts` launchers must be registered before `STARTED`. Its `updatePhotoPreview(uri)` method lets the host push a new thumbnail after the photo picker returns without re-invoking callbacks (to avoid double-counting the ad interstitial).
+- **`TextSettingsDialogFragment`** — shows the text color row (opens a `ColorSelectorDialog` via `childFragmentManager`) and a `MaterialButtonToggleGroup` for size (S/M/L/XL/XXL, indices 0–4). The toggle maps button IDs via `sizeButtonIds` list — don't reorder that list or the XML button order without updating both.
+- **`ColorIndicatorPreference`** — a custom `Preference` subclass (`preference_color_indicator.xml` widget layout) that shows a circular color chip to the right of a preference row instead of a text summary. Supports single color (`setIndicatorColor`), gradient (`setIndicatorGradient`), or hidden (`clearIndicator`). Used by `SettingPreferencesFragment` to reflect the current background/text color selection visually.
+
+### Shared utilities
+
+- **`ColorPalette`** (`object`) — single source of truth for the 20-color palette as a list of `R.color.*` resource IDs. `resIdForColor(context, actualColor)` does the reverse lookup (actual `Int` color → resource ID) used to determine which swatch gets a check mark. Never hardcode hex values for palette colors; always read through `ContextCompat.getColor()` against this list.
+- **`PhotoThumbnailLoader`** (`object`) — loads a downsampled, EXIF-corrected thumbnail for the settings-screen photo preview. Uses `inJustDecodeBounds` + `inSampleSize` before the real decode to cap memory use, then applies `ExifInterface` orientation correction via `Matrix`.
+- **`FigureType`** — enum (`CIRCLE`/`SQUARE`) passed to `ColorSelectorDialogBuilder` to control swatch shape.
+
+### Firebase Remote Config
+
+`RemoteConfigManager` (`object`) fetches `min_version_code` and `latest_version_code` from Firebase Remote Config (1-hour cache) and calls back with `UpdateStatus` (`UpToDate`/`RecommendedUpdate`/`ForceUpdate`). Firebase initialization failures and network errors both silently resolve to `UpToDate` so the app works without the `google-services.json` file present. Remote Config console keys: `min_version_code` (Long, default 0) and `latest_version_code` (Long, default 0).
 
 ### Known cross-file quirk
 

@@ -6,7 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.drawable.GradientDrawable
-import android.media.ExifInterface
+import androidx.exifinterface.media.ExifInterface
 import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION_CODES
@@ -225,7 +225,6 @@ class MotivationLockerActivity : AppCompatActivity() {
             binding.photoBackgroundView.visibility = View.VISIBLE
             binding.scrimView.visibility = View.VISIBLE
             // 스크림이 어두운 반투명이라 상태바 아이콘은 밝게 고정
-            window.statusBarColor = android.graphics.Color.TRANSPARENT
             setStatusBarIconsLight(false)
         } catch (e: Exception) {
             Log.w("MotivationLockerActivity", "배경 사진을 불러오지 못함, 기본 배경으로 대체", e)
@@ -257,9 +256,6 @@ class MotivationLockerActivity : AppCompatActivity() {
     }
 
     private fun applyStatusBarColor(color: Int) {
-        window.statusBarColor = color
-
-        // 상태바 글씨 색상 결정 (배경색이 밝으면 어두운 글씨, 어두우면 밝은 글씨)
         val brightness = (android.graphics.Color.red(color) + android.graphics.Color.green(color) + android.graphics.Color.blue(color)) / 3
         setStatusBarIconsLight(brightness > 128)
     }
