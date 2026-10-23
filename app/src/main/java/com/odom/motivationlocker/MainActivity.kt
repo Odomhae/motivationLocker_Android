@@ -337,6 +337,11 @@ class MainActivity : AppCompatActivity() {
             refreshTextSettingsSummary()
             refreshDailyNotificationSummary()
 
+            // 강제 종료 등으로 데일리 알림 알람이 지워졌으면 다시 건다
+            if (dailyNotificationPreference?.isChecked == true) {
+                DailyNotificationScheduler.ensureScheduled(requireContext())
+            }
+
 
             // 사용여부
             switchPreference.setOnPreferenceChangeListener { _, newValue ->
