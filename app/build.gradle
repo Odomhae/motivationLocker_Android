@@ -11,8 +11,8 @@ android {
         applicationId "com.odom.motivationlocker"
         minSdkVersion 23
         targetSdkVersion 36
-        versionCode 15
-        versionName "1.13"
+        versionCode 16
+        versionName "1.14"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
